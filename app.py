@@ -19,6 +19,7 @@ if page == "SAFT EoS":
     st.header("SAFT型状態方程式")
     
 elif page == "KD Viscosity":
+    st.markdown("---")
     st.markdown("#### Krieger-Dougherty 粘性推算")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
     st.markdown("---")
