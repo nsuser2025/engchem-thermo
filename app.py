@@ -7,6 +7,8 @@ import numpy as np
 def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
     return eta0 * (1 - phi/phi_max)**(-eta_intrinsic * phi_max)
 
+st.image("zkanics_full.png", caption="Powered by Zkanics F. P. S.", use_column_width=True)
+
 page = st.selectbox("計算を選択してください", ["SAFT EoS", "KD Viscosity", "ODE Solver"])
 
 if page == "SAFT EoS":
