@@ -8,7 +8,7 @@ def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
     return eta0 * (1 - phi/phi_max)**(-eta_intrinsic * phi_max)
 
 #st.image("zkanics_full.png", caption="Powered by Zkanics F. P. S.", use_container_width=True)
-st.image("zkanics_full.png", caption="Supported by Zkanics F. P. S. 2025", width=300)
+st.image("zkanics_full.png", caption="Supported by Zkanics F. P. S. 2025", width=250)
 
 page = st.selectbox("計算を選択してください", ["SAFT EoS", "KD Viscosity", "ODE Solver"])
 
