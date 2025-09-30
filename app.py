@@ -35,6 +35,8 @@ elif page == "KD Viscosity":
     if bool_comp:
        eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
 
+    plot_placeholder = st.empty()
+    
     if st.button("実行"):
        # プロット
        fig, ax = plt.subplots(figsize=(6,4))
@@ -48,7 +50,7 @@ elif page == "KD Viscosity":
        ax.set_title('Krieger–Dougherty Viscosity')
        ax.legend()
        ax.grid(True)
-       st.pyplot(fig)
+       plot_placeholder.pyplot(fig)
     
 elif page == "ODE Solvedr":
     st.header("常微分方程式（ODE）ソルバー")
