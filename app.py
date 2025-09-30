@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import io
-from kdvisco.helper import kdvisco
+from kdvisco.kdvisco import kdvisco
 
 # Krieger–Dougherty式
 def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
