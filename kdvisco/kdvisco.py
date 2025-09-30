@@ -1,3 +1,8 @@
+import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import io
 
 st.markdown("---")
 st.markdown("#### Krieger-Dougherty 粘性推算")
@@ -60,6 +65,6 @@ if st.button("実行"):
                       data=csv, file_name="viscosity.csv",
                       mime="text/csv")
 
-# module error message
+# MODULE ERROR MESSAGE
 if __name__ == "__main__":
    raise RuntimeError("Do not run this file directly; use it as a module.")
