@@ -10,7 +10,7 @@ if page == "SAFT":
     st.write("ここはホームです")
 
 elif page == "KD viscosity":
-    st.header("Krieger-Dougherty（クリーガー・ドーハティ） 粘性推算")
+    st.header("Krieger-Dougherty粘性推算")
     st.number_input("パラメータを入力", value=10)
 
 elif page == "Zkanics":
