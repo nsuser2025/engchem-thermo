@@ -11,8 +11,9 @@ if page == "SAFT":
 
 elif page == "KD viscosity":
     st.header("Krieger-Dougherty粘性推算")
-    st.number_input("パラメータを入力", value=10)
-
+    ai = st.number_input("パラメータを入力", value=10)
+    st.write(ai)
+    
 elif page == "Zkanics":
     st.title("結果ページ")
     st.write("ここに計算結果やグラフを表示")
