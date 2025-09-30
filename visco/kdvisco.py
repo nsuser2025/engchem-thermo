@@ -18,15 +18,24 @@ def kdvisco_gui():
     phi_max_1 = st.number_input("最大充填体積分率（粒子1を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     phi_max_2 = st.number_input("最大充填体積分率（粒子2を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     bool_comp = st.checkbox("粒子1と2を比較しますか?")
-
+    
+    # KRIEGER-DOUGHERTY VISCOSITY MODEL 
     phi = np.linspace(0, 0.55, 100)
     eta_1 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_1)
     if bool_comp:
        eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
 
+    # SESSION START
     bool_execute = st.button("実行")
+
+    # SAVE SESSION_STATE
+    if "fig" not in st.session_state:
+        st.session_state["fig"] = None
+    if "df" not in st.session_state:
+        st.session_state["df"] = None
+    
     if bool_execute:
-       # FIGURE PLOT
+       # STATE SAVE: FIGURE
        fig, ax = plt.subplots(figsize=(6,4))
        ax.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
        if bool_comp:
@@ -38,38 +47,26 @@ def kdvisco_gui():
        ax.set_title('Krieger–Dougherty Viscosity')
        ax.legend()
        ax.grid(True)
-       st.pyplot(fig)
-
-       # PNGに変換してバッファに保存
-       buf = io.BytesIO()
-       fig.savefig(buf, format="png")
-       buf.seek(0)
-       
-       # ダウンロードボタン
-       st.download_button(label="📥 グラフをPNGでダウンロード",
-                          data=buf,
-                          file_name="plot.png",
-                          mime="image/png")
-
-       if not bool_comp:
-          data = {"phi": phi,
-                  "eta_1": eta_1}
-       else:
-          data = {"phi": phi,
-                  "eta_1": eta_1,
-                  "eta_2": eta_2}
-        
+       st.session_state["fig"] = fig
+       # STATE SAVE: DF
+       data = {"phi": phi, "eta_1": eta_1}
+       if bool_comp:
+          data["eta_2"] = eta_2
        df = pd.DataFrame(data)
-       st.dataframe(df)
+       st.session_state["df"] = df
 
-       # CSV に変換
-       csv = df.to_csv(index=False)
-
-       # ダウンロードボタン
-       st.download_button(label="📥 グラフをCSVでダウンロード",
-                          data=csv, 
-                          file_name="viscosity.csv",
-                          mime="text/csv")
+    # 保存された図とデータを表示
+    if st.session_state["fig"] is not None:
+       st.pyplot(st.session_state["fig"])
+       # PNG ダウンロード
+       buf = io.BytesIO()
+       st.session_state["fig"].savefig(buf, format="png")
+       buf.seek(0)
+       st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot.png", mime="image/png")
+    if st.session_state["df"] is not None:
+        st.dataframe(st.session_state["df"])
+        csv = st.session_state["df"].to_csv(index=False)
+        st.download_button("📥 CSV ダウンロード", data=csv, file_name="viscosity.csv", mime="text/csv")
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
