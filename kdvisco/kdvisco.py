@@ -1,0 +1,65 @@
+
+st.markdown("---")
+st.markdown("#### Krieger-Dougherty 粘性推算")
+st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
+st.markdown("---")
+eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
+eta_intrinsic = st.number_input("固有粘度（形状依存性, def. 球体2.5）", value=2.5)
+phi_max_1 = st.number_input("最大充填体積分率（粒子1を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
+phi_max_2 = st.number_input("最大充填体積分率（粒子2を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
+bool_comp = st.checkbox("粒子1と2を比較しますか?")
+
+phi = np.linspace(0, 0.55, 100)
+
+eta_1 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_1)
+if bool_comp:
+   eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
+    
+if st.button("実行"):
+   # FIGURE PLOT
+   fig, ax = plt.subplots(figsize=(6,4))
+   ax.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
+   if bool_comp:
+      ax.plot(phi, eta_2, label='φmax: '+str(phi_max_2))
+      st.write("粒子2のグラフも表示しています")
+   ax.set_xlabel('φ')
+   ax.set_ylabel('η [mPa·s]')
+   ax.set_yscale('log')
+   ax.set_title('Krieger–Dougherty Viscosity')
+   ax.legend()
+   ax.grid(True)
+   st.pyplot(fig)
+
+   # PNGに変換してバッファに保存
+   buf = io.BytesIO()
+   fig.savefig(buf, format="png")
+   buf.seek(0)
+       
+   # ダウンロードボタン
+   st.download_button(label="📥 グラフをPNGでダウンロード",
+                      data=buf,
+                      file_name="plot.png",
+                      mime="image/png")
+
+   if not bool_comp:
+      data = {"phi": phi,
+              "eta_1": eta_1}
+   else:
+      data = {"phi": phi,
+              "eta_1": eta_1,
+              "eta_2": eta_2}
+        
+   df = pd.DataFrame(data)
+   st.dataframe(df)
+
+   # CSV に変換
+   csv = df.to_csv(index=False)
+
+   # ダウンロードボタン
+   st.download_button(label="📥 グラフをCSVでダウンロード",
+                      data=csv, file_name="viscosity.csv",
+                      mime="text/csv")
+
+# module error message
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
