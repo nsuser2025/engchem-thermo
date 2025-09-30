@@ -10,6 +10,8 @@ def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
 #st.image("zkanics_full.png", caption="Powered by Zkanics F. P. S.", use_container_width=True)
 st.image("zkanics_full.png", caption="Supported by Zkanics F. P. S. 2025", width=250)
 
+st.markdown("---")
+
 page = st.selectbox("計算を選択してください", ["SAFT EoS", "KD Viscosity", "ODE Solver"])
 
 if page == "SAFT EoS":
