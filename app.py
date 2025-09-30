@@ -1,7 +1,7 @@
 import streamlit as st
-import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import io
 
 # Krieger–Dougherty式
@@ -17,8 +17,7 @@ page = st.selectbox("計算を選択してください", ["SAFT EoS", "KD Viscos
 
 if page == "SAFT EoS":
     st.header("SAFT型状態方程式")
-    st.write("建設中！注意！")
-
+    
 elif page == "KD Viscosity":
     st.header("Krieger-Dougherty粘性推算")
     eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
@@ -66,6 +65,21 @@ elif page == "KD Viscosity":
                           data=buf,
                           file_name="plot.png",
                           mime="image/png")
+
+       data = {
+           "phi": [0.1, 0.2, 0.3, 0.4],
+           "eta": [10, 20, 40, 80]
+       }
+       df = pd.DataFrame(data)
+       st.dataframe(df)
+
+       # CSV に変換
+       csv = df.to_csv(index=False)
+
+       # ダウンロードボタン
+       st.download_button(label="📥 グラフをCSVでダウンロード",
+                          data=csv, file_name="viscosity.csv",
+                          mime="text/csv")
 
 
 elif page == "ODE Solvedr":
