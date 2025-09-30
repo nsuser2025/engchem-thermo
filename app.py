@@ -3,17 +3,17 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-page = st.selectbox("ページを選択してください", ["ホーム", "設定", "結果"])
+page = st.selectbox("計算を選択してください", ["SAFT", "KD viscosity", "Zkanics"])
 
-if page == "ホーム":
-    st.title("ホームページ")
+if page == "SAFT":
+    st.title("SAFT")
     st.write("ここはホームです")
 
-elif page == "設定":
+elif page == "KD viscosity":
     st.title("設定ページ")
     st.number_input("パラメータを入力", value=10)
 
-elif page == "結果":
+elif page == "Zkanics":
     st.title("結果ページ")
     st.write("ここに計算結果やグラフを表示")
 
