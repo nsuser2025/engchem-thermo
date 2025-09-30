@@ -6,11 +6,11 @@ import numpy as np
 page = st.selectbox("計算を選択してください", ["SAFT", "KD viscosity", "Zkanics"])
 
 if page == "SAFT":
-    st.title("SAFT")
+    st.header("SAFT")
     st.write("ここはホームです")
 
 elif page == "KD viscosity":
-    st.title("Krieger-Dougherty（クリーガー・ドーハティ） 粘性推算")
+    st.header("Krieger-Dougherty（クリーガー・ドーハティ） 粘性推算")
     st.number_input("パラメータを入力", value=10)
 
 elif page == "Zkanics":
