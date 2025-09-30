@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import io
-from kdvisco.kdvisco import kdvisco
+from kdvisco.kdvisco import kdvisco_gui
 
 # Krieger–Dougherty式
 def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
@@ -18,7 +18,7 @@ page = st.selectbox("計算を選択してください", ["SAFT EoS", "KD Viscos
 
 if page == "SAFT EoS":
     st.header("SAFT型状態方程式")
-    kdvisco()
+    kdvisco_gui()
     
 elif page == "KD Viscosity":
     st.markdown("---")
