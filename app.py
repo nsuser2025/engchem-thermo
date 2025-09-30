@@ -34,22 +34,7 @@ elif page == "KD Viscosity":
     eta_1 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_1)
     if bool_comp:
        eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
- 
-    # プロット
-    plt.figure(figsize=(6,4))
-    plt.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
-    if bool_comp:
-       st.write("粒子2のグラフを表示します")
-       phi_max_2 = float(phi_max_2)
-       plt.plot(phi, eta_2, label='φmax: '+str(phi_max_2))
-    plt.xlabel('φ')
-    plt.ylabel('η [mPa·s]')
-    plt.yscale('log')
-    plt.title('Krieger–Dougherty Viscosity')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-    
+     
     # プロット
     fig, ax = plt.subplots(figsize=(6,4))
     ax.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
