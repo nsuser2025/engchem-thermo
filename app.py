@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import io
 
 # Krieger–Dougherty式
 def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
@@ -54,7 +55,19 @@ elif page == "KD Viscosity":
        ax.legend()
        ax.grid(True)
        st.pyplot(fig)
-    
+
+       # PNGに変換してバッファに保存
+       buf = io.BytesIO()
+       fig.savefig(buf, format="png")
+       buf.seek(0)
+       
+       # ダウンロードボタン
+       st.download_button(label="📥 グラフをPNGでダウンロード",
+                          data=buf,
+                          file_name="plot.png",
+                          mime="image/png")
+
+
 elif page == "ODE Solvedr":
     st.header("常微分方程式（ODE）ソルバー")
     st.write("SCIPY")
