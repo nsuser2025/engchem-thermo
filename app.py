@@ -34,21 +34,21 @@ elif page == "KD Viscosity":
     eta_1 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_1)
     if bool_comp:
        eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
-     
-    # プロット
-    fig, ax = plt.subplots(figsize=(6,4))
-    ax.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
-    if bool_comp:
-       ax.plot(phi, eta_2, label='φmax: '+str(phi_max_2))
-       st.write("粒子2のグラフを表示します")
 
-    ax.set_xlabel('φ')
-    ax.set_ylabel('η [mPa·s]')
-    ax.set_yscale('log')
-    ax.set_title('Krieger–Dougherty Viscosity')
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
+    if st.button("実行"):
+       # プロット
+       fig, ax = plt.subplots(figsize=(6,4))
+       ax.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
+       if bool_comp:
+          ax.plot(phi, eta_2, label='φmax: '+str(phi_max_2))
+          st.write("粒子2のグラフも表示しています")
+       ax.set_xlabel('φ')
+       ax.set_ylabel('η [mPa·s]')
+       ax.set_yscale('log')
+       ax.set_title('Krieger–Dougherty Viscosity')
+       ax.legend()
+       ax.grid(True)
+       st.pyplot(fig)
     
 elif page == "ODE Solvedr":
     st.header("常微分方程式（ODE）ソルバー")
