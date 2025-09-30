@@ -67,8 +67,8 @@ elif page == "KD Viscosity":
                           mime="image/png")
 
        data = {
-           "phi": [0.1, 0.2, 0.3, 0.4],
-           "eta": [10, 20, 40, 80]
+           "phi": phi,
+           "eta_1": eta_1
        }
        df = pd.DataFrame(data)
        st.dataframe(df)
@@ -83,5 +83,5 @@ elif page == "KD Viscosity":
 
 
 elif page == "ODE Solvedr":
-    st.header("常微分方程式（ODE）ソルバー")
-    st.write("SCIPY")
+     st.header("常微分方程式（ODE）ソルバー")
+     st.write("SCIPY")
