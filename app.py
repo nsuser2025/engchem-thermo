@@ -29,16 +29,10 @@ elif page == "KD Viscosity":
     phi_max_2 = st.number_input("最大充填体積分率（粒子2を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     bool_comp = st.checkbox("粒子1と2を比較しますか?")
     
-    #eta0 = float(eta0)
-    #eta_intrinsic = float(eta_intrinsic)
-    #phi_max_1 = float(phi_max_1)
-    
     # 体積分率 φ の範囲
     phi = np.linspace(0, 0.55, 100)
     
-    # 粒径による差を考慮（ここは概念的に分散性の違いを反映）
-    # 119.3 nm: φ_max = 0.58
-    # 295.4 nm: φ_max や [η] がわずかに変化した場合（分散性低下を仮定）
+    # 懸濁液の粘性（メイン）
     eta_1 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_1)
     if bool_comp:
        eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
