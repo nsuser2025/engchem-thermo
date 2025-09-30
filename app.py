@@ -3,6 +3,10 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Krieger–Dougherty式
+def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
+    return eta0 * (1 - phi/phi_max)**(-eta_intrinsic * phi_max)
+
 page = st.selectbox("計算を選択してください", ["SAFT EoS", "KD Viscosity", "ODE Solver"])
 
 if page == "SAFT EoS":
@@ -16,14 +20,35 @@ elif page == "KD Viscosity":
     phi_max_1 = st.number_input("最大充填体積分率（粒子1を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     phi_max_2 = st.number_input("最大充填体積分率（粒子2を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     bool_comp = st.checkbox("粒子1と2を比較しますか?")
+    
     eta0 = float(eta0)
     eta_intrinsic = float(eta_intrinsic)
     phi_max_1 = float(phi_max_1)
+    
+    # 体積分率 φ の範囲
+    phi = np.linspace(0, 0.55, 100)
+    
+    # 粒径による差を考慮（ここは概念的に分散性の違いを反映）
+    # 119.3 nm: φ_max = 0.58
+    # 295.4 nm: φ_max や [η] がわずかに変化した場合（分散性低下を仮定）
+    eta_1 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_1)
+    if bool_comp:
+       eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
+ 
+    # プロット
+    plt.figure(figsize=(6,4))
+    plt.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
     if bool_comp:
        st.write("粒子2のグラフを表示します")
        phi_max_2 = float(phi_max_2)
-    else:
-       st.write("粒子2のグラフは非表示です")
+       plt.plot(phi, eta_2, label='φmax: '+str(phi_max_2))
+    plt.xlabel('φ')
+    plt.ylabel('η [mPa·s]')
+    plt.yscale('log')
+    plt.title('Krieger–Dougherty Viscosity')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
     
 elif page == "ODE Solvedr":
     st.header("常微分方程式（ODE）ソルバー")
