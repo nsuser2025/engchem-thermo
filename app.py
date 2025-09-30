@@ -16,8 +16,12 @@ elif page == "KD viscosity":
     phi_max_1 = st.number_input("最大充填体積分率（粒子1を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     phi_max_2 = st.number_input("最大充填体積分率（粒子2を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     bool_comp = st.checkbox("粒子1と2を比較しますか?")
+    eta0 = float(eta0)
+    eta_intrinsic = float(eta_intrinsic)
+    phi_max_1 = float(phi_max_1)
     if bool_comp:
        st.write("粒子2のグラフを表示します")
+       phi_max_2 = float(phi_max_2)
     else:
        st.write("粒子2のグラフは非表示です")
     
