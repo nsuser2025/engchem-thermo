@@ -21,6 +21,7 @@ if page == "SAFT EoS":
 elif page == "KD Viscosity":
     st.header("Krieger-Dougherty粘性推算")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
+    st.latex(r"\eta_{0}: \text{基材粘度}")
     eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
     eta_intrinsic = st.number_input("固有粘度（形状依存性, def. 球体2.5）", value=2.5)
     phi_max_1 = st.number_input("最大充填体積分率（粒子1を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
