@@ -3,6 +3,11 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
+st.title("サンプル")
+st.write("上から順に表示されます")
+st.button("ボタン1")
+st.button("ボタン2")
+
 st.title("Hello World")
 st.write("これは Streamlit で表示しているテキストです！")
 
