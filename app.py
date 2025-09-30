@@ -66,10 +66,14 @@ elif page == "KD Viscosity":
                           file_name="plot.png",
                           mime="image/png")
 
-       data = {
-           "phi": phi,
-           "eta_1": eta_1
-       }
+       if not bool_comp:
+          data = {"phi": phi,
+                  "eta_1": eta_1}
+       else:
+          data = {"phi": phi,
+                  "eta_1": eta_1,
+                  "eta_2": eta_2}
+        
        df = pd.DataFrame(data)
        st.dataframe(df)
 
