@@ -11,7 +11,7 @@ if page == "SAFT":
 
 elif page == "KD viscosity":
     st.header("Krieger-Dougherty粘性推算")
-    ai = st.number_input("パラメータを入力", value=10)
+    ai = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
     st.write(ai)
     
 elif page == "Zkanics":
