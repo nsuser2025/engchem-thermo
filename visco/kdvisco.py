@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import io
 
-# Krieger–Dougherty式
+# KRIEGER-DOUGHERTY VISCOSITY MODEL
 def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
     return eta0 * (1 - phi/phi_max)**(-eta_intrinsic * phi_max)
 
@@ -19,28 +19,28 @@ def kdvisco_gui():
     phi_max_2 = st.number_input("最大充填体積分率（粒子2を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
     bool_comp = st.checkbox("粒子1と2を比較しますか?")
     
-    # KRIEGER-DOUGHERTY VISCOSITY MODEL 
+    # CALCULATE KRIEGER-DOUGHERTY VISCOSITY MODEL 
     phi = np.linspace(0, 0.55, 100)
     eta_1 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_1)
     if bool_comp:
        eta_2 = kd_viscosity(phi, eta0, eta_intrinsic, phi_max_2)
 
-    # SESSION START
+    # SESSION BUTTON
     bool_execute = st.button("実行")
 
-    # SAVE SESSION_STATE
+    # INITIALIZE SESSION_STATE
     if "fig" not in st.session_state:
         st.session_state["fig"] = None
     if "df" not in st.session_state:
         st.session_state["df"] = None
-    
+
+    # SESSION START
     if bool_execute:
-       # STATE SAVE: FIGURE
+       # SESSION_STATE SAVE: FIGURE
        fig, ax = plt.subplots(figsize=(6,4))
        ax.plot(phi, eta_1, label='φmax: '+str(phi_max_1))
        if bool_comp:
           ax.plot(phi, eta_2, label='φmax: '+str(phi_max_2))
-          st.write("粒子2のグラフも表示しています")
        ax.set_xlabel('φ')
        ax.set_ylabel('η [mPa·s]')
        ax.set_yscale('log')
@@ -48,17 +48,16 @@ def kdvisco_gui():
        ax.legend()
        ax.grid(True)
        st.session_state["fig"] = fig
-       # STATE SAVE: DF
+       # SESSION_STATE SAVE: DF
        data = {"phi": phi, "eta_1": eta_1}
        if bool_comp:
           data["eta_2"] = eta_2
        df = pd.DataFrame(data)
        st.session_state["df"] = df
 
-    # 保存された図とデータを表示
+    # DISPLAY SAVED FIGURE AND DATA
     if st.session_state["fig"] is not None:
        st.pyplot(st.session_state["fig"])
-       # PNG ダウンロード
        buf = io.BytesIO()
        st.session_state["fig"].savefig(buf, format="png")
        buf.seek(0)
