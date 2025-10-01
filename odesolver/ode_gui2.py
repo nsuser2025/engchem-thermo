@@ -44,7 +44,7 @@ def ode_gui2():
             return dYdt
 
     # RUN SOLVE_IVP
-    if st.button("シミュレーション実行"):
+    if st.button("実行"):
        expr_lines = [line.strip() for line in expr_text.splitlines() if line.strip() != ""]
        t_eval = np.linspace(t0, t1, int(n_points))
        sol = solve_ivp(ode_system, (t0, t1), Y0, t_eval=t_eval)
