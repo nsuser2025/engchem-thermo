@@ -34,8 +34,8 @@ def ode_gui2():
     n_points = st.number_input("分割数", value=100, step=1)
 
     # INPUTS: TIME SPAN
-    graph_title = st.number_input("終了時刻", value=10.0)
-    graph_ylabel = st.number_input("開始時刻", value=0.0)
+    graph_title = st.text_input("グラフタイトル", value='ODE SOLUTION')
+    graph_ylabel = st.text_input("Y軸ラベル", value='VARIABLES')
     
     # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
@@ -58,8 +58,8 @@ def ode_gui2():
        for i in range(len(Y0)):
            ax.plot(sol.t, sol.y[i], label=f"x{i+1}")
        ax.set_xlabel("t")
-       ax.set_ylabel("濃度 / 値")
-       ax.set_title("連立反応速度式シミュレーション")
+       ax.set_ylabel(graph_ylable)
+       ax.set_title(graph_title)
        ax.legend()
        ax.grid(True)
        st.pyplot(fig)
