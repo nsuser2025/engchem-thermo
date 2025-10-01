@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import io
 from visco.kdvisco import kdvisco_gui
+from odesolver.ode import ode_gui
 
 st.image("zkanics_full.png", caption="Supported by Zkanics F. P. S. since 2024", width=250)
 st.markdown("---")
@@ -14,5 +15,4 @@ if page == "SAFT EoS":
 elif page == "KD Viscosity":
      kdvisco_gui()
 elif page == "ODE Solver":
-     st.header("常微分方程式（ODE）ソルバー")
-     st.write("SCIPY")
+     ode_gui()
