@@ -1,3 +1,4 @@
+import ast
 import streamlit as st
 import numpy as np
 from scipy.integrate import solve_ivp
@@ -21,11 +22,11 @@ def ode_gui2():
                              value = "-k1*x1 + k2*x2\n k1*x1 - k2*x2")
     # INPUTS: PARAMETERS
     params_input = st.text_input("パラメータを辞書形式で入力 (例: {'k1':1.0,'k2':0.5})", value="{'k1':1.0,'k2':0.5}")
-    params = eval(params_input)  # 注意: ユーザー入力で eval は安全性に注意
+    params = ast.literal_eval(params_input)  # 注意: ユーザー入力で eval は安全性に注意
 
     # INPUTS: INITIAL CONDITIONS
     initial_values_input = st.text_input("初期値をリスト形式で入力 (例: [1.0, 0.0])", value="[1.0, 0.0]")
-    Y0 = eval(initial_values_input)
+    Y0 = ast.literal_eval(initial_values_input)
 
     # INPUTS: TIME SPAN
     t0 = st.number_input("開始時刻 t0", value=0.0)
