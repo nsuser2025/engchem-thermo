@@ -15,24 +15,24 @@ def ode_gui2():
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")
     st.markdown("---")
     
-    # ODE
+    # INPUTS: ODE
     st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dXi/dt）を入力してください")
     expr_text = st.text_area("常微分方程式を入力 (1行に1つの式)",
                              value = "-k1*x1 + k2*x2\n k1*x1 - k2*x2")
-    # PARAMETERS
+    # INPUTS: PARAMETERS
     params_input = st.text_input("パラメータを辞書形式で入力 (例: {'k1':1.0,'k2':0.5})", value="{'k1':1.0,'k2':0.5}")
     params = eval(params_input)  # 注意: ユーザー入力で eval は安全性に注意
 
-    # 初期値
+    # INPUTS: INITIAL CONDITIONS
     initial_values_input = st.text_input("初期値をリスト形式で入力 (例: [1.0, 0.0])", value="[1.0, 0.0]")
     Y0 = eval(initial_values_input)
 
-    # 時間範囲
+    # INPUTS: TIME SPAN
     t0 = st.number_input("開始時刻 t0", value=0.0)
     t1 = st.number_input("終了時刻 t1", value=10.0)
     n_points = st.number_input("分割数", value=100, step=1)
 
-    # --- solve_ivp 関数定義 ---
+    # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
         local_dict = {f"x{i+1}": Y[i] for i in range(len(Y))}
         local_dict.update(params)
@@ -42,11 +42,10 @@ def ode_gui2():
             dYdt.append(ne.evaluate(expr, local_dict))
             return dYdt
 
-    # --- 実行 ---
+    # RUN SOLVE_IVP
     if st.button("シミュレーション実行"):
        expr_lines = [line.strip() for line in expr_text.splitlines() if line.strip() != ""]
        t_eval = np.linspace(t0, t1, int(n_points))
-    
        sol = solve_ivp(ode_system, (t0, t1), Y0, t_eval=t_eval)
 
        # --- プロット ---
