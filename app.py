@@ -13,6 +13,6 @@ if page == "SAFT EoS":
     st.header("SAFT型状態方程式")
 elif page == "KD Viscosity":
      kdvisco_gui()
-elif page == "ODE Solvedr":
+elif page == "ODE Solver":
      st.header("常微分方程式（ODE）ソルバー")
      st.write("SCIPY")
