@@ -3,7 +3,8 @@ import streamlit as st
 def ode_gui():
     st.markdown("---")
     st.markdown("#### 初期値問題とは？")
-    line = "例）化学反応の濃度変化(d[A]/dt)は常微分方程式（ODE）で表されます。\n例えば単純な一次反応なら次のODEに従います。"
+    line = "例）化学反応の濃度変化(d[A]/dt)は常微分方程式（ODE）で表されます。" 
+         + "例えば単純な一次反応なら次のODEに従います。"
     #st.write("例）化学反応の濃度変化(d[A]/dt)は常微分方程式（ODE）で表されます。例えば単純な一次反応なら次のODEに従います。")
     st.write(line)
     st.latex(r"\frac{d [A]}{dt} = -k[A]")
