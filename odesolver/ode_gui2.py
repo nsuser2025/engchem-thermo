@@ -58,7 +58,7 @@ def ode_gui2():
        for i in range(len(Y0)):
            ax.plot(sol.t, sol.y[i], label=f"x{i+1}")
        ax.set_xlabel("t")
-       ax.set_ylabel(graph_ylable)
+       ax.set_ylabel(graph_ylabel)
        ax.set_title(graph_title)
        ax.legend()
        ax.grid(True)
