@@ -5,7 +5,7 @@ def ode_gui():
     st.markdown("#### ODE Solver")
     st.markdown(
     "例）化学反応の濃度変化(d[A]/dt)は常微分方程式（ODE）で表されます。例えば単純な一次反応なら次のODEに従います。 "
-    r"\frac{d [A]}{dt} = -k[A]"
+    r"$$\frac{d [A]}{dt} = -k[A]$$"
     )
     st.write(line)
     st.latex(r"\frac{d [A]}{dt} = -k[A]")
