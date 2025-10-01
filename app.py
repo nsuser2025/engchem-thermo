@@ -5,7 +5,7 @@ import pandas as pd
 import io
 from visco.kdvisco import kdvisco_gui
 from odesolver.ode import ode_gui
-from odesolver.ode import ode_gui2
+from odesolver.ode_gui2 import ode_gui2
 
 st.image("zkanics_full.png", caption="Supported by Zkanics F. P. S. since 2024", width=250)
 st.markdown("---")
