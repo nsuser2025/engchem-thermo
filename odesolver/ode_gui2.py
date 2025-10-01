@@ -33,6 +33,10 @@ def ode_gui2():
     t1 = st.number_input("終了時刻 t1", value=10.0)
     n_points = st.number_input("分割数", value=100, step=1)
 
+    # INPUTS: TIME SPAN
+    plot_ylabel = st.number_input("開始時刻 t0", value=0.0)
+    plot_title = st.number_input("終了時刻 t1", value=10.0)
+    
     # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
         local_dict = {f"x{i+1}": Y[i] for i in range(len(Y))}
