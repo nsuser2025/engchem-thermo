@@ -15,14 +15,11 @@ def ode_gui2():
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")
     st.markdown("---")
     
-    # --- ユーザー入力 ---
-    st.write("変数を x1, x2, x3 ... のように表し、1行に1つの dXi/dt を入力してください")
-    st.write("例: '-k1*x1 + k2*x2'")
-
-    expr_text = st.text_area("反応速度式を入力 (1行に1つの式)",
+    # ODE
+    st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dXi/dt）を入力してください")
+    expr_text = st.text_area("常微分方程式を入力 (1行に1つの式)",
                              value = "-k1*x1 + k2*x2\n k1*x1 - k2*x2")
-
-    # パラメータ入力
+    # PARAMETERS
     params_input = st.text_input("パラメータを辞書形式で入力 (例: {'k1':1.0,'k2':0.5})", value="{'k1':1.0,'k2':0.5}")
     params = eval(params_input)  # 注意: ユーザー入力で eval は安全性に注意
 
