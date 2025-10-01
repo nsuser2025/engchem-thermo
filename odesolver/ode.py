@@ -7,7 +7,7 @@ def ode_gui():
     st.write(line)
     st.latex(r"\frac{d [A]}{dt} = -k[A]")
     line = "時刻t=0の[A]の値（初期値）を用いてODEを解けば、任意の時刻における[A]を決めることができます。これを初期値問題といいます。"
-    line += "ODE SolverはODEの式（上式では右辺）と初期値をユーザーが与えることで初期値問題を解くツールです。"
+    line += "ODE Solverは、ユーザーが入力したODEの式（上式では右辺）と初期値から初期値問題を解くツールです。"
     st.write(line)
     st.markdown("---")
     
