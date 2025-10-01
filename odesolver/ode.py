@@ -16,7 +16,13 @@ def ode_gui():
     # ユーザー入力（安全な式のみ）
     st.markdown("dx/dt = f(x,t) の f(x,t) を入力")
     expr = st.text_area("右辺の式 (例: -0.5*x + sin(t))", "-0.5*x")
-    st.write(expr[0])
+    
+    if expr:
+       # 改行ごとにリスト化
+       lines = expr.splitlines()
+       st.write("行ごとの処理例:")
+       for i, line in enumerate(lines, start=1):
+           st.write(f"行{i}: {line}")
     
     x0 = st.number_input("初期値 x(0)", value=1.0)
     t_start = st.number_input("開始時刻", value=0.0)
