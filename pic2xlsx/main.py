@@ -32,6 +32,7 @@ def pic2xlsx_gui():
 
           # DataFrame に変換して Excel 出力
           df = pd.DataFrame(all_rows)
+          st.session_state["df"] = df
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
