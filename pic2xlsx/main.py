@@ -13,8 +13,20 @@ def pic2xlsx_gui():
     if uploaded_file is not None:
        image = Image.open(uploaded_file)
        st.image(image, caption="アップロード画像", use_column_width=True)
-       text = pytesseract.image_to_string(image, lang="eng")  # lang="jpn" も可
-       st.text_area("OCR 結果", text, height=200)
+       #text = pytesseract.image_to_string(image, lang="eng")  # lang="jpn" も可
+       #st.text_area("OCR 結果", text, height=200)
+        
+       all_rows = []
+       if uploaded_file.lower().endswith((".png", ".jpg", ".jpeg")):
+          text = pytesseract.image_to_string(image, lang="eng")
+          # 改行で分割して行ごとに格納
+          lines = text.splitlines()
+          for line in lines:
+              if line.strip():  # 空行は無視
+                 all_rows.append({"text": line.strip()})
+
+          # DataFrame に変換して Excel 出力
+          df = pd.DataFrame(all_rows)
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
