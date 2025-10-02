@@ -7,6 +7,8 @@ import pytesseract
 def pic2xlsx_gui():
     st.markdown("---")
     st.markdown("#### Picuture to Excel（PIC2XLSX）")
+    st.markdown("""tesseractを用いた画像認識を利用したプログラムです。アップロードしたテーブル画像をエクセルファイルに
+    変換します。tesseractは白黒画像から文字を認識するので、色つきセルに記載の文字列は正しく認識できません。""")
     st.markdown("---")
     uploaded_file = st.file_uploader("画像をアップロードしてください", type=["png", "jpg", "jpeg"])
 
