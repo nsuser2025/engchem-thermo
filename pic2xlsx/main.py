@@ -13,7 +13,7 @@ def pic2xlsx_gui():
     if uploaded_file is not None:
        filename = uploaded_file.name
        image = Image.open(uploaded_file)
-       st.image(image, caption="アップロード画像", width=500)
+       st.image(image, caption="アップロード画像", width=300)
     
        # INITIALIZE SESSION_STATE 
        if "df" not in st.session_state:
