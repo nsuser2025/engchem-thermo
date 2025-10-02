@@ -13,7 +13,7 @@ def kdvisco_gui():
     st.markdown("#### Krieger-Dougherty 粘性推算")
     st.markdown("""固体粒子が高濃度に分散している懸濁液の粘性を簡単に推算するための経験式です。""")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
-    st.markdown("""r"\eta_{0}は"""")
+    st.markdown("r"\eta_{0}")
     st.markdown("---")
         
     eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
