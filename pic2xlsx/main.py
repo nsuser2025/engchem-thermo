@@ -13,31 +13,37 @@ def pic2xlsx_gui():
     if uploaded_file is not None:
        filename = uploaded_file.name
        image = Image.open(uploaded_file)
-       col1, col2 = st.columns([1, 1])
-       with col1:
-            st.image(image, caption="アップロード画像", width=100)
+    else:
+       st.info("デフォルトのサンプル画像を表示します")
+       image = Image.open("sample.png")
+       
+    col1, col2 = st.columns([1, 1])
+    with col1:
+         st.image(image, caption="変換前の画像", width=100)
     
-       # INITIALIZE SESSION_STATE 
-       if "df" not in st.session_state:
-          st.session_state["df"] = None
+    # INITIALIZE SESSION_STATE 
+    if "df" not in st.session_state:
+       st.session_state["df"] = None
         
-       all_rows = []
-       if filename.lower().endswith((".png", ".jpg", ".jpeg")):
-          text = pytesseract.image_to_string(image, lang="eng")
-          # 改行で分割して行ごとに格納
-          lines = text.splitlines()
-          for line in lines:
-              if line.strip():  # 空行は無視
-                 all_rows.append({"text": line.strip()})
+    all_rows = []
+    if filename.lower().endswith((".png", ".jpg", ".jpeg")):
+       text = pytesseract.image_to_string(image, lang="eng")
+          
+       # 改行で分割して行ごとに格納
+       lines = text.splitlines()
+       for line in lines:
+           if line.strip():  # 空行は無視
+              all_rows.append({"text": line.strip()})
 
-          # DataFrame に変換して Excel 出力
-          df = pd.DataFrame(all_rows)
-          st.session_state["df"] = df
-           
-          if st.session_state["df"] is not None:
-             with col2:
-                  st.dataframe(st.session_state["df"])
-                  csv = st.session_state["df"].to_csv(index=False)
+       # --> DataFrame
+       df = pd.DataFrame(all_rows)
+       st.session_state["df"] = df
+       
+       # DISPLAY DATAFRAME
+       if st.session_state["df"] is not None:
+          with col2:
+               st.dataframe(st.session_state["df"])
+               csv = st.session_state["df"].to_csv(index=False)
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
