@@ -64,9 +64,9 @@ def kdvisco_gui():
        buf.seek(0)
        st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot.png", mime="image/png")
     if st.session_state["df"] is not None:
-        st.dataframe(st.session_state["df"])
-        csv = st.session_state["df"].to_csv(index=False)
-
+       st.dataframe(st.session_state["df"])
+       csv = st.session_state["df"].to_csv(index=False)
+        
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
    raise RuntimeError("Do not run this file directly; use it as a module.")
