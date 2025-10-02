@@ -13,8 +13,8 @@ def pic2xlsx_gui():
     if uploaded_file is not None:
        filename = uploaded_file.name
        image = Image.open(uploaded_file)
-       col1, col2, col3 = st.columns([1, 2, 1])
-       with col2:
+       col1, col2 = st.columns([1, 1])
+       with col1:
             st.image(image, caption="アップロード画像", width=100)
     
        # INITIALIZE SESSION_STATE 
