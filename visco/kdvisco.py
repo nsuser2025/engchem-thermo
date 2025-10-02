@@ -2,7 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import io
+import io/
 
 # KRIEGER-DOUGHERTY VISCOSITY MODEL
 def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
@@ -15,7 +15,7 @@ def kdvisco_gui():
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
     st.markdown("""$$\eta_{0}$$: 基材粘度（粉体が一切入っていない基材本来の粘度）""")
     st.markdown("""$$[\eta]$$: 固有粘度（粉体が球体であれば2.5のままでOK）""")
-    st.markdown("""$$\phi_{\rm max}$$: 最大充填体積分率（粘度を決める最も重要な因子。離散要素法や実験で決められることが多い。）""")
+    st.markdown("""$$\phi_{max}$$: 最大充填体積分率（粘度を決める最も重要な因子。離散要素法や実験で決められることが多い。）""")
     st.markdown("---")
         
     eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
@@ -70,7 +70,6 @@ def kdvisco_gui():
     if st.session_state["df"] is not None:
         st.dataframe(st.session_state["df"])
         csv = st.session_state["df"].to_csv(index=False)
-        st.download_button("📥 CSV ダウンロード", data=csv, file_name="viscosity.csv", mime="text/csv")
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
