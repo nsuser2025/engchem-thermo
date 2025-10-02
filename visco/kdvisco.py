@@ -11,7 +11,6 @@ def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
 def kdvisco_gui():
     st.markdown("---")
     st.markdown("#### Krieger-Dougherty 粘性推算")
-    st.markdown("""固体粒子が高濃度に分散している懸濁液の粘性を簡単に推算するための経験式です。""")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
     st.markdown("---")
         
