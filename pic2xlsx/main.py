@@ -28,7 +28,7 @@ def pic2xlsx_gui():
         
     all_rows = []
     if filename.lower().endswith((".png", ".jpg", ".jpeg")):
-       text = pytesseract.image_to_string(image, lang="eng")
+       text = pytesseract.image_to_string(image, lang="jpn+eng")
           
        # 改行で分割して行ごとに格納
        lines = text.splitlines()
