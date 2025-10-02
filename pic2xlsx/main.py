@@ -4,11 +4,7 @@ import numpy as np
 import pandas as pd
 import io
 
-# KRIEGER-DOUGHERTY VISCOSITY MODEL
-def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
-    return eta0 * (1 - phi/phi_max)**(-eta_intrinsic * phi_max)
-
-def kdvisco_gui():
+def pic2xlsx_gui():
     st.markdown("---")
     st.markdown("#### Krieger-Dougherty 粘性推算")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
