@@ -15,7 +15,7 @@ def kdvisco_gui():
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
     st.markdown("""$$\eta_{0}$$: 基材粘度（粉体が一切入っていない基材本来の粘度）""")
     st.markdown("""$$[\eta]$$: 固有粘度（粉体が球体であれば2.5のままでOK）""")
-    st.markdown("""$$\phi_{max}$$: 最大充填体積分率（粘度を決める最も重要な因子。離散要素法や実験で決められることが多い。）""")
+    st.markdown("""$$\eta_{0}$$: 最大充填体積分率（粘度を決める最も重要な因子。離散要素法や実験で決められることが多い。）""")
     st.markdown("---")
         
     eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
