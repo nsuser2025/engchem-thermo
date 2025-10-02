@@ -16,7 +16,7 @@ def pic2xlsx_gui():
        #st.image(image, caption="アップロード画像", width=200)
        col1, col2, col3 = st.columns([1, 2, 1])
        with col2:
-            st.image(image, width=200)
+            st.image(image, width=100)
     
        # INITIALIZE SESSION_STATE 
        if "df" not in st.session_state:
