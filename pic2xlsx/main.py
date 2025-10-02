@@ -9,7 +9,13 @@ def pic2xlsx_gui():
     st.markdown("#### Picuture to Excel（PIC2XLSX）")
     st.markdown("---")
     uploaded_file = st.file_uploader("画像をアップロードしてください", type=["png", "jpg", "jpeg"])
-    
+
+    if uploaded_file is not None:
+       image = Image.open(uploaded_file)
+       st.image(image, caption="アップロード画像", use_column_width=True)
+       text = pytesseract.image_to_string(image, lang="eng")  # lang="jpn" も可
+       st.text_area("OCR 結果", text, height=200)
+
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
    raise RuntimeError("Do not run this file directly; use it as a module.")
