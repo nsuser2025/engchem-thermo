@@ -14,8 +14,9 @@ def pic2xlsx_gui():
        filename = uploaded_file.name
        image = Image.open(uploaded_file)
     else:
+       filename = "sample.png"
        st.info("デフォルトのサンプル画像を表示します")
-       image = Image.open("pic2xlsx/sample.png")
+       image = Image.open("pic2xlsx/" + filename)
        
     col1, col2 = st.columns([1, 1])
     with col1:
