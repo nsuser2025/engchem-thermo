@@ -11,13 +11,14 @@ def pic2xlsx_gui():
     uploaded_file = st.file_uploader("画像をアップロードしてください", type=["png", "jpg", "jpeg"])
 
     if uploaded_file is not None:
+       filename = uploaded_file.name
        image = Image.open(uploaded_file)
        st.image(image, caption="アップロード画像", use_column_width=True)
        #text = pytesseract.image_to_string(image, lang="eng")  # lang="jpn" も可
        #st.text_area("OCR 結果", text, height=200)
         
        all_rows = []
-       if uploaded_file.lower().endswith((".png", ".jpg", ".jpeg")):
+       if filename.lower().endswith((".png", ".jpg", ".jpeg")):
           text = pytesseract.image_to_string(image, lang="eng")
           # 改行で分割して行ごとに格納
           lines = text.splitlines()
