@@ -13,7 +13,7 @@ def kdvisco_gui():
     st.markdown("#### Krieger-Dougherty 粘性推算")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
     st.markdown("""$$\eta_{0}$$: 基材粘度（粉体を一切含まない基材の粘度）""")
-    st.markdown("""$$\phi_{0}$$: 基材粘度（粉体を一切含まない基材の粘度）""")
+    st.markdown("""$$\phi_{\rm max}$$: 基材粘度（粉体を一切含まない基材の粘度）""")
     st.markdown("---")
     eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
     eta_intrinsic = st.number_input("固有粘度（形状依存性, def. 球体2.5）", value=2.5)
