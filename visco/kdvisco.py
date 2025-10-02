@@ -2,7 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import io/
+import io
 
 # KRIEGER-DOUGHERTY VISCOSITY MODEL
 def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
@@ -13,7 +13,6 @@ def kdvisco_gui():
     st.markdown("#### Krieger-Dougherty 粘性推算")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
     st.markdown("---")
-        
     eta0 = st.number_input("基材粘度 [mPa・s]（def. エポキシ樹脂単体の粘度 1000）", value=1000)
     eta_intrinsic = st.number_input("固有粘度（形状依存性, def. 球体2.5）", value=2.5)
     phi_max_1 = st.number_input("最大充填体積分率（粒子1を隙間なく詰めたときの上限, def. 0.58）", value=0.58)
@@ -64,9 +63,10 @@ def kdvisco_gui():
        buf.seek(0)
        st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot.png", mime="image/png")
     if st.session_state["df"] is not None:
-       st.dataframe(st.session_state["df"])
-       csv = st.session_state["df"].to_csv(index=False)
-        
+        st.dataframe(st.session_state["df"])
+        csv = st.session_state["df"].to_csv(index=False)
+        st.download_button("📥 CSV ダウンロード", data=csv, file_name="viscosity.csv", mime="text/csv")
+
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
    raise RuntimeError("Do not run this file directly; use it as a module.")
