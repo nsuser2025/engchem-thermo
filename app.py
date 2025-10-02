@@ -10,10 +10,12 @@ from odesolver.ode_gui2 import ode_gui2
 st.image("zkanics_cute_logo.png", caption="Supported by Zkanics F. P. S. since 2024", width=250)
 st.markdown("---")
 
-page = st.selectbox("計算を選択してください", ["SAFT EoS", "KD Viscosity", "ODE Solver"])
-if page == "SAFT EoS":
-    st.header("SAFT型状態方程式")
+page = st.selectbox("計算を選択してください", ["SAFT", "KD Viscosity", "ODE Solver", "PNG2XLSX"])
+if page == "SAFT":
+     st.header("SAFT Theory")
 elif page == "KD Viscosity":
      kdvisco_gui()
 elif page == "ODE Solver":
      ode_gui2()
+elif page == "PNG2XLSX":
+     st.header("PNG2XLSX")
