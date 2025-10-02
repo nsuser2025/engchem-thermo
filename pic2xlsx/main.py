@@ -15,7 +15,7 @@ def pic2xlsx_gui():
        image = Image.open(uploaded_file)
     else:
        filename = "sample.png"
-       st.info("デフォルトのサンプル画像を表示します")
+       st.info("サンプル画像の変換結果を表示しています")
        image = Image.open("pic2xlsx/" + filename)
        
     col1, col2 = st.columns([1, 1])
