@@ -68,7 +68,7 @@ def kdvisco_gui():
     if st.session_state["df"] is not None:
         st.dataframe(st.session_state["df"])
         csv = st.session_state["df"].to_csv(index=False)
-        st.download_button("📥 CSV ダウンロード", data=csv, file_name="viscosity.csv", mime="text/csv")
+        #st.download_button("📥 CSV ダウンロード", data=csv, file_name="viscosity.csv", mime="text/csv")
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
