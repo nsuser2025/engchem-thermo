@@ -35,8 +35,9 @@ def pic2xlsx_gui():
           st.session_state["df"] = df
            
           if st.session_state["df"] is not None:
-             st.dataframe(st.session_state["df"])
-             csv = st.session_state["df"].to_csv(index=False)
+             with col3:
+                  st.dataframe(st.session_state["df"])
+                  csv = st.session_state["df"].to_csv(index=False)
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
