@@ -18,4 +18,4 @@ elif page == "KD Viscosity":
 elif page == "ODE Solver":
      ode_gui2 ()
 elif page == "PIC2XLSX":
-     pic2xlsx ()
+     pic2xlsx_gui ()
