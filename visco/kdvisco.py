@@ -13,7 +13,7 @@ def kdvisco_gui():
     st.markdown("#### Krieger-Dougherty 粘性推算")
     st.markdown("""固体粒子が高濃度に分散している懸濁液の粘性を簡単に推算するための経験式です。""")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
-    st.markdown("""η0: 基材粘度""")
+    st.markdown("""$$\eta_{0}$$: 基材粘度""")
     st.markdown("""[η]: 固有粘度（粉体が球体であれば2.5のままでOKです）""")
     st.markdown("""Φmax: 最大充填体積分率（粘度を決める最も重要な因子です。離散要素法や実験で決められることが多いです。）""")
     st.markdown("---")
