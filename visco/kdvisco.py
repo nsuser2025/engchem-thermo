@@ -10,7 +10,7 @@ def kd_viscosity(phi, eta0, eta_intrinsic, phi_max):
 
 def kdvisco_gui():
     st.markdown("---")
-    st.markdown("#### Krieger-Dougherty 粘性推算")
+    st.markdown("#### Krieger-Dougherty 粘度推算モデル")
     st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
     st.markdown("""$$\eta_{0}$$: 基材粘度（粉体を一切含まない基材の粘度）""")
     st.markdown(r"$\left[ \eta \right]$: 固有粘度（粉体が球体であれば2.5のままでOK）")
