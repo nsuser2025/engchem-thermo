@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from scipy.integrate import solve_ivp
 from matplotlib import cm
-from io import BytesIO
+import tempfile
 
 def main2():
     st.title("Lorenz Attractor Animation (Cloud-Friendly GIF)")
@@ -67,15 +67,16 @@ def main2():
     ani = FuncAnimation(fig, update, frames=n_points,
                         init_func=init_anim, interval=30, blit=True)
 
-    # ---- BytesIOに直接保存 ----
-    gif_io = BytesIO()
-    ani.save(gif_io, writer="pillow")
-    gif_io.seek(0)
+    # ---- 一時ファイルに保存 ----
+    with tempfile.NamedTemporaryFile(suffix=".gif", delete=False) as tmpfile:
+        tmpfile_path = tmpfile.name
+    ani.save(tmpfile_path, writer="pillow")
     plt.close(fig)
 
-    # ---- Streamlitに表示 ----
-    st.image(gif_io, caption="Lorenz Attractor GIF", format="GIF")
+    # ---- 読み込んで表示 ----
+    with open(tmpfile_path, "rb") as f:
+        gif_bytes = f.read()
+    st.image(gif_bytes, caption="Lorenz Attractor GIF", format="GIF")
 
 if __name__ == "__main__":
     main2()
-
