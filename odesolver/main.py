@@ -16,7 +16,7 @@ def ode_gui():
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")
     st.markdown("---")
 
-    option = st.radio("好きな色を選んでください：",("赤", "青", "緑"))
+    option = st.radio("入力例：",("ローレンツアトラクター", "シュレーディンガー方程式"))
     st.write(f"あなたが選んだのは：{option} です 🌈")
     
     # INPUTS: ODE
