@@ -33,10 +33,10 @@ def ode_gui():
         params = ast.literal_eval(params_input)
         if not isinstance(params, dict):
            st.error("パラメータは辞書形式（例: {'k1':1.0,'k2':0.5}）で入力してください。")
-           return
+           st.stop()
     except Exception as e:
         st.error(f"パラメータの読み込みに失敗しました: {e}")
-        return
+        st.stop()
 
     # INPUTS: INITIAL CONDITIONS
     initial_values_input = st.text_input("初期値（例: [1.0, 0.0]）", 
