@@ -7,3 +7,6 @@ numexpr>=2.9
 pytesseract>=0.3.10
 Pillow>=10.1.0
 openpyxl>=3.1.2
+torch>=2.1.0
+torchvision>=0.16.0
+torchaudio>=2.1.0
