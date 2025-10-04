@@ -5,6 +5,7 @@ from matplotlib.animation import FuncAnimation
 from scipy.integrate import solve_ivp
 from matplotlib import cm
 from io import BytesIO
+import tempfile
 
 def main2():
     st.title("Lorenz Attractor Animation (Cloud-Friendly GIF)")
