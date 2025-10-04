@@ -45,9 +45,9 @@ def ode_gui():
     Y0 = ast.literal_eval(initial_values_input)
 
     # INPUTS: TIME SPAN
-    t0 = st.number_input("開始時刻 t0", value=0.0, min_value=-1e6, max_value=1e6)
-    t1 = st.number_input("終了時刻 t1", value=10.0, min_value=-1e6, max_value=1e6)
-    n_points = st.number_input("分割数", value=100, min_value=2, max_value=1000, step=1)
+    t0 = st.number_input("開始時刻 t0", value=0.0, min_value=0.0, max_value=1e5)
+    t1 = st.number_input("終了時刻 t1", value=10.0, min_value=0.0, max_value=1e5)
+    n_points = st.number_input("分割数", value=100, min_value=1, max_value=10000, step=1)
 
     # INPUTS: TIME SPAN
     graph_title = st.text_input("グラフタイトル", value='ODE SOLUTION')
