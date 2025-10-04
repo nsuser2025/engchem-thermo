@@ -67,10 +67,18 @@ def main2():
     ani = FuncAnimation(fig, update, frames=n_points,
                         init_func=init_anim, interval=30, blit=True)
 
+    # ---- 一時ファイルに保存してから読み込み ----
+    with tempfile.NamedTemporaryFile(suffix=".gif") as tmpfile:
+         ani.save(tmpfile.name, writer="pillow")
+         tmpfile.seek(0)
+         gif_bytes = tmpfile.read()
+
+    st.image(gif_bytes, caption="Lorenz Attractor GIF")
+
     # メモリ上に保存
-    gif_io = BytesIO()
-    ani.save(gif_io, writer="pillow")
-    gif_io.seek(0)
+    #gif_io = BytesIO()
+    #ani.save(gif_io, writer="pillow")
+    #gif_io.seek(0)
 
     # 表示
-    st.image(gif_io, caption="Lorenz Attractor GIF")
+    #st.image(gif_io, caption="Lorenz Attractor GIF")
