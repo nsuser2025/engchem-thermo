@@ -17,9 +17,10 @@ def ode_gui():
     st.markdown("---")
     
     # INPUTS: ODE
-    st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dXi/dt）を入力してください")
+    default_input = "-k1*x1 + k2*x2\n k1*x1 - k2*x2"
+    st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dxi/dt）を入力してください")
     expr_text = st.text_area("常微分方程式を入力 (1行に1つの式)",
-                             value = "-k1*x1 + k2*x2\n k1*x1 - k2*x2")
+                             value = default_input)
     # INPUTS: PARAMETERS
     params_input = st.text_input("パラメータ（例: {'k1':1.0,'k2':0.5}）", value="{'k1':1.0,'k2':0.5}")
     params = ast.literal_eval(params_input)
