@@ -14,20 +14,26 @@ def ode_gui():
     st.latex(r"\frac{d [A]}{dt} = -k[A]")
     st.markdown("""時刻t=0の[A]の値（初期値）を用いてODEを解けば、任意の時刻における[A]を決めることができます。これを初期値問題といいます。
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")    
-    option = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）"), horizontal=True)
+    option = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）", "テスト"), horizontal=True)
     st.markdown("---")
+
+    if option == "テスト":
+       default_input = "-k1*x1 + k2*x2\n k1*x1 - k2*x2"
+       default_param = "{'k1':1.0,'k2':0.5}"
+       default_inita = "[1.0, 0.0]" 
     
     # INPUTS: ODE
-    default_input = "-k1*x1 + k2*x2\n k1*x1 - k2*x2"
     st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dxi/dt）を入力してください")
     expr_text = st.text_area("常微分方程式を入力 (1行に1つの式)",
                              value = default_input)
     # INPUTS: PARAMETERS
-    params_input = st.text_input("パラメータ（例: {'k1':1.0,'k2':0.5}）", value="{'k1':1.0,'k2':0.5}")
+    params_input = st.text_input("パラメータ（例: {'k1':1.0,'k2':0.5}）", 
+                                 value = default_param)
     params = ast.literal_eval(params_input)
 
     # INPUTS: INITIAL CONDITIONS
-    initial_values_input = st.text_input("初期値（例: [1.0, 0.0]）", value="[1.0, 0.0]")
+    initial_values_input = st.text_input("初期値（例: [1.0, 0.0]）", 
+                                         value = default_initia)
     Y0 = ast.literal_eval(initial_values_input)
 
     # INPUTS: TIME SPAN
