@@ -34,11 +34,9 @@ def ode_gui():
     except Exception as e:
         st.error(f"パラメータの読み込みに失敗しました: {e}")
         st.stop()
-
     if not isinstance(parsed, dict):
        st.error("パラメータは辞書形式（例: {'k1':1.0,'k2':0.5}）で入力してください。")
        st.stop()
-
     params = parsed
     
     # INPUTS: INITIAL CONDITIONS
@@ -47,9 +45,9 @@ def ode_gui():
     Y0 = ast.literal_eval(initial_values_input)
 
     # INPUTS: TIME SPAN
-    t0 = st.number_input("開始時刻 t0", value=0.0)
-    t1 = st.number_input("終了時刻 t1", value=10.0)
-    n_points = st.number_input("分割数", value=100, step=1)
+    t0 = st.number_input("開始時刻 t0", value=0.0, min_value=-1e6, max_value=1e6)
+    t1 = st.number_input("終了時刻 t1", value=10.0, min_value=-1e6, max_value=1e6)
+    n_points = st.number_input("分割数", value=100, min_value=2, max_value=1000, step=1)
 
     # INPUTS: TIME SPAN
     graph_title = st.text_input("グラフタイトル", value='ODE SOLUTION')
