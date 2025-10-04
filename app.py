@@ -7,7 +7,7 @@ from visco.kdvisco import kdvisco_gui
 from odesolver.ode_gui2 import ode_gui2
 from pic2xlsx.main import pic2xlsx_gui
 from lorenz.main import lorenz_gui
-from lorenz.main2 import main2
+#from lorenz.main2 import main2
 
 st.image("zkanics_cute_logo.png", caption="Supported by Zkanics F. P. S. since 2024", width=250)
 st.markdown("---")
