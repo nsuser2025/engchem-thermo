@@ -16,9 +16,10 @@ def ode_gui():
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")
     st.markdown("---")
 
-    option = st.radio("入力例：",("ローレンツアトラクター", "シュレーディンガー方程式"))
-    st.write(f"あなたが選んだのは：{option} です 🌈")
-    
+    option = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式"))
+    if option == "ローレンツアトラクター":
+       st.write(f"あなたが選んだのは：{option} です")
+        
     # INPUTS: ODE
     default_input = "-k1*x1 + k2*x2\n k1*x1 - k2*x2"
     st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dxi/dt）を入力してください")
