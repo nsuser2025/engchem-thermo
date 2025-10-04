@@ -14,7 +14,7 @@ def ode_gui():
     st.latex(r"\frac{d [A]}{dt} = -k[A]")
     st.markdown("""時刻t=0の[A]の値（初期値）を用いてODEを解けば、任意の時刻における[A]を決めることができます。これを初期値問題といいます。
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")    
-    option = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式"), horizontal=True)
+    option = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）"), horizontal=True)
     st.markdown("---")
     
     # INPUTS: ODE
