@@ -12,7 +12,7 @@ def main2():
     # データ生成
     init = [1.0, 0.0, 0.0]
     t_span = [0.0, 50.0]
-    n_points = 800
+    n_points = 200
     t_eval = np.linspace(t_span[0], t_span[1], n_points)
     p, r, b = 10.0, 28.0, 8.0/3.0
 
