@@ -73,7 +73,8 @@ def main2():
          ani.save(tmpfile.name, writer="pillow")
          tmpfile.seek(0)
          gif_bytes = tmpfile.read()
-
+    plt.close(fig)  # ← これが大事（Streamlitに空白画面を出さない）
+    
     st.image(gif_bytes, caption="Lorenz Attractor GIF")
 
     # メモリ上に保存
