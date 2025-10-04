@@ -6,7 +6,7 @@ import numexpr as ne
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def ode_gui2():
+def ode_gui():
     
     st.markdown("---")
     st.markdown("#### ODE Solver")
