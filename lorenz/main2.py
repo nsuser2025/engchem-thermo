@@ -5,7 +5,6 @@ from matplotlib.animation import FuncAnimation
 from scipy.integrate import solve_ivp
 from matplotlib import cm
 from io import BytesIO
-import tempfile
 
 def main2():
     st.title("Lorenz Attractor Animation (Cloud-Friendly GIF)")
@@ -68,19 +67,15 @@ def main2():
     ani = FuncAnimation(fig, update, frames=n_points,
                         init_func=init_anim, interval=30, blit=True)
 
-    # ---- 一時ファイルに保存してから読み込み ----
-    with tempfile.NamedTemporaryFile(suffix=".gif") as tmpfile:
-         ani.save(tmpfile.name, writer="pillow")
-         tmpfile.seek(0)
-         gif_bytes = tmpfile.read()
-    plt.close(fig)  # ← これが大事（Streamlitに空白画面を出さない）
-    
-    st.image(gif_bytes, caption="Lorenz Attractor GIF")
+    # ---- BytesIOに直接保存 ----
+    gif_io = BytesIO()
+    ani.save(gif_io, writer="pillow")
+    gif_io.seek(0)
+    plt.close(fig)
 
-    # メモリ上に保存
-    #gif_io = BytesIO()
-    #ani.save(gif_io, writer="pillow")
-    #gif_io.seek(0)
+    # ---- Streamlitに表示 ----
+    st.image(gif_io, caption="Lorenz Attractor GIF", format="GIF")
 
-    # 表示
-    #st.image(gif_io, caption="Lorenz Attractor GIF")
+if __name__ == "__main__":
+    main2()
+
