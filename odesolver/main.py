@@ -20,7 +20,7 @@ def ode_gui():
     if option == "テスト":
        default_input = "-k1*x1 + k2*x2\n k1*x1 - k2*x2"
        default_param = "{'k1':1.0,'k2':0.5}"
-       default_inita = "[1.0, 0.0]" 
+       default_initi = "[1.0, 0.0]" 
     
     # INPUTS: ODE
     st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dxi/dt）を入力してください")
@@ -33,7 +33,7 @@ def ode_gui():
 
     # INPUTS: INITIAL CONDITIONS
     initial_values_input = st.text_input("初期値（例: [1.0, 0.0]）", 
-                                         value = default_initia)
+                                         value = default_initi)
     Y0 = ast.literal_eval(initial_values_input)
 
     # INPUTS: TIME SPAN
