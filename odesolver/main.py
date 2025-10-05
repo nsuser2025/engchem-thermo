@@ -39,7 +39,7 @@ def ode_gui():
        st.stop()
     for key, val in parsed_params.items():
         if not isinstance(val, (int, float)):
-           st.error(f"パラメータ '{key}' の値が数値ではありません")
+           st.error(f"パラメータ {key} の値が数値ではありません")
            st.stop()
     params = parsed_params
     
