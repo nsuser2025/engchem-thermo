@@ -69,7 +69,7 @@ def ode_gui():
        t_eval = np.linspace(t0, t1, int(n_points))
        sol = solve_ivp(ode_system, (t0, t1), Y0, t_eval=t_eval)
 
-       # --- プロット ---
+       # FIGURE PLOT
        fig, ax = plt.subplots(figsize=(6,4))
        for i in range(len(Y0)):
            ax.plot(sol.t, sol.y[i], label=f"x{i+1}")
@@ -80,7 +80,7 @@ def ode_gui():
        ax.grid(True)
        st.pyplot(fig)
     
-       # --- CSV ダウンロード ---
+       # CSV DOWNLOAD
        data = {"t": sol.t}
        for i in range(len(Y0)):
            data[f"x{i+1}"] = sol.y[i]
