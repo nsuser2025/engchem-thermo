@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def ode_gui():
-    
+    # EXPLANATIONS
     st.markdown("---")
     st.markdown("#### ODE Solver（作成中）")
     st.markdown("""例）化学反応の濃度変化(d[A]/dt)は常微分方程式（ODE）で表されます。例えば単純な一次反応なら次のODEに従います。""")
@@ -16,11 +16,15 @@ def ode_gui():
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")    
     option = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）", "テスト"), horizontal=True)
     st.markdown("---")
-
+    # EXAMPLES
     if option == "テスト":
        default_input = "-k1*x1 + k2*x2\n k1*x1 - k2*x2"
        default_param = "{'k1':1.0,'k2':0.5}"
-       default_initi = "[1.0, 0.0]" 
+       default_initi = "[1.0, 0.0]"
+    elif option == "ローレンツアトラクター"
+       default_input = "-p * x + p * y\n -x * z + r * x - y\n x * y - b * z"
+       default_param = "{'p':10.0,'r':28.0,'b':8.0/3.0}"
+       default_initi = "[1.0, 0.0, 0.0]"
     
     # INPUTS: ODE
     st.write("変数を x1, x2, x3 ... のように表し、1行に1つのODE（dxi/dt）を入力してください")
