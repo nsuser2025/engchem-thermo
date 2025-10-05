@@ -50,6 +50,9 @@ def ode_gui():
     if not isinstance(parsed_Y0, list):
         st.error("初期値はリスト形式で入力してください。")
         st.stop()
+    if len(parsed_Y0) == 0:
+       st.error("初期値リストは空にできません。")
+       st.stop()
     Y0 = parsed_Y0
 
     # INPUTS: TIME SPAN
