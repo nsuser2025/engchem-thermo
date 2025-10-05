@@ -37,6 +37,10 @@ def ode_gui():
     if not isinstance(parsed_params, dict):
        st.error("パラメータは辞書形式（例: {'k1':1.0,'k2':0.5}）で入力してください。")
        st.stop()
+    for key, val in parsed_params.items():
+        if not isinstance(val, (int, float)):
+           raise ValueError(f"パラメータ '{key}' の値が数値ではありません")
+           st.stop()
     params = parsed_params
     
     # INPUTS: INITIAL CONDITIONS
