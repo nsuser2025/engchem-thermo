@@ -31,16 +31,23 @@ def ode_gui():
                                  value = default_param)
     try:
         parsed_params = ast.literal_eval(params_input)
+        if not isinstance(parsed_params, dict):
+           st.error("パラメータは辞書形式（例: {'k1':1.0,'k2':0.5}）で入力してください。")
+           st.stop()
+        for key, val in parsed_params.items():
+            if not isinstance(val, (int, float)):
+               st.error(f"パラメータ {key} の値が数値ではありません")
+               st.stop()
     except Exception as e:
         st.error(f"パラメータの読み込みに失敗しました: {e}")
         st.stop()
-    if not isinstance(parsed_params, dict):
-       st.error("パラメータは辞書形式（例: {'k1':1.0,'k2':0.5}）で入力してください。")
-       st.stop()
-    for key, val in parsed_params.items():
-        if not isinstance(val, (int, float)):
-           st.error(f"パラメータ {key} の値が数値ではありません")
-           st.stop()
+    #if not isinstance(parsed_params, dict):
+    #   st.error("パラメータは辞書形式（例: {'k1':1.0,'k2':0.5}）で入力してください。")
+    #   st.stop()
+    #for key, val in parsed_params.items():
+    #    if not isinstance(val, (int, float)):
+    #       st.error(f"パラメータ {key} の値が数値ではありません")
+    #       st.stop()
     params = parsed_params
     
     # INPUTS: INITIAL CONDITIONS
@@ -57,12 +64,6 @@ def ode_gui():
     except Exception as e:
         st.error(f"初期値の読み込みに失敗しました: {e}")
         st.stop()
-    #if not isinstance(parsed_Y0, list):
-    #    st.error("初期値はリスト形式で入力してください。")
-    #    st.stop()
-    #if not all(isinstance(x, (int, float)) for x in parsed_Y0):
-    #    st.error("リストの中身はすべて数値にしてください。")
-    #    st.stop()
     if len(parsed_Y0) == 0:
        st.error("初期値リストは空にできません。")
        st.stop()
