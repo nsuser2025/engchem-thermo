@@ -42,7 +42,16 @@ def ode_gui():
     # INPUTS: INITIAL CONDITIONS
     initial_values_input = st.text_input("初期値（例: [1.0, 0.0]）", 
                                          value = default_initi)
-    Y0 = ast.literal_eval(initial_values_input)
+    try:
+        #Y0 = ast.literal_eval(initial_values_input)
+        parsed = ast.literal_eval(initial_values_input)
+    except Exception as e:
+        st.error(f"初期値の読み込みに失敗しました: {e}")
+        st.stop()
+    if not isinstance(parsed, list):
+        st.error("初期値はリスト形式で入力してください。")
+        st.stop()
+    Y0 = parsed
 
     # INPUTS: TIME SPAN
     t0 = st.number_input("開始時刻 t0", value=0.0, min_value=0.0, max_value=1e5)
