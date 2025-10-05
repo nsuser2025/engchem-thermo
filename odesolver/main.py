@@ -48,15 +48,21 @@ def ode_gui():
                                          value = default_initi)
     try:
         parsed_Y0 = ast.literal_eval(initial_values_input)
+        if not isinstance(parsed_Y0, list):
+           st.error("初期値はリスト形式で入力してください。")
+           st.stop()
+        if not all(isinstance(x, (int, float)) for x in parsed_Y0):
+           st.error("リストの中身はすべて数値にしてください。")
+           st.stop()
     except Exception as e:
         st.error(f"初期値の読み込みに失敗しました: {e}")
         st.stop()
-    if not isinstance(parsed_Y0, list):
-        st.error("初期値はリスト形式で入力してください。")
-        st.stop()
-    if not all(isinstance(x, (int, float)) for x in parsed_Y0):
-        st.error("リストの中身はすべて数値にしてください。")
-        st.stop()
+    #if not isinstance(parsed_Y0, list):
+    #    st.error("初期値はリスト形式で入力してください。")
+    #    st.stop()
+    #if not all(isinstance(x, (int, float)) for x in parsed_Y0):
+    #    st.error("リストの中身はすべて数値にしてください。")
+    #    st.stop()
     if len(parsed_Y0) == 0:
        st.error("初期値リストは空にできません。")
        st.stop()
