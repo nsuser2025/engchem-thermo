@@ -22,8 +22,8 @@ def ode_gui():
        default_param = "{'k1':1.0,'k2':0.5}"
        default_initi = "[1.0, 0.0]"
     elif option == "ローレンツアトラクター":
-       default_input = "-p * x + p * y\n -x * z + r * x - y\n x * y - b * z"
-       default_param = "{'p':10.0,'r':28.0,'b':8.0/3.0}"
+       default_input = "-p * x + p * y\n -x * z + r * x - y\n x * y - (b/c) * z"
+       default_param = "{'p':10.0,'r':28.0,'b':8.0,'c':3.0}"
        default_initi = "[1.0, 0.0, 0.0]"
     
     # INPUTS: ODE
