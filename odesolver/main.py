@@ -44,14 +44,14 @@ def ode_gui():
                                          value = default_initi)
     try:
         #Y0 = ast.literal_eval(initial_values_input)
-        parsed = ast.literal_eval(initial_values_input)
+        parsed_Y0 = ast.literal_eval(initial_values_input)
     except Exception as e:
         st.error(f"初期値の読み込みに失敗しました: {e}")
         st.stop()
-    if not isinstance(parsed, list):
+    if not isinstance(parsed_Y0, list):
         st.error("初期値はリスト形式で入力してください。")
         st.stop()
-    Y0 = parsed
+    Y0 = parsed_Y0
 
     # INPUTS: TIME SPAN
     t0 = st.number_input("開始時刻 t0", value=0.0, min_value=0.0, max_value=1e5)
