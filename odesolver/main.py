@@ -20,7 +20,7 @@ def extract_x_vars(expr_text):
         if line.strip() == "":
             continue
         try:
-            tree = ast.parse(line, mode='eval')
+            tree = ast.parse(line, mode='exec')
             visitor.visit(tree)
         except Exception:
             continue
