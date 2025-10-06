@@ -164,7 +164,7 @@ def ode_gui():
           lc.set_linewidth(0.5)
 
           ax.add_collection(lc)
-          fig.colorbar(lc, ax=ax, label="Time", pad=0.1, fraction=0.05)
+          fig.colorbar(lc, ax=ax, label="Time", pad=0.1, fraction=0.02)
           ax.set_xlabel(graph_xlabel3d)
           ax.set_ylabel(graph_ylabel3d)
           ax.set_zlabel(graph_zlabel3d)
