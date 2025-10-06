@@ -77,7 +77,7 @@ def ode_gui():
     n_points = st.number_input("分割数", value=100, min_value=1, max_value=10000, step=1)
 
     # INPUTS: GRAPH INFORMATION (2D PLOT)
-    graph_title = st.text_input("グラフタイトル", value='ODE SOLUTION')
+    graph_title = st.text_input("グラフタイトル（2次元プロット）", value='ODE SOLUTION')
     graph_ylabel = st.text_input("Y軸ラベル", value='VARIABLES')
 
     # INPUTS: GRAPH INFORMATION (3D PLOT)
