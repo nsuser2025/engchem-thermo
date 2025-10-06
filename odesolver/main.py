@@ -147,7 +147,7 @@ def ode_gui():
               y_idx = var_options.index(y_var)
               z_idx = var_options.index(z_var)
           except ValueError:
-              st.error("入力した変数が存在しません。x1, x2, x3 のように入力してください。")
+              st.error("3Dプロットに用いる変数が存在ていないようです。x1, x2, x3 のように入力してください。")
               st.stop()
            
           x_data, y_data, z_data = sol.y[x_idx], sol.y[y_idx], sol.y[z_idx]
