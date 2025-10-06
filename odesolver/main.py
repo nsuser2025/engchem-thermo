@@ -79,6 +79,7 @@ def ode_gui():
 
     # INPUTS: GRAPH INFORMATION (2D PLOT)
     graph_title = st.text_input("グラフタイトル（2次元プロット）", value='ODE SOLUTION')
+    graph_xlabel = st.text_input("X軸ラベル（2次元プロット）", value='TIME')
     graph_ylabel = st.text_input("Y軸ラベル（2次元プロット）", value='VARIABLES')
 
     # INPUTS: GRAPH INFORMATION (3D PLOT)
@@ -88,9 +89,9 @@ def ode_gui():
        graph_xlabel3d = st.text_input("X軸ラベル（3次元プロット）", value='x1')
        graph_ylabel3d = st.text_input("Y軸ラベル（3次元プロット）", value='x2')
        graph_zlabel3d = st.text_input("Z軸ラベル（3次元プロット）", value='x3')
-       x_var = st.text_input("X軸の変数", value="x1")
-       y_var = st.text_input("Y軸の変数", value="x2")
-       z_var = st.text_input("Z軸の変数", value="x3")
+       x_var = st.text_input("X軸の変数（3次元プロット）", value="x1")
+       y_var = st.text_input("Y軸の変数（3次元プロット）", value="x2")
+       z_var = st.text_input("Z軸の変数（3次元プロット）", value="x3")
     
     # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
@@ -112,7 +113,7 @@ def ode_gui():
        fig, ax = plt.subplots(figsize=(6,4))
        for i in range(len(Y0)):
            ax.plot(sol.t, sol.y[i], label=f"x{i+1}")
-       ax.set_xlabel("t")
+       ax.set_xlabel(graph_xlabel)
        ax.set_ylabel(graph_ylabel)
        ax.set_title(graph_title)
        ax.legend()
