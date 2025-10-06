@@ -85,9 +85,9 @@ def ode_gui():
     option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
     if option_3dplot == "ON":
        graph_title3d = st.text_input("グラフタイトル（3次元プロット）", value='ODE SOLUTION 3D PLOT')
-       x_var = st.text_input("Variable for x-axis", value="x1")
-       y_var = st.text_input("Variable for y-axis", value="x2")
-       z_var = st.text_input("Variable for z-axis", value="x3")
+       x_var = st.text_input("X軸の変数", value="x1")
+       y_var = st.text_input("Y軸の変数", value="x2")
+       z_var = st.text_input("Z軸の変数", value="x3")
     
     # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
