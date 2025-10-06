@@ -109,13 +109,15 @@ def ode_gui():
     if "df" not in st.session_state:
         st.session_state["df"] = None
 
+    # CLEAR SESSION
+    if st.button("クリア"):
+       for key in ["fig2d", "fig3d", "df"]:
+       if key in st.session_state:
+          st.session_state[key] = None
+       st.experimental_rerun()
+
     # SESSION START
     if bool_execute:
-
-       # DELETE PREVIOUS SESSION DATA
-       for key in ["fig2d", "fig3d", "df"]:
-           if key in st.session_state:
-              st.session_state[key] = None
 
        # DEFINE THE FUNCTIONS
        def ode_system(t, Y):
