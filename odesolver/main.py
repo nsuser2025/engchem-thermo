@@ -114,7 +114,6 @@ def ode_gui():
        for key in ["fig2d", "fig3d", "df"]:
            if key in st.session_state:
               st.session_state[key] = None
-       st.experimental_rerun()
 
     # SESSION START
     if bool_execute:
