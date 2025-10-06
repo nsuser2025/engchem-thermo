@@ -100,7 +100,7 @@ def ode_gui():
     
     # SESSION BUTTON
     if "executed" not in st.session_state:
-       st.session_state.executed = False
+       st.session_state.executed = True
 
     def toggle_button():
         if st.session_state.executed:
