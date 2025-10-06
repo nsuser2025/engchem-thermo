@@ -19,7 +19,7 @@ def ode_gui():
     option_examples = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）", "テスト"), horizontal=True)
     option_3dplot = st.radio("入力欄を表示しますか？", ["OFF", "ON"], index = 0, horizontal = True)
     # ON の場合のみ入力欄を表示
-    if switch == "ON":
+    if option_3dplot == "ON":
        user_input = st.text_input("ここに文字を入力")
        st.write("入力内容:", user_input)
     else:
