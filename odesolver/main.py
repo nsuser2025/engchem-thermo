@@ -107,14 +107,23 @@ def ode_gui():
             dYdt.append(ne.evaluate(expr, local_dict))
         return dYdt
 
-    # RUN SOLVE_IVP
-    if st.button("実行"):
+    # SESSION BUTTON
+    bool_execute = st.button("実行")
+
+    # INITIALIZE SESSION_STATE
+    if "fig2d" not in st.session_state:
+        st.session_state["fig2d"] = None
+
+    # SESSION START
+    if bool_execute:
+
+       # SOLVE INITIAL PROBLEM
        expr_lines = [line.strip() for line in expr_text.splitlines() if line.strip() != ""]
        t_eval = np.linspace(t0, t1, int(n_points))
        sol = solve_ivp(ode_system, (t0, t1), Y0, t_eval=t_eval)
 
        # FIGURE PLOT
-       fig, ax = plt.subplots(figsize=(6,4))
+       fig2d, ax = plt.subplots(figsize=(6,4))
        for i in range(len(Y0)):
            ax.plot(sol.t, sol.y[i], label=f"x{i+1}")
        ax.set_xlabel(graph_xlabel)
@@ -122,7 +131,7 @@ def ode_gui():
        ax.set_title(graph_title)
        ax.legend()
        ax.grid(True)
-       st.pyplot(fig)
+       st.pyplot(fig2d)
     
        # CSV DOWNLOAD
        data = {"t": sol.t}
