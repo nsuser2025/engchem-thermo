@@ -99,8 +99,14 @@ def ode_gui():
        z_var = st.text_input("Z軸の変数（3次元プロット）", value="x3")
     
     # SESSION BUTTON
-    bool_execute = st.button("実行")
-
+    col1, col2 = st.columns([1, 1])
+    with col1:
+         if st.button("実行"):
+            bool_execute = st.button("実行")
+    with col2:
+         if st.button("クリア"):
+            bool_clear = st.button("クリア")   
+    
     # INITIALIZE SESSION_STATE
     if "fig2d" not in st.session_state:
         st.session_state["fig2d"] = None
@@ -110,7 +116,7 @@ def ode_gui():
         st.session_state["df"] = None
 
     # CLEAR SESSION
-    if st.button("クリア"):
+    if bool_clear:
        for key in ["fig2d", "fig3d", "df"]:
            if key in st.session_state:
               st.session_state[key] = None
