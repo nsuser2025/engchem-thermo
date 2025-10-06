@@ -4,6 +4,8 @@ import numpy as np
 from scipy.integrate import solve_ivp
 import numexpr as ne
 import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
+from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import pandas as pd
 
 def ode_gui():
