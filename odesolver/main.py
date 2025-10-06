@@ -142,9 +142,14 @@ def ode_gui():
 
           num_vars = sol.y.shape[0]
           var_options = [f"x{i+1}" for i in range(num_vars)]
-          x_idx = var_options.index(x_var)
-          y_idx = var_options.index(y_var)
-          z_idx = var_options.index(z_var)
+          try:
+              x_idx = var_options.index(x_var)
+              y_idx = var_options.index(y_var)
+              z_idx = var_options.index(z_var)
+          except ValueError:
+              st.error("入力した変数が存在しません。x1, x2, x3 のように入力してください。")
+              st.stop()
+           
           x_data, y_data, z_data = sol.y[x_idx], sol.y[y_idx], sol.y[z_idx]
            
           fig = plt.figure(figsize=(8, 6))
