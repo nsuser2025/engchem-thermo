@@ -18,10 +18,13 @@ def ode_gui():
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""")    
     option_examples = st.radio("入力例：",("ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）", "テスト"), horizontal=True)
     option_3dplot = st.radio("3Dプロット：",("OFF", "ON"), index = 0, horizontal=True)
-    if option_3dplot:
-       default_param = "{'p':10.0,'r':28.0,'b':8.0,'c':3.0}" 
-       test = st.text_input("パラメータ（例: {'k1':1.0,'k2':0.5}）", 
-                             value = default_param)   
+    switch = st.radio("入力欄を表示しますか？", ["OFF", "ON"])
+    # ON の場合のみ入力欄を表示
+    if switch == "ON":
+       user_input = st.text_input("ここに文字を入力")
+       st.write("入力内容:", user_input)
+    else:
+       st.write("入力欄は非表示です")   
     st.markdown("---")
     # EXAMPLES
     if option_examples == "テスト":
