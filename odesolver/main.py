@@ -135,7 +135,6 @@ def ode_gui():
        ax.legend()
        ax.grid(True)
        st.session_state["fig2d"] = fig2d
-       #st.pyplot(fig2d)
     
        # SESSION_STATE SAVE: DF
        data = {"t": sol.t}
@@ -143,20 +142,7 @@ def ode_gui():
            data[f"x{i+1}"] = sol.y[i]
        df = pd.DataFrame(data)
        st.session_state["df"] = df
-       #csv = df.to_csv(index=False)
-       #st.download_button("CSVダウンロード", csv, file_name="ode_solution.csv", mime="text/csv")
-
-       # DISPLAY SAVED FIGURE AND DATA
-       if st.session_state["fig2d"] is not None:
-          st.pyplot(st.session_state["fig2d"])
-          buf = io.BytesIO()
-          st.session_state["fig2d"].savefig(buf, format="png")
-          buf.seek(0)
-          st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot2d.png", mime="image/png")
-       if st.session_state["df"] is not None:
-          st.dataframe(st.session_state["df"])
-          csv = st.session_state["df"].to_csv(index=False)
-        
+               
        # 3D PLOT
        if option_3dplot == "ON":
           
@@ -199,3 +185,18 @@ def ode_gui():
           ax.set_zlim(z_data.min(), z_data.max())
           plt.tight_layout()
           st.pyplot(fig)
+    
+    # DISPLAY SAVED FIGURE AND DATA
+    if st.session_state["fig2d"] is not None:
+       st.pyplot(st.session_state["fig2d"])
+       buf = io.BytesIO()
+       st.session_state["fig2d"].savefig(buf, format="png")
+       buf.seek(0)
+       st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot2d.png", mime="image/png")
+    if st.session_state["df"] is not None:
+       st.dataframe(st.session_state["df"])
+       csv = st.session_state["df"].to_csv(index=False)
+
+# MODULE ERROR MESSAGE
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
