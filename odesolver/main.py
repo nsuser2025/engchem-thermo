@@ -101,17 +101,18 @@ def ode_gui():
     # SESSION BUTTON
     if "executed" not in st.session_state:
        st.session_state.executed = False
+    
+    def execute():
+        st.session_state.executed = True
+    def clear():
+        st.session_state.executed = False
 
-    def toggle_button():
-        if st.session_state.executed:
-           st.session_state.executed = False
-        else:
-           st.session_state.executed = True
-
-    button_label = "クリア" if st.session_state.executed else "実行"
-    #if st.button(button_label, key="execute_clear"):
-    if st.button(button_label):
-       toggle_button()
+    if st.session_state.executed:
+       if st.button("クリア"):
+          clear()
+    else:
+       if st.button("実行"):
+          execute()
     
     # INITIALIZE SESSION_STATE
     if "fig2d" not in st.session_state:
