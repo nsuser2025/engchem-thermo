@@ -119,7 +119,7 @@ def ode_gui():
        st.download_button("CSVダウンロード", csv, file_name="ode_solution.csv", mime="text/csv")
 
        # 3D PLOT
-       if option_3dplot:
+       if option_3dplot == "ON":
           x_data, y_data, z_data = sol.y
           fig = plt.figure(figsize=(8, 6))
           ax = fig.add_subplot(111, projection="3d")
