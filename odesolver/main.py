@@ -123,12 +123,11 @@ def ode_gui():
        # 3D PLOT
        if option_3dplot == "ON":
            
-          num_vars = sol_y.shape[0]
+          num_vars = sol.y.shape[0]
           var_options = [f"x{i+1}" for i in range(num_vars)]
           x_var = st.selectbox("Variable for X-axis", var_options, index=0)
           y_var = st.selectbox("Variable for Y-axis", var_options, index=1 if num_vars>1 else 0)
           z_var = st.selectbox("Variable for Z-axis", var_options, index=2 if num_vars>2 else 0)
-          
            
           if sol.y.shape[0] >= 3:
              x_data, y_data, z_data = sol.y[:3]
