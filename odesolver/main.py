@@ -129,7 +129,6 @@ def ode_gui():
              st.error("3Dプロットには変数が3つ以上必要です")
              st.stop()
 
-          x_data, y_data, z_data = sol.y
           fig = plt.figure(figsize=(8, 6))
           ax = fig.add_subplot(111, projection="3d")
 
@@ -143,17 +142,12 @@ def ode_gui():
 
           ax.add_collection(lc)
           fig.colorbar(lc, ax=ax, label="Time")
-
           ax.set_xlabel("X")
           ax.set_ylabel("Y")
           ax.set_zlabel("Z")
           ax.set_title(graph_title3d)
-
           ax.set_xlim(x_data.min(), x_data.max())
           ax.set_ylim(y_data.min(), y_data.max())
           ax.set_zlim(z_data.min(), z_data.max())
-
           plt.tight_layout()
-
-          # Streamlit に表示
           st.pyplot(fig)
