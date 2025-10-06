@@ -79,8 +79,8 @@ def ode_gui():
 
     # INPUTS: TIME SPAN
     t0 = st.number_input("開始時刻 t0", value=0.0, min_value=0.0, max_value=1e5)
-    t1 = st.number_input("終了時刻 t1", value=10.0, min_value=0.0, max_value=1e5)
-    n_points = st.number_input("分割数", value=100, min_value=1, max_value=10000, step=1)
+    t1 = st.number_input("終了時刻 t1", value=50.0, min_value=0.0, max_value=1e5)
+    n_points = st.number_input("分割数", value=3000, min_value=1, max_value=10000, step=1)
 
     # INPUTS: GRAPH INFORMATION (2D PLOT)
     graph_title = st.text_input("グラフタイトル（2次元プロット）", value='ODE SOLUTION')
