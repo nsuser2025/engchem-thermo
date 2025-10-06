@@ -113,6 +113,8 @@ def ode_gui():
     # INITIALIZE SESSION_STATE
     if "fig2d" not in st.session_state:
         st.session_state["fig2d"] = None
+    if "df" not in st.session_state:
+        st.session_state["df"] = None
 
     # SESSION START
     if bool_execute:
@@ -131,16 +133,29 @@ def ode_gui():
        ax.set_title(graph_title)
        ax.legend()
        ax.grid(True)
-       st.pyplot(fig2d)
+       st.session_state["fig"] = fig
+       #st.pyplot(fig2d)
     
        # CSV DOWNLOAD
        data = {"t": sol.t}
        for i in range(len(Y0)):
            data[f"x{i+1}"] = sol.y[i]
        df = pd.DataFrame(data)
-       csv = df.to_csv(index=False)
-       st.download_button("CSVダウンロード", csv, file_name="ode_solution.csv", mime="text/csv")
+       st.session_state["df"] = df
+       #csv = df.to_csv(index=False)
+       #st.download_button("CSVダウンロード", csv, file_name="ode_solution.csv", mime="text/csv")
 
+       # DISPLAY SAVED FIGURE AND DATA
+       if st.session_state["fig2d"] is not None:
+          st.pyplot(st.session_state["fig2d"])
+          buf = io.BytesIO()
+          st.session_state["fig"].savefig(buf, format="png")
+          buf.seek(0)
+          st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot2d.png", mime="image/png")
+       if st.session_state["df"] is not None:
+          st.dataframe(st.session_state["df"])
+          csv = st.session_state["df"].to_csv(index=False)
+        
        # 3D PLOT
        if option_3dplot == "ON":
           
