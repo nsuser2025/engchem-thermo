@@ -112,6 +112,11 @@ def ode_gui():
     # SESSION START
     if bool_execute:
 
+       # DELETE PREVIOUS SESSION DATA
+       for key in ["fig2d", "fig3d", "df"]:
+           if key in st.session_state:
+              st.session_state[key] = None
+
        # DEFINE THE FUNCTIONS
        def ode_system(t, Y):
            local_dict = {f"x{i+1}": Y[i] for i in range(len(Y))}
