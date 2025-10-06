@@ -8,26 +8,7 @@ from matplotlib.colors import Normalize
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import pandas as pd
 
-# EXTRACT X*** VARABLES FROM USER DEFINED EQUATIONS
-def extract_x_vars(expr_text):
-    class VarVisitor(ast.NodeVisitor):
-        def __init__(self):
-            self.vars = set()
-        def visit_Name(self, node):
-            self.vars.add(node.id)
-    visitor = VarVisitor()
-    for line in expr_text.splitlines():
-        if line.strip() == "":
-            continue
-        try:
-            tree = ast.parse(line, mode='exec')
-            visitor.visit(tree)
-        except Exception:
-            continue
-    x_vars = sorted([v for v in visitor.vars if v.startswith('x')])
-    return x_vars
-
-# MAIN PART OF ODE SOLVER
+# MAIN PART OF ODE SOLVER GUI
 def ode_gui():
     
     # EXPLANATIONS
