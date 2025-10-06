@@ -79,12 +79,15 @@ def ode_gui():
 
     # INPUTS: GRAPH INFORMATION (2D PLOT)
     graph_title = st.text_input("グラフタイトル（2次元プロット）", value='ODE SOLUTION')
-    graph_ylabel = st.text_input("Y軸ラベル", value='VARIABLES')
+    graph_ylabel = st.text_input("Y軸ラベル（2次元プロット）", value='VARIABLES')
 
     # INPUTS: GRAPH INFORMATION (3D PLOT)
     option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
     if option_3dplot == "ON":
        graph_title3d = st.text_input("グラフタイトル（3次元プロット）", value='ODE SOLUTION 3D PLOT')
+       graph_xlabel3d = st.text_input("X軸ラベル（3次元プロット）", value='x1')
+       graph_ylabel3d = st.text_input("Y軸ラベル（3次元プロット）", value='x2')
+       graph_zlabel3d = st.text_input("Z軸ラベル（3次元プロット）", value='x3')
        x_var = st.text_input("X軸の変数", value="x1")
        y_var = st.text_input("Y軸の変数", value="x2")
        z_var = st.text_input("Z軸の変数", value="x3")
@@ -132,7 +135,7 @@ def ode_gui():
              st.error("3Dプロットには変数が3つ以上必要です")
              st.stop()
 
-          num_vars = sol_y.shape[0]
+          num_vars = sol.y.shape[0]
           var_options = [f"x{i+1}" for i in range(num_vars)]
           x_idx = var_options.index(x_var)
           y_idx = var_options.index(y_var)
@@ -152,9 +155,9 @@ def ode_gui():
 
           ax.add_collection(lc)
           fig.colorbar(lc, ax=ax, label="Time")
-          ax.set_xlabel("X")
-          ax.set_ylabel("Y")
-          ax.set_zlabel("Z")
+          ax.set_xlabel(graph_xlabel3d)
+          ax.set_ylabel(graph_ylabel3d)
+          ax.set_zlabel(graph_zlabel3d)
           ax.set_title(graph_title3d)
           ax.set_xlim(x_data.min(), x_data.max())
           ax.set_ylim(y_data.min(), y_data.max())
