@@ -99,18 +99,31 @@ def ode_gui():
        z_var = st.text_input("Z軸の変数（3次元プロット）", value="x3")
     
     # SESSION BUTTON
+    # セッションステート初期化
     if "executed" not in st.session_state:
-        st.session_state.executed = False
+       st.session_state.executed = False
 
-    def toggle():
-        st.session_state.executed = not st.session_state.executed
+    # ボタン押下時の処理
+    def on_click():
+        if not st.session_state.executed:
+           # 実行処理
+           st.session_state.executed = True
+           st.session_state.message = "処理を実行しました！"
+        else:
+           # クリア処理
+           st.session_state.executed = False
+           st.session_state.message = "クリアしました！"
+           # ここで図やデータもリセット可能
 
-    # ボタンラベルは状態に応じて決定
+    # ボタンラベルを状態に応じて決定
     button_label = "クリア" if st.session_state.executed else "実行"
 
-    # keyを指定して1つのボタンとして認識させる
-    if st.button(button_label, key="execute_clear"):
-       toggle()
+    # ボタン表示
+    st.button(button_label, on_click=on_click, key="exec_clear")
+
+    # 実行・クリアのメッセージ表示
+    if "message" in st.session_state:
+       st.write(st.session_state.message)
 
     # INITIALIZE SESSION_STATE
     if "fig2d" not in st.session_state:
