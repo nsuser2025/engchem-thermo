@@ -104,6 +104,8 @@ def ode_gui():
     # INITIALIZE SESSION_STATE
     if "fig2d" not in st.session_state:
         st.session_state["fig2d"] = None
+    if "fig3d" not in st.session_state:
+        st.session_state["fig3d"] = None
     if "df" not in st.session_state:
         st.session_state["df"] = None
 
@@ -143,7 +145,7 @@ def ode_gui():
        df = pd.DataFrame(data)
        st.session_state["df"] = df
                
-       # 3D PLOT
+       # SESSION_STATE SAVE: FIGURE3D
        if option_3dplot == "ON":
           
           # ERROR MESSAGE
@@ -163,8 +165,8 @@ def ode_gui():
            
           x_data, y_data, z_data = sol.y[x_idx], sol.y[y_idx], sol.y[z_idx]
            
-          fig = plt.figure(figsize=(8, 6))
-          ax = fig.add_subplot(111, projection="3d")
+          fig3d = plt.figure(figsize=(8, 6))
+          ax = fig3d.add_subplot(111, projection="3d")
 
           points = np.array([x_data, y_data, z_data]).T.reshape(-1, 1, 3)
           segments = np.concatenate([points[:-1], points[1:]], axis=1)
@@ -175,7 +177,7 @@ def ode_gui():
           lc.set_linewidth(0.5)
 
           ax.add_collection(lc)
-          fig.colorbar(lc, ax=ax, label="Time", pad=0.1, fraction=0.02)
+          fig3d.colorbar(lc, ax=ax, label="Time", pad=0.1, fraction=0.02)
           ax.set_xlabel(graph_xlabel3d)
           ax.set_ylabel(graph_ylabel3d)
           ax.set_zlabel(graph_zlabel3d)
@@ -183,8 +185,9 @@ def ode_gui():
           ax.set_xlim(x_data.min(), x_data.max())
           ax.set_ylim(y_data.min(), y_data.max())
           ax.set_zlim(z_data.min(), z_data.max())
-          plt.tight_layout()
-          st.pyplot(fig)
+          st.session_state["fig3d"] = fig3d
+          #plt.tight_layout()
+          #st.pyplot(fig)
     
     # DISPLAY SAVED FIGURE AND DATA
     if st.session_state["fig2d"] is not None:
@@ -193,6 +196,12 @@ def ode_gui():
        st.session_state["fig2d"].savefig(buf, format="png")
        buf.seek(0)
        st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot2d.png", mime="image/png")
+    if st.session_state["fig3d"] is not None:
+       st.pyplot(st.session_state["fig3d"])
+       buf = io.BytesIO()
+       st.session_state["fig3d"].savefig(buf, format="png")
+       buf.seek(0)
+       st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot3d.png", mime="image/png")
     if st.session_state["df"] is not None:
        st.dataframe(st.session_state["df"])
        csv = st.session_state["df"].to_csv(index=False)
