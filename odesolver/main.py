@@ -9,16 +9,6 @@ from matplotlib.colors import Normalize
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import pandas as pd
 
-# DEFINE THE FUNCTIONS
-def ode_system(t, Y):
-    local_dict = {f"x{i+1}": Y[i] for i in range(len(Y))}
-    local_dict.update(params)
-    local_dict["t"] = t
-    dYdt = []
-    for expr in expr_lines:
-        dYdt.append(ne.evaluate(expr, local_dict))
-    return dYdt
-
 # MAIN PART OF ODE SOLVER GUI
 def ode_gui():
     
@@ -120,6 +110,16 @@ def ode_gui():
     # SESSION START
     if bool_execute:
 
+       # DEFINE THE FUNCTIONS
+       def ode_system(t, Y):
+           local_dict = {f"x{i+1}": Y[i] for i in range(len(Y))}
+           local_dict.update(params)
+           local_dict["t"] = t
+           dYdt = []
+           for expr in expr_lines:
+              dYdt.append(ne.evaluate(expr, local_dict))
+           return dYdt
+        
        # SOLVE INITIAL PROBLEMS
        expr_lines = [line.strip() for line in expr_text.splitlines() if line.strip() != ""]
        t_eval = np.linspace(t0, t1, int(n_points))
