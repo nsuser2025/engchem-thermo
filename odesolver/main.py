@@ -17,9 +17,9 @@ def ode_gui():
     st.markdown("""時刻t=0の[A]の値（初期値）を用いてODEを解けば、任意の時刻における[A]を決めることができます。これを初期値問題といいます。
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""") 
     examples = ["ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）", "テスト"]
-    option_examples = st.radio("入力例：", examples, horizontal = True)
+    option_examples = st.radio("入力例：", examples, index = 0, horizontal = True)
     option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
-    # ON の場合のみ入力欄を表示
+    # 3D PLOT OPTIONS
     if option_3dplot == "ON":
        user_input = st.text_input("ここに文字を入力")
        st.write("入力内容:", user_input)
@@ -118,34 +118,33 @@ def ode_gui():
        csv = df.to_csv(index=False)
        st.download_button("CSVダウンロード", csv, file_name="ode_solution.csv", mime="text/csv")
 
-       # -----------------------------------
-       # 3Dプロット
-       # -----------------------------------
-       x_data, y_data, z_data = sol.y
-       fig = plt.figure(figsize=(8, 6))
-       ax = fig.add_subplot(111, projection="3d")
+       # 3D PLOT
+       if option_3dplot:
+          x_data, y_data, z_data = sol.y
+          fig = plt.figure(figsize=(8, 6))
+          ax = fig.add_subplot(111, projection="3d")
 
-       points = np.array([x_data, y_data, z_data]).T.reshape(-1, 1, 3)
-       segments = np.concatenate([points[:-1], points[1:]], axis=1)
+          points = np.array([x_data, y_data, z_data]).T.reshape(-1, 1, 3)
+          segments = np.concatenate([points[:-1], points[1:]], axis=1)
 
-       norm = Normalize(t_eval.min(), t_eval.max())
-       lc = Line3DCollection(segments, cmap='plasma', norm=norm)
-       lc.set_array(t_eval[:-1])
-       lc.set_linewidth(0.5)
+          norm = Normalize(t_eval.min(), t_eval.max())
+          lc = Line3DCollection(segments, cmap='plasma', norm=norm)
+          lc.set_array(t_eval[:-1])
+          lc.set_linewidth(0.5)
 
-       ax.add_collection(lc)
-       fig.colorbar(lc, ax=ax, label="Time")
+          ax.add_collection(lc)
+          fig.colorbar(lc, ax=ax, label="Time")
 
-       ax.set_xlabel("X")
-       ax.set_ylabel("Y")
-       ax.set_zlabel("Z")
-       ax.set_title("Lorenz Attractor")
+          ax.set_xlabel("X")
+          ax.set_ylabel("Y")
+          ax.set_zlabel("Z")
+          ax.set_title("Lorenz Attractor")
 
-       ax.set_xlim(x_data.min(), x_data.max())
-       ax.set_ylim(y_data.min(), y_data.max())
-       ax.set_zlim(z_data.min(), z_data.max())
+          ax.set_xlim(x_data.min(), x_data.max())
+          ax.set_ylim(y_data.min(), y_data.max())
+          ax.set_zlim(z_data.min(), z_data.max())
 
-       plt.tight_layout()
+          plt.tight_layout()
 
-       # Streamlit に表示
-       st.pyplot(fig)
+          # Streamlit に表示
+          st.pyplot(fig)
