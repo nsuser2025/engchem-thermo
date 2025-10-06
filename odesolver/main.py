@@ -85,7 +85,7 @@ def ode_gui():
         dYdt = []
         for expr in expr_lines:
             dYdt.append(ne.evaluate(expr, local_dict))
-            return dYdt
+        return dYdt
 
     # RUN SOLVE_IVP
     if st.button("実行"):
