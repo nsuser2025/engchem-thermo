@@ -101,11 +101,9 @@ def ode_gui():
     # SESSION BUTTON
     col1, col2 = st.columns([1, 1])
     with col1:
-         if st.button("実行"):
-            bool_execute = st.button("実行")
+         bool_execute = st.button("実行")
     with col2:
-         if st.button("クリア"):
-            bool_clear = st.button("クリア")   
+         bool_clear = st.button("クリア")   
     
     # INITIALIZE SESSION_STATE
     if "fig2d" not in st.session_state:
