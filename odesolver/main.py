@@ -67,7 +67,7 @@ def ode_gui():
         if len(parsed_Y0) == 0:
            st.error("初期値リストは空にできません。")
            st.stop()
-        if len(parsed_Y0) != len(expr_lines):
+        if len(parsed_Y0) != len(expr_text):
            st.error("初期値の数とODE式の数が一致しません")
            st.stop()
     except Exception as e:
