@@ -9,6 +9,7 @@ from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import pandas as pd
 
 def ode_gui():
+    
     # EXPLANATIONS
     st.markdown("---")
     st.markdown("#### ODE Solver（作成中）")
@@ -18,12 +19,8 @@ def ode_gui():
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""") 
     examples = ["ローレンツアトラクター", "シュレディンガー方程式", "拡散方程式", "反応速度式（1次）", "テスト"]
     option_examples = st.radio("入力例：", examples, index = 0, horizontal = True)
-    option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
-    # 3D PLOT OPTIONS
-    if option_3dplot == "ON":
-       user_input = st.text_input("ここに文字を入力")
-       st.write("入力内容:", user_input)
     st.markdown("---")
+    
     # EXAMPLES
     if option_examples == "テスト":
        default_input = "-k1*x1 + k2*x2\n k1*x1 - k2*x2"
@@ -79,9 +76,15 @@ def ode_gui():
     t1 = st.number_input("終了時刻 t1", value=10.0, min_value=0.0, max_value=1e5)
     n_points = st.number_input("分割数", value=100, min_value=1, max_value=10000, step=1)
 
-    # INPUTS: TIME SPAN
+    # INPUTS: GRAPH INFORMATION (2D PLOT)
     graph_title = st.text_input("グラフタイトル", value='ODE SOLUTION')
     graph_ylabel = st.text_input("Y軸ラベル", value='VARIABLES')
+
+    # INPUTS: GRAPH INFORMATION (3D PLOT)
+    option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
+    if option_3dplot == "ON":
+       user_input = st.text_input("ここに文字を入力")
+       st.write("入力内容:", user_input)
     
     # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
