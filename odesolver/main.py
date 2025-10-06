@@ -8,6 +8,26 @@ from matplotlib.colors import Normalize
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import pandas as pd
 
+# EXTRACT X*** VARABLES FROM USER DEFINED EQUATIONS
+def extract_x_vars(expr_text):
+    class VarVisitor(ast.NodeVisitor):
+        def __init__(self):
+            self.vars = set()
+        def visit_Name(self, node):
+            self.vars.add(node.id)
+    visitor = VarVisitor()
+    for line in expr_text.splitlines():
+        if line.strip() == "":
+            continue
+        try:
+            tree = ast.parse(line, mode='eval')
+            visitor.visit(tree)
+        except Exception:
+            continue
+    x_vars = sorted([v for v in visitor.vars if v.startswith('x')])
+    return x_vars
+
+# MAIN PART OF ODE SOLVER
 def ode_gui():
     
     # EXPLANATIONS
@@ -83,7 +103,15 @@ def ode_gui():
     # INPUTS: GRAPH INFORMATION (3D PLOT)
     option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
     if option_3dplot == "ON":
-       graph_title3d = st.text_input("グラフタイトル（3次元プロット）", value='ODE SOLUTION')
+       graph_title3d = st.text_input("グラフタイトル（3次元プロット）", value='ODE SOLUTION 3D PLOT')
+       x_variables = extract_x_vars(expr_text)
+       if len(x_variables) >= 3:
+          x_var = st.selectbox("X軸", x_variables, index=0)
+          y_var = st.selectbox("Y軸", x_variables, index=1)
+          z_var = st.selectbox("Z軸", x_variables, index=2)
+       else:
+          st.error("3Dプロットには3つ以上のx変数が必要です")
+          st.stop()
     
     # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
@@ -122,20 +150,17 @@ def ode_gui():
 
        # 3D PLOT
        if option_3dplot == "ON":
+          
           # ERROR MESSAGE
           if sol.y.shape[0] < 3:
              st.error("3Dプロットには変数が3つ以上必要です")
              st.stop()
-          # AXIS FOR 3D PLOT
-          num_vars = sol.y.shape[0]
+
+          num_vars = sol_y.shape[0]
           var_options = [f"x{i+1}" for i in range(num_vars)]
-          x_var = st.selectbox("Variable for X-axis", var_options, index=0)
-          y_var = st.selectbox("Variable for Y-axis", var_options, index=1 if num_vars>1 else 0)
-          z_var = st.selectbox("Variable for Z-axis", var_options, index=2 if num_vars>2 else 0)
           x_idx = var_options.index(x_var)
           y_idx = var_options.index(y_var)
           z_idx = var_options.index(z_var)
-
           x_data, y_data, z_data = sol.y[x_idx], sol.y[y_idx], sol.y[z_idx]
            
           fig = plt.figure(figsize=(8, 6))
