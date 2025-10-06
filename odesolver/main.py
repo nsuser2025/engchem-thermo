@@ -109,7 +109,8 @@ def ode_gui():
            st.session_state.executed = True
 
     button_label = "クリア" if st.session_state.executed else "実行"
-    if st.button(button_label, key="execute_clear"):
+    #if st.button(button_label, key="execute_clear"):
+    if st.button(button_label):
        toggle_button()
     
     # INITIALIZE SESSION_STATE
