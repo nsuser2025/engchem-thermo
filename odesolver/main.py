@@ -8,6 +8,16 @@ from matplotlib.colors import Normalize
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import pandas as pd
 
+# DEFINE THE FUNCTIONS
+def ode_system(t, Y):
+    local_dict = {f"x{i+1}": Y[i] for i in range(len(Y))}
+    local_dict.update(params)
+    local_dict["t"] = t
+    dYdt = []
+    for expr in expr_lines:
+        dYdt.append(ne.evaluate(expr, local_dict))
+    return dYdt
+
 # MAIN PART OF ODE SOLVER GUI
 def ode_gui():
     
@@ -97,16 +107,6 @@ def ode_gui():
        y_var = st.text_input("Y軸の変数（3次元プロット）", value="x2")
        z_var = st.text_input("Z軸の変数（3次元プロット）", value="x3")
     
-    # DEFINE THE FUNCTIONS
-    def ode_system(t, Y):
-        local_dict = {f"x{i+1}": Y[i] for i in range(len(Y))}
-        local_dict.update(params)
-        local_dict["t"] = t
-        dYdt = []
-        for expr in expr_lines:
-            dYdt.append(ne.evaluate(expr, local_dict))
-        return dYdt
-
     # SESSION BUTTON
     bool_execute = st.button("実行")
 
@@ -119,12 +119,12 @@ def ode_gui():
     # SESSION START
     if bool_execute:
 
-       # SOLVE INITIAL PROBLEM
+       # SOLVE INITIAL PROBLEMS
        expr_lines = [line.strip() for line in expr_text.splitlines() if line.strip() != ""]
        t_eval = np.linspace(t0, t1, int(n_points))
        sol = solve_ivp(ode_system, (t0, t1), Y0, t_eval=t_eval)
 
-       # FIGURE PLOT
+       # SESSION_STATE SAVE: FIGURE2D
        fig2d, ax = plt.subplots(figsize=(6,4))
        for i in range(len(Y0)):
            ax.plot(sol.t, sol.y[i], label=f"x{i+1}")
@@ -133,7 +133,7 @@ def ode_gui():
        ax.set_title(graph_title)
        ax.legend()
        ax.grid(True)
-       st.session_state["fig"] = fig
+       st.session_state["fig2d"] = fig2d
        #st.pyplot(fig2d)
     
        # CSV DOWNLOAD
