@@ -99,12 +99,6 @@ def ode_gui():
        z_var = st.text_input("Z軸の変数（3次元プロット）", value="x3")
     
     # SESSION BUTTON
-    #col1, col2 = st.columns([1, 1])
-    #with col1:
-    #     bool_execute = st.button("実行")
-    #with col2:
-    #     bool_clear = st.button("クリア")
-    
     if "executed" not in st.session_state:
        st.session_state.executed = False
 
