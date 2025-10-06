@@ -83,8 +83,7 @@ def ode_gui():
     # INPUTS: GRAPH INFORMATION (3D PLOT)
     option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
     if option_3dplot == "ON":
-       user_input = st.text_input("ここに文字を入力")
-       st.write("入力内容:", user_input)
+       graph_title3d = st.text_input("グラフタイトル（3次元プロット）", value='ODE SOLUTION')
     
     # DEFINE THE FUNCTIONS
     def ode_system(t, Y):
@@ -123,6 +122,13 @@ def ode_gui():
 
        # 3D PLOT
        if option_3dplot == "ON":
+          
+          if sol.y.shape[0] >= 3:
+             x_data, y_data, z_data = sol.y[:3]
+          else:
+             st.error("3Dプロットには変数が3つ以上必要です")
+             st.stop()
+
           x_data, y_data, z_data = sol.y
           fig = plt.figure(figsize=(8, 6))
           ax = fig.add_subplot(111, projection="3d")
@@ -141,7 +147,7 @@ def ode_gui():
           ax.set_xlabel("X")
           ax.set_ylabel("Y")
           ax.set_zlabel("Z")
-          ax.set_title("Lorenz Attractor")
+          ax.set_title(graph_title3d)
 
           ax.set_xlim(x_data.min(), x_data.max())
           ax.set_ylim(y_data.min(), y_data.max())
