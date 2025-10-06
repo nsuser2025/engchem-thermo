@@ -1,4 +1,5 @@
 import ast
+import io
 import streamlit as st
 import numpy as np
 from scipy.integrate import solve_ivp
@@ -136,7 +137,7 @@ def ode_gui():
        st.session_state["fig2d"] = fig2d
        #st.pyplot(fig2d)
     
-       # CSV DOWNLOAD
+       # SESSION_STATE SAVE: DF
        data = {"t": sol.t}
        for i in range(len(Y0)):
            data[f"x{i+1}"] = sol.y[i]
@@ -149,7 +150,7 @@ def ode_gui():
        if st.session_state["fig2d"] is not None:
           st.pyplot(st.session_state["fig2d"])
           buf = io.BytesIO()
-          st.session_state["fig"].savefig(buf, format="png")
+          st.session_state["fig2d"].savefig(buf, format="png")
           buf.seek(0)
           st.download_button("📥 PNG ダウンロード", data=buf, file_name="plot2d.png", mime="image/png")
        if st.session_state["df"] is not None:
