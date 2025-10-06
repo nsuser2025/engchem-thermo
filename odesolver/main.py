@@ -84,6 +84,7 @@ def ode_gui():
     option_3dplot = st.radio("3次元プロット:", ["OFF", "ON"], index = 0, horizontal = True)
     if option_3dplot == "ON":
        graph_title3d = st.text_input("グラフタイトル（3次元プロット）", value='ODE SOLUTION')
+       num_vars = sol_y.shape[0]
        var_options = [f"x{i+1}" for i in range(num_vars)]
        x_var = st.selectbox("Variable for X-axis", var_options, index=0)
        y_var = st.selectbox("Variable for Y-axis", var_options, index=1 if num_vars>1 else 0)
