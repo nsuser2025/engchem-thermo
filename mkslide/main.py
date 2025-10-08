@@ -41,7 +41,7 @@ def mkslide_gui():
                        (df["電解液"] == selected_elec) & 
                        (df["倍率"] == selected_magn), 
                        "ファイル名"].tolist()
-       #st.write(result)
+       st.write(result)
        for i, file in enumerate(uploaded_pict):
            if file.name in result:
               image = Image.open(io.BytesIO(file.read()))
