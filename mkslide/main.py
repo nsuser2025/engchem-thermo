@@ -27,12 +27,12 @@ def mkslide_gui():
            col = cols[i % 3]
            col.image(image, caption=name, use_container_width=True)
               
-       selected_exam = st.selectbox("試験を選んでください", df["試験"].unique().tolist())
-       selected_face = st.selectbox("測定面を選んでください", df["測定面"].unique().tolist())
-       selected_cath = st.selectbox("正極を選んでください", df["正極"].unique().tolist()) 
-       selected_mesu = st.selectbox("測定を選んでください", df["測定"].unique().tolist())
-       selected_elec = st.selectbox("電解液を選んでください", df["電解液"].unique().tolist())
-       selected_magn = st.selectbox("倍率を選んでください", df["倍率"].unique().tolist()) 
+       selected_exam = st.selectbox("試験を選んでください", ["指定しない"]+df["試験"].unique().tolist())
+       selected_face = st.selectbox("測定面を選んでください", ["指定しない"]+df["測定面"].unique().tolist())
+       selected_cath = st.selectbox("正極を選んでください", ["指定しない"]+df["正極"].unique().tolist()) 
+       selected_mesu = st.selectbox("測定を選んでください", ["指定しない"]+df["測定"].unique().tolist())
+       selected_elec = st.selectbox("電解液を選んでください", ["指定しない"]+df["電解液"].unique().tolist())
+       selected_magn = st.selectbox("倍率を選んでください", ["指定しない"]+df["倍率"].unique().tolist()) 
 
        result = df.loc[(df["試験"] == selected_exam) & 
                        (df["測定面"] == selected_face) & 
