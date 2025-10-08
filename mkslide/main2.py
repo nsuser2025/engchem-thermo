@@ -7,7 +7,8 @@ import numpy as np # エラーチェック用に利用
 def main_gui2():
 
  # ファイルアップロード
- uploaded_file = st.file_uploader("Excelファイルをアップロード", type=["xlsx", "xls"])
+ uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", type=["xlsx", "xls", "csv"])
+ option_examples = st.radio("フォーマット済みのCSVファイルですか？", ["Yes", "No"], index = 1, horizontal = True)
 
  if uploaded_file:
     # ファイルロード（data_only=Trueで計算結果の値を取得）
