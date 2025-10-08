@@ -12,7 +12,7 @@ def mkslide_gui():
     
     if uploaded_file and option_form == "No":
        mkcsv_gui(uploaded_file)
-    else:
+    elif uploaded_file and option_form == "Yes":
        df = pd.DataFrame({"試験": ["Alice", "Bob", "Alice", "David"],"点数": [90, 85, 95, 92]}) 
     
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
