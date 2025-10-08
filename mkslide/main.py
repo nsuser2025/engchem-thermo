@@ -42,9 +42,9 @@ def mkslide_gui():
                        (df["倍率"] == selected_magn), 
                        "ファイル名"].tolist()
        st.write(result)
-       for i, file in enumerate(uploaded_pict):
-           if file.name in result:
-              image = Image.open(io.BytesIO(file.read()))
+       for i, uploaded_pict in enumerate(uploaded_pict):
+           if uploaded_pict.name in result:
+              image = Image.open(io.BytesIO(uploaded_pict.read()))
               col = cols[i % 3]
-              col.image(image, caption=file.name, use_container_width=True)
+              col.image(image, caption=uploaded_pict.name, use_container_width=True)
        
