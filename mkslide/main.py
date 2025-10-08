@@ -40,15 +40,16 @@ def mkslide_gui():
                        (df["測定"] == selected_mesu) & 
                        (df["電解液"] == selected_elec) & 
                        (df["倍率"] == selected_magn), 
-                       "ファイル名"].tolist()
+                       "ファイル名"]
        
        # 実際にアップロードされた画像だけを残す
+       st.write(result)
+       result = result.tolist()
        result = [name for name in result if name in images]
         
        if len(result) == 0:
           st.warning("該当する画像がありません。")
        else:
-          st.write(result)
           result_cols = st.columns(3)
           for i, name in enumerate(result):
               if name in images:
