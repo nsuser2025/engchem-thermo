@@ -5,6 +5,7 @@ pandas
 scipy
 sympy
 numexpr
+python-pptx
 pytesseract
 Pillow
 openpyxl
