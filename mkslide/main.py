@@ -3,7 +3,7 @@ import string
 import pandas as pd
 from openpyxl import load_workbook
 import numpy as np
-from mkcsv import mkcsv_gui
+from .mkcsv import mkcsv_gui
 
 def mkslide_gui():
 
