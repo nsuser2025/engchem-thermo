@@ -63,7 +63,7 @@ def mkslide_gui():
             # 範囲指定エラー、複数列指定、シートエラーなど
             return None, f"'{range_str}' の範囲指定が無効です。"
 
-    if st.button("DataFrameを生成/更新"):
+    if st.button("CSVファイルを生成"):
         extracted_data = {}
         error_messages = []
 
