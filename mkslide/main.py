@@ -8,7 +8,7 @@ def mkslide_gui():
 
  # ファイルアップロード
  uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", type=["xlsx", "xls", "csv"])
- option_form = st.radio("フォーマット済みのCSVファイルですか？", ["Yes", "No"], index = 1, horizontal = True)
+ option_form = st.radio("MKSLIDEが作成したCSVファイルですか？", ["Yes", "No"], index = 1, horizontal = True)
 
  if uploaded_file and option_form == "No":
     # ファイルロード（data_only=Trueで計算結果の値を取得）
