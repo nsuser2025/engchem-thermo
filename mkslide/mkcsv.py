@@ -4,7 +4,7 @@ import pandas as pd
 from openpyxl import load_workbook
 import numpy as np
 
-def mkcsv_gui():
+def mkcsv_gui(uploaded_file):
 
     try:
         wb = load_workbook(uploaded_file, data_only=True)
@@ -80,7 +80,10 @@ def mkcsv_gui():
             st.warning("全ての範囲が空でした。DataFrameを生成できません")
             st.stop()
 
-        # 3. DataFrame化して表示
         df = pd.DataFrame(extracted_data)
         st.success(f"選択範囲を結合したCSVを生成しました。（{list(unique_lengths)[0]}行）")
         st.dataframe(df)
+
+# MODULE ERROR MESSAGE
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
