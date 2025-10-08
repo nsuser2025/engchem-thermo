@@ -41,11 +41,14 @@ def mkslide_gui():
                        (df["電解液"] == selected_elec) & 
                        (df["倍率"] == selected_magn), 
                        "ファイル名"].tolist()
-       st.write(result)
-       result_cols = st.columns(3)
-       for i, name in enumerate(result):
-           if name in images:
-              image = images[name]
-              col_result = result_cols[i % 3]
-              col_result.image(image, caption=name, use_container_width=True)
+       if len(result) == 0:
+          st.warning("該当する画像がありません。")
+       else:
+          st.write(result)
+          result_cols = st.columns(3)
+          for i, name in enumerate(result):
+              if name in images:
+                 image = images[name]
+                 col_result = result_cols[i % 3]
+                 col_result.image(image, caption=name, use_container_width=True)
        
