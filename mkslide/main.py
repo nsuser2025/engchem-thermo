@@ -12,8 +12,14 @@ def mkslide_gui():
        df.index = range(1, len(df) + 1)
        st.dataframe(df) 
        exam_input = st.text_input("試験を選んでください（例: A1:A10）", value="A1:A10")
-       face_input = st.text_input("測定面を選んでください（例: A1:A10）", value="A1:A10")
+       face_input = st.text_input("測定面を選んでください（例: B1:B10）", value="B1:B10")
+       cath_input = st.text_input("正極を選んでください（例: C1:C10）", value="C1:C10")
+       mesu_input = st.text_input("測定を選んでください（例: D1:D10）", value="D1:D10")
+       elec_input = st.text_input("電解液を選んでください（例: E1:E10）", value="E1:E10")
+       magn_input = st.text_input("倍率を選んでください（例: F1:F10）", value="F1:F10")
+        
 
+    
        #wb = load_workbook(uploaded_file, data_only=True)
        #ws = wb.active
        #try:
