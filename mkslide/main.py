@@ -18,9 +18,28 @@ def mkslide_gui():
        mesu_input = st.text_input("測定を選んでください（例: E1:E10）", value="E1:E10")
        elec_input = st.text_input("電解液を選んでください（例: F1:F10）", value="F1:F10")
        magn_input = st.text_input("倍率を選んでください（例: G1:G10）", value="G1:G10")
-        
 
-    
+       def extract_range(range_str):
+           try:
+               cells = ws[range_str]
+               return [c[0].value for c in cells]
+           except:
+               return []
+       
+       data = {
+            "ファイル名": extract_range(file_input),
+            "試験": extract_range(exam_input),
+            "測定面": extract_range(face_input),
+            "正極": extract_range(cath_input),
+            "測定": extract_range(mesu_input),
+            "電解液": extract_range(elec_input),
+            "倍率": extract_range(magn_input),
+       }
+        
+       df_new = pd.DataFrame(data)
+       st.success("データ選択に誤りがないか確認してください")
+       st.dataframe(df_new)
+        
        #wb = load_workbook(uploaded_file, data_only=True)
        #ws = wb.active
        #try:
