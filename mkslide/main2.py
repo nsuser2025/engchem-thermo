@@ -17,7 +17,10 @@ def main_gui2():
         st.error(f"Excelファイルの読み込み中にエラーが発生しました: {e}")
         st.stop()
         
-    st.subheader(f"現在アクティブなシート: {ws.title}")
+    df = pd.read_excel(uploaded_file, header=None)
+    df.columns = list(string.ascii_uppercase[:len(df.columns)])
+    df.index = range(1, len(df) + 1)
+    st.dataframe(df) 
 
     # --- ユーザーインターフェース ---
     st.markdown("---")
