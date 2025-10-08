@@ -17,17 +17,17 @@ def main_gui2():
     except Exception as e:
         st.error(f"Excelファイルの読み込み中にエラーが発生しました: {e}")
         st.stop()
-        
+
+    # --- ユーザーインターフェース ---
+    st.markdown("---")  
     df_orig = pd.read_excel(uploaded_file, header=None)
     df_orig.columns = list(string.ascii_uppercase[:len(df_orig.columns)])
     df_orig.index = range(1, len(df_orig) + 1)
     st.dataframe(df_orig) 
-
-    # --- ユーザーインターフェース ---
     st.markdown("---")
-    st.markdown("**各データのExcel範囲をA1:A10のように入力してください。（1列のみ対応）**")
     
     # ユーザーに範囲入力 (デフォルト値を設定)
+    st.markdown("**各データのExcel範囲をA1:A10のように入力してください。（1列のみ対応）**")
     file_input = st.text_input("ファイル名範囲", value="A1:A10", key="k_file")
     exam_input = st.text_input("試験範囲", value="B1:B10", key="k_exam")
     face_input = st.text_input("測定面範囲", value="C1:C10", key="k_face")
