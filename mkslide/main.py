@@ -4,7 +4,7 @@ import pandas as pd
 from openpyxl import load_workbook
 import numpy as np # エラーチェック用に利用
 
-def main_gui2():
+def mkslide_gui():
 
  # ファイルアップロード
  uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", type=["xlsx", "xls", "csv"])
