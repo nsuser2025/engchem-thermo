@@ -46,6 +46,6 @@ def mkslide_gui():
        for i, name in enumerate(result):
            if name in images:
               image = images[name]
-              col_result = cols[i % 3]
+              col_result = result_cols[i % 3]
               col_result.image(image, caption=name, use_container_width=True)
        
