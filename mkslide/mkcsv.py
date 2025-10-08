@@ -1,4 +1,8 @@
-
+import streamlit as st
+import string
+import pandas as pd
+from openpyxl import load_workbook
+import numpy as np
 
 def mkcsv():
 
@@ -6,7 +10,7 @@ def mkcsv():
         wb = load_workbook(uploaded_file, data_only=True)
         ws = wb.active
     except Exception as e:
-        st.error(f"Excelファイルの読み込み中にエラーが発生しました: {e}")
+        st.error(f"Excel/CSVファイルの読み込み中にエラーが発生しました: {e}")
         st.stop()
       
     st.markdown("---")  
