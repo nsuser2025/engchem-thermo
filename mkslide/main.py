@@ -35,5 +35,5 @@ def mkslide_gui():
        selected_magn = st.selectbox("倍率を選んでください", df["倍率"].unique().tolist()) 
 
        result = df.loc[(df["正極"] == selected_elec) & (df["測定面"] == selected_face), "ファイル名"]
-       st.wreite(result)
+       st.write(result)
        
