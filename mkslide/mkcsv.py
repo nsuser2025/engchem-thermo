@@ -4,7 +4,7 @@ import pandas as pd
 from openpyxl import load_workbook
 import numpy as np
 
-def mkcsv():
+def mkcsv_gui():
 
     try:
         wb = load_workbook(uploaded_file, data_only=True)
