@@ -34,6 +34,6 @@ def mkslide_gui():
        selected_elec = st.selectbox("電解液を選んでください", df["電解液"].unique().tolist())
        selected_magn = st.selectbox("倍率を選んでください", df["倍率"].unique().tolist()) 
 
-       result = df.loc[(df["正極"] == selected_cath) & (df["測定面"] == selected_face) & (df["倍率"] == selected_magn), "ファイル名"]
+       result = df.loc[(df["試験"] == selected_exam) & (df["測定面"] == selected_face) & (df["正極"] == selected_cath) & (df["測定"] == selected_mesu) & (df["電解液"] == selected_elec) & (df["倍率"] == selected_magn), "ファイル名"]
        st.write(result)
        
