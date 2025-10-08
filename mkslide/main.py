@@ -9,6 +9,7 @@ def mkslide_gui():
     if uploaded_file is not None:
        df = pd.read_excel(uploaded_file, header=None)
        df.columns = list(string.ascii_uppercase[:len(df.columns)])
+       df.index = range(1, len(df) + 1)
        st.dataframe(df) 
        exam_input = st.text_input("試験を選んでください（例: A1:A10）", value="A1:A10")
 
