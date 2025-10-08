@@ -7,7 +7,7 @@ def mkslide_gui():
     if uploaded_file is not None:
        df = pd.read_excel(uploaded_file)
        #st.dataframe(df)
-       st.data_editor(df, use_container_width=True)
+       edited_df = st.data_editor(df, use_container_width=True)
        selected_rows = edited_df[edited_df["選択"] == True]
        st.dataframe(selected_rows)
     else:
