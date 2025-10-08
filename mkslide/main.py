@@ -6,10 +6,13 @@ def mkslide_gui():
     
     if uploaded_file is not None:
        df = pd.read_excel(uploaded_file)
-       st.dataframe(df)
-       selected_col = st.selectbox("項目（列）を選択してください", df.columns)
-       st.write(f"選択された項目: **{selected_col}**")
-       st.dataframe(df[[selected_col]])
+       #st.dataframe(df)
+       st.data_editor(df, use_container_width=True)
+       selected_rows = edited_df[edited_df["選択"] == True]
+       st.dataframe(selected_rows)
+       #selected_col = st.selectbox("項目（列）を選択してください", df.columns)
+       #st.write(f"選択された項目: **{selected_col}**")
+       #st.dataframe(df[[selected_col]])
     else:
        pass
 
