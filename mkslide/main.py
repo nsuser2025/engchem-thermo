@@ -17,5 +17,5 @@ def mkslide_gui():
     if uploaded_pict:
        st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
        for i, uploaded_pict in enumerate(uploaded_pict):
-           image = Image.open(uploaded_file)
+           image = Image.open(uploaded_pict)
            st.image(image, caption=f"画像 {i+1}: {uploaded_pict.name}", use_column_width=True) 
