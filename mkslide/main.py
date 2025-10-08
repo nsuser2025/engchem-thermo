@@ -1,6 +1,6 @@
 import streamlit as st
-import pandas as pd
 import io
+import pandas as pd
 from PIL import Image
 from .mkcsv import mkcsv_gui
 
@@ -41,5 +41,10 @@ def mkslide_gui():
                        (df["電解液"] == selected_elec) & 
                        (df["倍率"] == selected_magn), 
                        "ファイル名"].tolist()
-       st.write(result)
+       #st.write(result)
+       for i, file in enumerate(uploaded_pict):
+           if file.name in result:
+              image = Image.open(io.BytesIO(file.read()))
+              col = cols[i % 3]
+              col.image(image, caption=file.name, use_container_width=True)
        
