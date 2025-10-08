@@ -3,12 +3,12 @@ import pandas as pd
 from openpyxl import load_workbook
 import numpy as np # エラーチェック用に利用
 
-st.title("複数範囲を結合してDataFrame化")
+def main_gui2():
 
-# ファイルアップロード
-uploaded_file = st.file_uploader("Excelファイルをアップロード", type=["xlsx", "xls"])
+ # ファイルアップロード
+ uploaded_file = st.file_uploader("Excelファイルをアップロード", type=["xlsx", "xls"])
 
-if uploaded_file:
+ if uploaded_file:
     # ファイルロード（data_only=Trueで計算結果の値を取得）
     try:
         wb = load_workbook(uploaded_file, data_only=True)
