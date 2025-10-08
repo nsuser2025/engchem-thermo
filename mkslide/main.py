@@ -25,7 +25,7 @@ def mkslide_gui():
            col.image(image, caption=uploaded_pict.name, use_container_width=True)
            
        df = pd.DataFrame({"試験": ["Alice", "Bob", "Alice", "David"],"点数": [90, 85, 95, 92]})
-       selected_exam = st.selectbox("試験を選んでください", df["試験"].tolist())
+       selected_exam = st.selectbox("試験を選んでください", df["試験"].unique().tolist())
        #exam = st.text_input("試験", value="B1:B10", key="k_exam")
        #face = st.text_input("測定面", value="C1:C10", key="k_face")
        #cath = st.text_input("正極", value="D1:D10", key="k_cath")
