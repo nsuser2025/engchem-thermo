@@ -2,7 +2,7 @@ import streamlit as st
 import string
 import pandas as pd
 from openpyxl import load_workbook
-import numpy as np # エラーチェック用に利用
+import numpy as np
 
 def mkslide_gui():
 
