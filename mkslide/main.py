@@ -14,6 +14,7 @@ def mkslide_gui():
        mkcsv_gui(uploaded_file)
     elif uploaded_file and option_form == "Yes":
        df = pd.read_csv(uploaded_file)
+       st.dataframe(df)
     
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                     type=["png", "jpg", "jpeg"], accept_multiple_files=True)
