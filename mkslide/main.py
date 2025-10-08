@@ -29,7 +29,7 @@ def mkslide_gui():
        selected_exam = st.selectbox("試験を選んでください", df["試験"].unique().tolist())
        selected_face = st.selectbox("測定面を選んでください", df["測定面"].unique().tolist())
        selected_cath = st.selectbox("正極を選んでください", df["正極"].unique().tolist()) 
-       #cath = st.text_input("正極", value="D1:D10", key="k_cath")
-       #mesu = st.text_input("測定", value="E1:E10", key="k_mesu")
-       #elec = st.text_input("電解液", value="F1:F10", key="k_elec")
-       #magn = st.text_input("倍率", value="G1:G10", key="k_magn")
+       selected_mesu = st.selectbox("測定を選んでください", df["測定"].unique().tolist())
+       selected_elec = st.selectbox("電解液を選んでください", df["電解液"].unique().tolist())
+       selected_magn = st.selectbox("倍率を選んでください", df["倍率"].unique().tolist()) 
+       
