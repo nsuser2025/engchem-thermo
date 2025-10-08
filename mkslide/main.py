@@ -1,4 +1,5 @@
 import streamlit as st
+import io
 from PIL import Image
 from .mkcsv import mkcsv_gui
 
