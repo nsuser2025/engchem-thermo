@@ -21,9 +21,9 @@ def mkslide_gui():
     
     if uploaded_pict:
        st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
+       images = {pic.name: Image.open(pic) for pic in uploaded_pict}
        cols = st.columns(3)
-       for i, uploaded_pict in enumerate(uploaded_pict):
-           image = Image.open(io.BytesIO(uploaded_pict.read()))
+       for i, image in enumerate(images):
            col = cols[i % 3]
            col.image(image, caption=uploaded_pict.name, use_container_width=True)
               
@@ -42,9 +42,10 @@ def mkslide_gui():
                        (df["倍率"] == selected_magn), 
                        "ファイル名"].tolist()
        st.write(result)
-       for i, uploaded_pict in enumerate(uploaded_pict):
-           if uploaded_pict.name in result:
-              image = Image.open(io.BytesIO(uploaded_pict.read()))
+       result_cols = st.columns(3)
+       for i, name in enumerate(result):
+           if name in images:
+              image = images[name]
               col_result = cols[i % 3]
               col_result.image(image, caption=uploaded_pict.name, use_container_width=True)
        
