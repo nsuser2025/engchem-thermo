@@ -20,7 +20,7 @@ def main_gui2():
         
     df_orig = pd.read_excel(uploaded_file, header=None)
     df_orig.columns = list(string.ascii_uppercase[:len(df_orig.columns)])
-    df_orig.index = range(1, len(df) + 1)
+    df_orig.index = range(1, len(df_orig) + 1)
     st.dataframe(df_orig) 
 
     # --- ユーザーインターフェース ---
