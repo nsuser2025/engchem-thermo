@@ -8,9 +8,9 @@ def main_gui2():
 
  # ファイルアップロード
  uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", type=["xlsx", "xls", "csv"])
- option_examples = st.radio("フォーマット済みのCSVファイルですか？", ["Yes", "No"], index = 1, horizontal = True)
+ option_form = st.radio("フォーマット済みのCSVファイルですか？", ["Yes", "No"], index = 1, horizontal = True)
 
- if uploaded_file:
+ if uploaded_file and option_form == "No":
     # ファイルロード（data_only=Trueで計算結果の値を取得）
     try:
         wb = load_workbook(uploaded_file, data_only=True)
