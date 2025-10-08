@@ -23,9 +23,9 @@ def mkslide_gui():
        st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
        images = {pic.name: Image.open(pic) for pic in uploaded_pict}
        cols = st.columns(3)
-       for i, image in enumerate(images):
+       for i, (name, image) in enumerate(images.items()):
            col = cols[i % 3]
-           col.image(image, caption=uploaded_pict.name, use_container_width=True)
+           col.image(image, caption=name, use_container_width=True)
               
        selected_exam = st.selectbox("試験を選んでください", df["試験"].unique().tolist())
        selected_face = st.selectbox("測定面を選んでください", df["測定面"].unique().tolist())
