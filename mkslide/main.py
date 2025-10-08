@@ -22,3 +22,10 @@ def mkslide_gui():
            image = Image.open(io.BytesIO(uploaded_pict.read()))
            col = cols[i % 3]
            col.image(image, caption=uploaded_pict.name, use_container_width=True)
+           
+       exam = st.text_input("試験", value="B1:B10", key="k_exam")
+       face = st.text_input("測定面", value="C1:C10", key="k_face")
+       cath = st.text_input("正極", value="D1:D10", key="k_cath")
+       mesu = st.text_input("測定", value="E1:E10", key="k_mesu")
+       elec = st.text_input("電解液", value="F1:F10", key="k_elec")
+       magn = st.text_input("倍率", value="G1:G10", key="k_magn")
