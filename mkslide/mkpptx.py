@@ -47,7 +47,7 @@ def mkpptx_gui(df, images, result):
                condition_row = condition_row.iloc[0]
                cond_text = (f"{condition_row['試験']}-"
                             f"{condition_row['測定面']}-"
-                            f"{condition_row['正極']}-\n"
+                            f"{condition_row['正極']}-"
                             f"{condition_row['測定']}-"
                             f"{condition_row['電解液']}-"
                             f"{condition_row['倍率']}")
