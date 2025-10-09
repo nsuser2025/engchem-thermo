@@ -63,7 +63,7 @@ def mkpptx_gui(df, images, result):
                for line in cond_text.split("\n"):
                    p = text_frame.add_paragraph()
                    p.text = line
-                   p.font.size = Pt(12)
+                   p.font.size = Pt(9)
 
     pptx_path = "output.pptx"
     prs.save(pptx_path)
