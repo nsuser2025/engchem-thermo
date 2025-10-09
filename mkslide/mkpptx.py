@@ -61,10 +61,10 @@ def mkpptx_gui(df, images, result):
                text_frame.word_wrap = True 
                text_frame.clear()
                 
-               text_frame.margin_left = Pt(2)
-               text_frame.margin_right = Pt(2)
-               text_frame.margin_top = Pt(2)
-               text_frame.margin_bottom = Pt(2) 
+               #text_frame.margin_left = Pt(2)
+               #text_frame.margin_right = Pt(2)
+               #text_frame.margin_top = Pt(2)
+               #text_frame.margin_bottom = Pt(2) 
 
                for line in cond_text.split("\n"):
                    p = text_frame.add_paragraph()
