@@ -7,8 +7,8 @@ def mkpptx_gui(images, result):
     slide = prs.slides.add_slide(prs.slide_layouts[5])
 
     rows, cols_num = 2, 3
-    width = Inches(2.5) 
-    height = Inches(1.8)
+    width = Inches(3.0) 
+    height = Inches(2.0)
     margin_x, margin_y = Inches(0.5), Inches(0.5)
     spacing_x, spacing_y = Inches(0.2), Inches(0.2)
 
