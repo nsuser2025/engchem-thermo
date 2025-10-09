@@ -15,8 +15,7 @@ def mkslide_gui():
        mkcsv_gui(uploaded_file)
     elif uploaded_file and option_form == "Yes":
        df = pd.read_csv(uploaded_file)
-       if disply_form == "Yes":
-          st.dataframe(df)
+       st.dataframe(df)
     
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                     type=["png", "jpg", "jpeg"], accept_multiple_files=True)
@@ -24,10 +23,11 @@ def mkslide_gui():
     if uploaded_pict:
        st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
        images = {pic.name: Image.open(pic) for pic in uploaded_pict}
-       cols = st.columns(3)
-       for i, (name, image) in enumerate(images.items()):
-           col = cols[i % 3]
-           col.image(image, caption=name, use_container_width=True)
+       if disply_form == "Yes":
+          cols = st.columns(3)
+          for i, (name, image) in enumerate(images.items()):
+              col = cols[i % 3]
+              col.image(image, caption=name, use_container_width=True)
               
        selected_exam = st.selectbox("試験を選んでください", ["指定しない"]+df["試験"].unique().tolist())
        selected_face = st.selectbox("測定面を選んでください", ["指定しない"]+df["測定面"].unique().tolist())
