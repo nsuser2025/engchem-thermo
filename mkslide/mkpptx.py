@@ -5,7 +5,7 @@ from pptx import Presentation
 from openpyxl import load_workbook
 import numpy as np
 
-def mkpptx_gui(result):
+def mkpptx_gui(images, result):
     prs = Presentation()
     for name in result:
         if name in images:
