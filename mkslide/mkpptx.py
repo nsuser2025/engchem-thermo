@@ -51,11 +51,19 @@ def mkpptx_gui(df, images, result):
                             f"測定: {condition_row['測定']}\n"
                             f"電解液: {condition_row['電解液']}\n"
                             f"倍率: {condition_row['倍率']}")
-               #f"試験: {condition_row['試験']}, 測定面: {condition_row['測定面']}, 正極: {condition_row['正極']}, 測定: {condition_row['測定']}, 電解液: {condition_row['電解液']}, 倍率: {condition_row['倍率']}"
-               textbox_top = top + height + Pt(5)
-               textbox = image_slide.shapes.add_textbox(left, textbox_top, width, Pt(30))
-               textbox.text = cond_text
-               textbox.text_frame.paragraphs[0].font.size = Pt(10) 
+               #textbox_top = top + height + Pt(5)
+               #textbox = image_slide.shapes.add_textbox(left, textbox_top, width, Pt(30))
+               #textbox.text = cond_text
+               #textbox.text_frame.paragraphs[0].font.size = Pt(10)
+
+               textbox = slide.shapes.add_textbox(left, top, width, height)
+               text_frame = textbox.text_frame
+               text_frame.clear() 
+
+               for line in cond_text.split("\n"):
+                   p = text_frame.add_paragraph()
+                   p.text = line
+                   p.font.size = Pt(12)
 
     pptx_path = "output.pptx"
     prs.save(pptx_path)
