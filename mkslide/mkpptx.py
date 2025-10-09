@@ -33,7 +33,7 @@ def mkpptx_gui(images, result):
            top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
            base_slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
 
-    slide_layout = prs.slide_layouts[1]
+    slide_layout = prs.slide_layouts[2]
     new_slide = prs.slides.add_slide(slide_layout)
 
     pptx_path = "output.pptx"
