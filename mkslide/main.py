@@ -84,3 +84,6 @@ def mkslide_gui():
           pptx_path = "output.pptx"
           prs.save(pptx_path)
           st.success(f"PPTXに画像を追加しました: {pptx_path}")
+
+          with open(pptx_path, "rb") as f:
+               st.download_button("PPTXをダウンロード", f, file_name="output.pptx")
