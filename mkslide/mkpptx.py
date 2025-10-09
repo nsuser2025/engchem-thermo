@@ -4,7 +4,8 @@ from pptx.util import Inches
 
 def mkpptx_gui(images, result):
     uploaded_template = st.file_uploader("PPTXテンプレートをアップロード", type=["pptx"])
-    prs = Presentation(uploaded_template)
+    template_bytes = BytesIO(uploaded_template.read())
+    prs = Presentation(template_bytes)
     slide = prs.slides.add_slide(prs.slide_layouts[5])
 
     slide_width = prs.slide_width
