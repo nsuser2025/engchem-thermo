@@ -10,7 +10,10 @@ def mkpptx_gui(images, result):
         return
     template_bytes = BytesIO(uploaded_template.read())
     prs = Presentation(template_bytes)
-    base_slide = prs.slides[0]
+    
+    slide_layout_index = 2
+    slide_layout = prs.slide_layouts[slide_layout_index]
+    image_slide = prs.slides.add_slide(slide_layout)
 
     slide_width = prs.slide_width
 
@@ -31,7 +34,7 @@ def mkpptx_gui(images, result):
            col = idx % cols_num
            left = left_margin + col * (width + spacing_x)
            top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
-           base_slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
+           image_slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
 
     slide_layout = prs.slide_layouts[2]
     new_slide = prs.slides.add_slide(slide_layout)
