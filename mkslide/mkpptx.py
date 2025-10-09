@@ -10,6 +10,8 @@ def mkpptx_gui(images, result):
         return
     template_bytes = BytesIO(uploaded_template.read())
     prs = Presentation(template_bytes)
+
+    cover_slide = prs.slides[0]
     
     slide_layout_index = 2
     slide_layout = prs.slide_layouts[slide_layout_index]
