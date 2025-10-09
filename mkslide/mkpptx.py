@@ -11,7 +11,11 @@ def mkpptx_gui(df, images, result):
     template_bytes = BytesIO(uploaded_template.read())
     prs = Presentation(template_bytes)
 
-    st.write(df["測定面"])
+    #st.write(df["測定面"])
+    if "測定面" in df.columns:
+       st.write(df["測定面"])
+    else:
+       st.warning("列 '測定面' は存在しません")
     
     cover_slide = prs.slides[0]
 
