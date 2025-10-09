@@ -66,10 +66,20 @@ def mkpptx_gui(df, images, result):
                #text_frame.margin_top = Pt(2)
                #text_frame.margin_bottom = Pt(2) 
 
-               for line in cond_text.split("\n"):
-                   p = text_frame.add_paragraph()
-                   p.text = line
-                   p.font.size = Pt(9)
+               lines = cond_text.split("\n")
+               if lines:
+                  p = text_frame.paragraphs[0]
+                  p.text = lines[0]
+                  p.font.size = Pt(9)
+                  for line in lines[1:]:
+                      p = text_frame.add_paragraph()
+                      p.text = line
+                      p.font.size = Pt(9)
+                      
+               #for line in cond_text.split("\n"):
+               #    p = text_frame.add_paragraph()
+               #    p.text = line
+               #    p.font.size = Pt(9)
 
     pptx_path = "output.pptx"
     prs.save(pptx_path)
