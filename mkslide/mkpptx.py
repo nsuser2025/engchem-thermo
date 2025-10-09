@@ -32,7 +32,10 @@ def mkpptx_gui(images, result):
            left = left_margin + col * (width + spacing_x)
            top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
            base_slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
-    
+
+    slide_layout = prs.slide_layouts[0]
+    new_slide = prs.slides.add_slide(slide_layout)
+
     pptx_path = "output.pptx"
     prs.save(pptx_path)
     st.success(f"PPTXに画像を追加しました: {pptx_path}")
