@@ -3,7 +3,7 @@ from io import BytesIO
 from pptx import Presentation
 from pptx.util import Inches
 
-def mkpptx_gui(images, result):
+def mkpptx_gui(df, images, result):
     uploaded_template = st.file_uploader("PPTXテンプレートをアップロード", type=["pptx"])
     if uploaded_template is None:
         st.warning("PPTXテンプレートをアップロードしてください。")
