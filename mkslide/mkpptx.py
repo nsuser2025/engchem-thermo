@@ -13,9 +13,9 @@ def mkpptx_gui(images, result):
 
     cover_slide = prs.slides[0]
     
-    slide_layout_index = 2
-    slide_layout = prs.slide_layouts[slide_layout_index]
-    image_slide = prs.slides.add_slide(slide_layout)
+    #slide_layout_index = 2
+    #slide_layout = prs.slide_layouts[slide_layout_index]
+    #image_slide = prs.slides.add_slide(slide_layout)
 
     rows, cols_num = 2, 3
     width = Inches(3.4) 
