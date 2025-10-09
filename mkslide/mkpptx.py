@@ -10,9 +10,11 @@ def mkpptx_gui(images, result):
         return
     template_bytes = BytesIO(uploaded_template.read())
     prs = Presentation(template_bytes)
-    for i, layout in enumerate(prs.slide_layouts):
-        st.write(i, layout.name)
-    slide = prs.slides.add_slide(prs.slide_layouts[5])
+    #for i, layout in enumerate(prs.slide_layouts):
+    #    st.write(i, layout.name)
+    layout = prs.slide_layouts[2]
+    #slide = prs.slides.add_slide(prs.slide_layouts[5])
+    slide = prs.slides.add_slide(layout)
 
     slide_width = prs.slide_width
 
