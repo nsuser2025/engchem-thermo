@@ -7,14 +7,15 @@ def mkpptx_gui(images, result):
     slide = prs.slides.add_slide(prs.slide_layouts[5])
 
     slide_width = prs.slide_width
-    slide_height = prs.slide_height
 
-    bottom_margin = Inches(0.5)  
     rows, cols_num = 2, 3
     width = Inches(2.8) 
     height = Inches(2.0)
     spacing_x, spacing_y = Inches(0.2), Inches(0.2)
-
+    left_margin, bottom_margin = Inches(0.5), Inches(0.5)
+    slide_height = prs.slide_height
+    total_height = rows * height + (rows - 1) * spacing_y
+    
     for idx, name in enumerate(result[:6]):
         if name in images:
            image = images[name]
@@ -22,8 +23,7 @@ def mkpptx_gui(images, result):
            image.save(tmp_path)
            row = idx // cols_num
            col = idx % cols_num
-           left = Inches(0.5) + col * (width + spacing_x)
-           total_height = rows * height + (rows - 1) * spacing_y
+           left = left_margin + col * (width + spacing_x)
            top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
            slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
     
