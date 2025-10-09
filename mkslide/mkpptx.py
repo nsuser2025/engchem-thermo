@@ -67,7 +67,7 @@ def mkpptx_gui(df, images, result):
                text_frame.margin_bottom = Pt(2) 
 
                for line in cond_text.split("\n"):
-                   p = text_frame.add_paragraph[0]
+                   p = text_frame.add_paragraph()
                    p.text = line
                    p.font.size = Pt(9)
 
