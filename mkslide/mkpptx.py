@@ -58,7 +58,12 @@ def mkpptx_gui(df, images, result):
                textbox_height = Inches(0.35)
                textbox = image_slide.shapes.add_textbox(textbox_left, textbox_top, textbox_width, textbox_height)
                text_frame = textbox.text_frame
-               text_frame.clear() 
+               text_frame.clear()
+                
+               text_frame.margin_left = Pt(2)
+               text_frame.margin_right = Pt(2)
+               text_frame.margin_top = Pt(2)
+               text_frame.margin_bottom = Pt(2) 
 
                for line in cond_text.split("\n"):
                    p = text_frame.add_paragraph()
