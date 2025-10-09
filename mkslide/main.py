@@ -19,10 +19,10 @@ def mkslide_gui():
     
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                     type=["png", "jpg", "jpeg"], accept_multiple_files=True)
-    disply_form = st.radio("アップロードした画像を表示しますか？", ["Yes", "No"], index = 1, horizontal = True)
     
     if uploaded_pict:
        st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
+       disply_form = st.radio("アップロードした画像を表示しますか？", ["Yes", "No"], index = 1, horizontal = True) 
        images = {pic.name: Image.open(pic) for pic in uploaded_pict}
        if disply_form == "Yes":
           cols = st.columns(3)
