@@ -16,7 +16,7 @@ def mkpptx_gui(df, images, result):
     rows, cols_num = 2, 3
     width = Inches(2.4) 
     height = Inches(1.8)
-    spacing_x, spacing_y = Inches(0.2), Inches(0.2)
+    spacing_x, spacing_y = Inches(0.2), Inches(0.6)
     left_margin, bottom_margin = Inches(0.5), Inches(0.5)
     slide_width = prs.slide_width
     slide_height = prs.slide_height
