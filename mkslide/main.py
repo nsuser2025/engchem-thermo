@@ -1,7 +1,6 @@
 import streamlit as st
 import io
 import pandas as pd
-from pptx.util import Inches
 from PIL import Image
 from .mkcsv import mkcsv_gui
 from .mkpptx import mkpptx_gui
