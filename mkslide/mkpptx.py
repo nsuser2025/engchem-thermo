@@ -29,7 +29,7 @@ def mkpptx_gui(images, result):
            image.save(tmp_path)
            row = idx // cols_num
            col = idx % cols_num
-          left = left_margin + col * (width + spacing_x)
+           left = left_margin + col * (width + spacing_x)
            top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
            base_slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
     
