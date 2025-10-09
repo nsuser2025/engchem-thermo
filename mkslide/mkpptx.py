@@ -11,6 +11,8 @@ def mkpptx_gui(df, images, result):
     template_bytes = BytesIO(uploaded_template.read())
     prs = Presentation(template_bytes)
 
+    st.write(df["測定面"])
+    
     cover_slide = prs.slides[0]
 
     rows, cols_num = 2, 3
