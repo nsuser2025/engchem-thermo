@@ -3,6 +3,7 @@ from pptx import Presentation
 from pptx.util import Inches
 
 def mkpptx_gui(images, result):
+    uploaded_template = st.file_uploader("PPTXテンプレートをアップロード", type=["pptx"])
     prs = Presentation()
     slide = prs.slides.add_slide(prs.slide_layouts[5])
 
