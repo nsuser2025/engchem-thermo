@@ -21,43 +21,17 @@ def mkpptx_gui(images, result):
     left_margin, bottom_margin = Inches(0.5), Inches(0.5)
     slide_height = prs.slide_height
     total_height = rows * height + (rows - 1) * spacing_y
-
-    def add_images_to_slide(slide, image_names):
-        for idx, name in enumerate(image_names):
-            if name in images:
-               image = images[name]
-               tmp_path = f"tmp_{name}"
-               image.save(tmp_path)
-               row = idx // cols_num 
-               col = idx % cols_num
-               left = left_margin + col * (width + spacing_x)
-               top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
-               slide.shapes.add_picture(tmp_path, left, top, width=width, height=height) 
-
-    for i in range(0, len(result), 6):
-        image_group = result[i:i+6]
-        if i == 0:
-           slide = base_slide
-        else:
-           slide_layout = prs.slide_layouts[0]
-           new_slide = prs.slides.add_slide(slide_layout)
-           for shape in base_slide.shapes:
-               el = shape.element
-               new_slide.shapes._spTree.insert_element_before(copy.deepcopy(el), 'p:extLst')
-               #new_slide.shapes._spTree.insert_element_before(el.clone(), 'p:extLst')
-           slide = new_slide
-        add_images_to_slide(slide, image_group)   
         
-    #for idx, name in enumerate(result[:6]):
-    #    if name in images:
-    #       image = images[name]
-    #       tmp_path = f"tmp_{name}"
-    #       image.save(tmp_path)
-    #       row = idx // cols_num
-    #       col = idx % cols_num
-    #       left = left_margin + col * (width + spacing_x)
-    #       top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
-    #       base_slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
+    for idx, name in enumerate(result[:6]):
+        if name in images:
+           image = images[name]
+           tmp_path = f"tmp_{name}"
+           image.save(tmp_path)
+           row = idx // cols_num
+           col = idx % cols_num
+          left = left_margin + col * (width + spacing_x)
+           top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
+           base_slide.shapes.add_picture(tmp_path, left, top, width=width, height=height)
     
     pptx_path = "output.pptx"
     prs.save(pptx_path)
