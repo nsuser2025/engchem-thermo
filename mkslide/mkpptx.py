@@ -2,6 +2,7 @@ import streamlit as st
 import string
 import pandas as pd
 from pptx import Presentation
+from pptx.util import Inches
 from openpyxl import load_workbook
 import numpy as np
 
