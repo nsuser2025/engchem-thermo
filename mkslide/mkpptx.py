@@ -45,12 +45,12 @@ def mkpptx_gui(df, images, result):
             condition_row = df[df["ファイル名"] == name]
             if not condition_row.empty:
                condition_row = condition_row.iloc[0]
-               cond_text = (f"試験: {condition_row['試験']}\n"
-                            f"測定面: {condition_row['測定面']}\n"
-                            f"正極: {condition_row['正極']}\n"
-                            f"測定: {condition_row['測定']}\n"
-                            f"電解液: {condition_row['電解液']}\n"
-                            f"倍率: {condition_row['倍率']}")
+               cond_text = (f"{condition_row['試験']}-"
+                            f"{condition_row['測定面']}-"
+                            f"{condition_row['正極']}-\n"
+                            f"{condition_row['測定']}-"
+                            f"{condition_row['電解液']}-"
+                            f"{condition_row['倍率']}")
     
                textbox = image_slide.shapes.add_textbox(left, top, width, height)
                text_frame = textbox.text_frame
