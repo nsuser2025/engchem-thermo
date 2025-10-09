@@ -1,6 +1,7 @@
 import streamlit as st
 import string
 import pandas as pd
+from pptx import Presentation
 from openpyxl import load_workbook
 import numpy as np
 
