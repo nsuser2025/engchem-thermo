@@ -53,7 +53,7 @@ def mkpptx_gui(df, images, result):
                             f"{condition_row['倍率']}")
 
                textbox_left = left
-               textbox_top = top + height + Inches(0.05)  # 画像下に少し余白
+               textbox_top = top + height #+ Inches(0.05)  # 画像下に少し余白
                textbox_width = width
                textbox_height = Pt(40)
                textbox = image_slide.shapes.add_textbox(textbox_left, textbox_top, textbox_width, textbox_height)
