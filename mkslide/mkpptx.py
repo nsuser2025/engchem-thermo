@@ -51,11 +51,7 @@ def mkpptx_gui(df, images, result):
                             f"測定: {condition_row['測定']}\n"
                             f"電解液: {condition_row['電解液']}\n"
                             f"倍率: {condition_row['倍率']}")
-               #textbox_top = top + height + Pt(5)
-               #textbox = image_slide.shapes.add_textbox(left, textbox_top, width, Pt(30))
-               #textbox.text = cond_text
-               #textbox.text_frame.paragraphs[0].font.size = Pt(10)
-
+    
                textbox = image_slide.shapes.add_textbox(left, top, width, height)
                text_frame = textbox.text_frame
                text_frame.clear() 
