@@ -70,7 +70,7 @@ def mkslide_gui():
                  col_result.image(image, caption=name, use_container_width=True)
 
        if len(result) > 0:
-          mkpptx_gui(result)
+          mkpptx_gui(images, result)
           #prs = Presentation()
           #for name in result:
           #    if name in images:
