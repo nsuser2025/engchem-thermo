@@ -17,6 +17,8 @@ def mkpptx_gui(df, images, result):
     width = Inches(2.8) 
     height = Inches(2.1)
     spacing_x, spacing_y = Inches(0.2), Inches(0.6)
+    # left_margin increase -> 図を右にシフト
+    # bottom_margin increase -> 図を上にシフト
     left_margin, bottom_margin = Inches(0.7), Inches(0.8)
     slide_width = prs.slide_width
     slide_height = prs.slide_height
