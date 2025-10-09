@@ -43,7 +43,8 @@ def mkpptx_gui(images, result):
            new_slide = prs.slides.add_slide(slide_layout)
            for shape in base_slide.shapes:
                el = shape.element
-               new_slide.shapes._spTree.insert_element_before(el.clone(), 'p:extLst')
+               new_slide.shapes._spTree.insert_element_before(copy.deepcopy(el), 'p:extLst')
+               #new_slide.shapes._spTree.insert_element_before(el.clone(), 'p:extLst')
            slide = new_slide
         add_images_to_slide(slide, image_group)   
         
