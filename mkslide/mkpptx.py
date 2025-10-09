@@ -56,7 +56,7 @@ def mkpptx_gui(df, images, result):
                #textbox.text = cond_text
                #textbox.text_frame.paragraphs[0].font.size = Pt(10)
 
-               textbox = slide.shapes.add_textbox(left, top, width, height)
+               textbox = image_slide.shapes.add_textbox(left, top, width, height)
                text_frame = textbox.text_frame
                text_frame.clear() 
 
