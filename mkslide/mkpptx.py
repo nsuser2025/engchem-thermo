@@ -55,7 +55,7 @@ def mkpptx_gui(df, images, result):
                textbox_left = left
                textbox_top = top + height + Inches(0.05)  # 画像下に少し余白
                textbox_width = width
-               textbox_height = Inches(0.35)
+               textbox_height = Pt(25)
                textbox = image_slide.shapes.add_textbox(textbox_left, textbox_top, textbox_width, textbox_height)
                text_frame = textbox.text_frame
                text_frame.clear()
