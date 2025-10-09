@@ -9,7 +9,6 @@ def mkslide_gui():
     # ファイルアップロード
     uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", type=["xlsx", "xls", "csv"])
     option_form = st.radio("MKSLIDEが作成したCSVファイルですか？", ["Yes", "No"], index = 1, horizontal = True)
-    disply_form = st.radio("アップロードした画像を表示しますか？", ["Yes", "No"], index = 1, horizontal = True)
     
     if uploaded_file and option_form == "No":
        mkcsv_gui(uploaded_file)
@@ -19,6 +18,7 @@ def mkslide_gui():
     
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                     type=["png", "jpg", "jpeg"], accept_multiple_files=True)
+    disply_form = st.radio("アップロードした画像を表示しますか？", ["Yes", "No"], index = 1, horizontal = True)
     
     if uploaded_pict:
        st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
