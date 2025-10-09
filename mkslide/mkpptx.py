@@ -17,13 +17,12 @@ def mkpptx_gui(images, result):
     slide_layout = prs.slide_layouts[slide_layout_index]
     image_slide = prs.slides.add_slide(slide_layout)
 
-    slide_width = prs.slide_width
-
     rows, cols_num = 2, 3
     width = Inches(3.4) 
     height = Inches(2.4)
     spacing_x, spacing_y = Inches(0.2), Inches(0.2)
     left_margin, bottom_margin = Inches(0.5), Inches(0.5)
+    slide_width = prs.slide_width
     slide_height = prs.slide_height
     total_height = rows * height + (rows - 1) * spacing_y
         
