@@ -70,3 +70,7 @@ def mkslide_gui():
 
        if len(result) > 0:
           mkpptx_gui(df, images, result)
+
+# MODULE ERROR MESSAGE
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
