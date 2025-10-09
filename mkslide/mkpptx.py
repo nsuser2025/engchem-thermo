@@ -1,7 +1,7 @@
 import streamlit as st
 from io import BytesIO
 from pptx import Presentation
-from pptx.util import Inches
+from pptx.util import Inches, Pt
 
 def mkpptx_gui(df, images, result):
     uploaded_template = st.file_uploader("PPTXテンプレートをアップロード", type=["pptx"])
