@@ -1,4 +1,5 @@
 import streamlit as st
+from io import BytesIO
 from pptx import Presentation
 from pptx.util import Inches
 
