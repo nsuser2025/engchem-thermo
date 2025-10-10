@@ -15,7 +15,13 @@ def mkpptx0_gui(df, images, result):
     else:
        prs = Presentation()     
 
-    cover_slide = prs.slides[0] 
+    #cover_slide = prs.slides[0] 
+    if len(prs.slides) > 0:
+       cover_slide = prs.slides[0]
+    else:
+       # 空のプレゼンなら新しいスライドを追加
+       slide_layout = prs.slide_layouts[0]
+       cover_slide = prs.slides.add_slide(slide_layout)
     
     rows, cols_num = 2, 3
     width = Inches(2.8) 
