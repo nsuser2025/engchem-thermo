@@ -4,7 +4,7 @@ import pandas as pd
 from PIL import Image
 from .mkcsv import mkcsv_gui
 from .mkpptx import mkpptx0_gui
-from .cond import hachida_gui
+#from .cond import hachida_gui
 
 def mkslide_gui():
 
