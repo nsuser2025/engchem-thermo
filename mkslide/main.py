@@ -3,7 +3,7 @@ import io
 import pandas as pd
 from PIL import Image
 from .mkcsv import mkcsv_gui
-from .mkpptx import mkpptx_gui
+from .mkpptx import mkpptx0_gui
 
 def mkslide_gui():
 
@@ -68,13 +68,12 @@ def mkslide_gui():
                  col_result = result_cols[i % 3]
                  col_result.image(image, caption=name, use_container_width=True)
 
-       pptx_choice = ["Yes（ファイル名で配列）",
-                      "Yes（指定条件で配列）",
+       pptx_choice = ["Yes（ファイル名配列）",
+                      "Yes（指定条件配列）",
                       "No"]
-       pptx_form = st.radio("パワーポイントスライドは作成しますか？", pptx_choice, index = 1, horizontal = True) 
-       #pptx_form = st.radio("パワーポイントスライドは作成しますか？", ["Yes（ファイル名で配列）", "Yes（指定条件で配列）", "No"], index = 1, horizontal = True) 
-       if len(result) > 0 and pptx_form == "Yes（ファイル名で配列）":
-          mkpptx_gui(df, images, result)
+       pptx_form = st.radio("パワーポイントスライドは作成しますか？", pptx_choice, index = 0, horizontal = True) 
+       if len(result) > 0 and pptx_form == "Yes（ファイル名配列）":
+          mkpptx0_gui(df, images, result)
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
