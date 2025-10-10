@@ -13,15 +13,15 @@ def mkpptx0_gui(df, images, result):
        template_bytes = BytesIO(uploaded_template.read())
        prs = Presentation(template_bytes)
     else:
-       prs = Presentation()     
+       prs = Presentation("default_template.pptx")     
 
-    #cover_slide = prs.slides[0] 
-    if len(prs.slides) > 0:
-       cover_slide = prs.slides[0]
-    else:
-       # 空のプレゼンなら新しいスライドを追加
-       slide_layout = prs.slide_layouts[0]
-       cover_slide = prs.slides.add_slide(slide_layout)
+    cover_slide = prs.slides[0] 
+    #if len(prs.slides) > 0:
+    #   cover_slide = prs.slides[0]
+    #else:
+    #   # 空のプレゼンなら新しいスライドを追加
+    #   slide_layout = prs.slide_layouts[0]
+    #   cover_slide = prs.slides.add_slide(slide_layout)
     
     rows, cols_num = 2, 3
     width = Inches(2.8) 
