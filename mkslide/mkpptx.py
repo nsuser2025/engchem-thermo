@@ -4,15 +4,19 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 
 def mkpptx0_gui(df, images, result):
-    uploaded_template = st.file_uploader("PPTXテンプレートをアップロード", type=["pptx"])
-    if uploaded_template is None:
-        st.warning("PPTXテンプレートをアップロードしてください。")
-        return
-    template_bytes = BytesIO(uploaded_template.read())
-    prs = Presentation(template_bytes)
-    
-    cover_slide = prs.slides[0]
+    template_form = st.radio("テンプレートを使用しますか？", ["Yes", "No"], index = 1, horizontal = True)
+    if template_form == "Yes":
+       uploaded_template = st.file_uploader("PPTXテンプレートをアップロード", type=["pptx"])
+       if uploaded_template is None:
+          st.warning("PPTXテンプレートをアップロードしてください。")
+          return
+       template_bytes = BytesIO(uploaded_template.read())
+       prs = Presentation(template_bytes)
+    else:
+       prs = Presentation()     
 
+    cover_slide = prs.slides[0] 
+    
     rows, cols_num = 2, 3
     width = Inches(2.8) 
     height = Inches(2.1)
