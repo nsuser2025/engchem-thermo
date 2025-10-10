@@ -67,11 +67,12 @@ def mkslide_gui():
                  image = images[name]
                  col_result = result_cols[i % 3]
                  col_result.image(image, caption=name, use_container_width=True)
-
+       
+       # パワーポイント作成
        pptx_choice = ["Yes（ファイル名配列）",
                       "Yes（指定条件配列）",
                       "No"]
-       pptx_form = st.radio("パワーポイントスライドは作成しますか？", pptx_choice, index = 0, horizontal = True) 
+       pptx_form = st.radio("パワーポイントを作成しますか？", pptx_choice, index = 2, horizontal = True) 
        if len(result) > 0 and pptx_form == "Yes（ファイル名配列）":
           mkpptx0_gui(df, images, result)
 
