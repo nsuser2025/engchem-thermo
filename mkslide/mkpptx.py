@@ -13,7 +13,7 @@ def mkpptx0_gui(df, images, result):
        template_bytes = BytesIO(uploaded_template.read())
        prs = Presentation(template_bytes)
     else:
-       prs = Presentation("default_template.pptx")     
+       prs = Presentation("./default_template.pptx")     
 
     cover_slide = prs.slides[0] 
     #if len(prs.slides) > 0:
