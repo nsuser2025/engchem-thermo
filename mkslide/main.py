@@ -37,10 +37,6 @@ def mkslide_gui():
        if "conditions" not in st.session_state:
           st.session_state.conditions = [{} for _ in range(st.session_state.condition_count)]
 
-       if st.button("➕ 条件を追加"):
-          st.session_state.condition_count += 1
-          st.session_state.conditions.append({})
-
        results_all = [] 
        st.subheader("🧩 条件設定")
        if "current_condition" not in st.session_state:
