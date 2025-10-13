@@ -5,6 +5,7 @@ from PIL import Image
 from .mkcsv import mkcsv_gui
 from .mkpptx import mkpptx0_gui
 from .hachida import condition_selector
+from .display import display_image
 
 def mkslide_gui():
 
