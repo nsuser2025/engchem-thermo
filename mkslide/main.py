@@ -50,10 +50,6 @@ def mkslide_gui():
                 display_images(result, images, f"条件{i+1}")
                 results_all.append((f"条件{i+1}", result))
         
-       # 実際にアップロードされた画像だけを残す
-       #result = result.tolist()
-       #result = [name for name in result if name in images]
-        
        if len(result) == 0:
           st.warning("該当する画像がありません。")
        else:
