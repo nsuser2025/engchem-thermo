@@ -43,7 +43,7 @@ def mkslide_gui():
 
        idx = st.session_state.current_condition
        st.markdown(f"### 条件セット {idx+1}")
-       result = condition_selector(df, images, key_prefix=f"{idx}") 
+       result = condition_selector(df, images, key_prefix=f"{idx}") or []
        st.session_state.conditions[idx] = result
 
        if len(result) == 0:
