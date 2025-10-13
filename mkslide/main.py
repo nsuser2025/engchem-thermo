@@ -44,7 +44,7 @@ def mkslide_gui():
        results_all = [] 
        st.subheader("🧩 条件設定")
        for i in range(st.session_state.condition_count): 
-           st.markdown(f"### 条件セット {i+1}")
+           st.markdown(f"### 条件セット str{i+1}")
            with st.container():
                 result = condition_selector(df, images, key_prefix=f"{i}")
                 #display_images(result, images, f"条件{i+1}")
