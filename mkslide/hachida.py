@@ -1,5 +1,4 @@
 import streamlit as st
-import io
 import pandas as pd
 
 def condition_selector(df, images, key_prefix=""):
