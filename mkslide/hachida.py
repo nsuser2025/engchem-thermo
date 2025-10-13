@@ -25,4 +25,7 @@ def condition_selector(df, images, key_prefix=""):
        condition &= (df["倍率"] == selected_magn)
 
     result = df.loc[condition, "ファイル名"]
-    
+    st.write(result)
+    result = result.tolist()
+    result = [name for name in result if name in images]
+    return result
