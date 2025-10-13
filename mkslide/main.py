@@ -58,7 +58,7 @@ def mkslide_gui():
               if name in images:
                  image = images[name]
                  col_result = result_cols[i % 3]
-                 col_result.image(image, caption=name, use_container_width=True)
+                 col_result.image(image, caption=name+"条件{i+1}", use_container_width=True)
        
        # パワーポイント作成
        pptx_choice = ["Yes（ファイル名配列）",
