@@ -43,22 +43,35 @@ def mkslide_gui():
 
        results_all = [] 
        st.subheader("🧩 条件設定")
-       for i in range(st.session_state.condition_count): 
-           st.markdown(f"### 条件セット {i+1}")
-           with st.container():
-                result = condition_selector(df, images, key_prefix=f"{i}")
-                #display_images(result, images, f"条件{i+1}")
-                results_all.append((f"条件{i+1}", result))
-        
-       if len(result) == 0:
-          st.warning("該当する画像がありません。")
-       else:
+       if "current_condition" not in st.session_state:
+          st.session_state.current_condition = 0
+       if "conditions" not in st.session_state:
+          st.session_state.conditions = {}
+       if st.button("次の条件設定"): 
+          st.session_state.current_condition += 1
+
+       idx = st.session_state.current_condition
+       st.markdown(f"### 条件セット {idx+1}")
+       result = condition_selector(df, images, key_prefix=f"{idx}") 
+       st.session_state.conditions[idx] = result
+
+       if len(result) > 0:
           result_cols = st.columns(3)
           for i, name in enumerate(result):
               if name in images:
-                 image = images[name]
                  col_result = result_cols[i % 3]
-                 col_result.image(image, caption=name, use_container_width=True)
+                 col_result.image(images[name], caption=name, use_container_width=True)
+ 
+           
+       #if len(result) == 0:
+       #   st.warning("該当する画像がありません。")
+       #else:
+       #   result_cols = st.columns(3)
+       #   for i, name in enumerate(result):
+       #       if name in images:
+       #          image = images[name]
+       #          col_result = result_cols[i % 3]
+       #          col_result.image(image, caption=name, use_container_width=True)
        
        # パワーポイント作成
        pptx_choice = ["Yes（ファイル名配列）",
