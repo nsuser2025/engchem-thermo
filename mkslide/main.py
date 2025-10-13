@@ -47,7 +47,7 @@ def mkslide_gui():
            st.markdown(f"### 条件セット {i+1}")
            with st.container():
                 result = condition_selector(df, images, key_prefix=f"{i}")
-                display_images(result, images, f"条件{i+1}")
+                #display_images(result, images, f"条件{i+1}")
                 results_all.append((f"条件{i+1}", result))
         
        if len(result) == 0:
