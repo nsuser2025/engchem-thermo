@@ -23,3 +23,6 @@ def condition_selector(df, images, key_prefix=""):
        condition &= (df["電解液"] == selected_elec)
     if selected_magn != "指定しない":
        condition &= (df["倍率"] == selected_magn)
+
+    result = df.loc[condition, "ファイル名"]
+    
