@@ -48,34 +48,10 @@ def mkslide_gui():
                 result = condition_selector(df, images, key_prefix=f"{i}")
                 display_images(result, images, f"条件{i+1}")
                 results_all.append((f"条件{i+1}", result))
-       
-       #selected_exam = st.selectbox("試験を選んでください", ["指定しない"]+df["試験"].unique().tolist())
-       #selected_face = st.selectbox("測定面を選んでください", ["指定しない"]+df["測定面"].unique().tolist())
-       #selected_cath = st.selectbox("正極を選んでください", ["指定しない"]+df["正極"].unique().tolist()) 
-       #selected_mesu = st.selectbox("測定を選んでください", ["指定しない"]+df["測定"].unique().tolist())
-       #selected_elec = st.selectbox("電解液を選んでください", ["指定しない"]+df["電解液"].unique().tolist())
-       #selected_magn = st.selectbox("倍率を選んでください", ["指定しない"]+df["倍率"].unique().tolist())
-
-       #condition = pd.Series(True, index=df.index)
-       #if selected_exam != "指定しない":
-       #   condition &= (df["試験"] == selected_exam)
-       #if selected_face != "指定しない":
-       #   condition &= (df["測定面"] == selected_face)
-       #if selected_cath != "指定しない":
-       #   condition &= (df["正極"] == selected_cath)
-       #if selected_mesu != "指定しない":
-       #   condition &= (df["測定"] == selected_mesu)
-       #if selected_elec != "指定しない":
-       #   condition &= (df["電解液"] == selected_elec)
-       #if selected_magn != "指定しない":
-       #   condition &= (df["倍率"] == selected_magn)
-
-       #result = df.loc[condition, "ファイル名"]
-       #st.write(result)
         
        # 実際にアップロードされた画像だけを残す
-       result = result.tolist()
-       result = [name for name in result if name in images]
+       #result = result.tolist()
+       #result = [name for name in result if name in images]
         
        if len(result) == 0:
           st.warning("該当する画像がありません。")
