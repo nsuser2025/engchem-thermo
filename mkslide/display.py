@@ -1,3 +1,4 @@
+import streamlit as st
 
 def display_images(result, images, label):
     if not result:
