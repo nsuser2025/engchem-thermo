@@ -32,11 +32,6 @@ def mkslide_gui():
               col = cols[i % 3]
               col.image(image, caption=name, use_container_width=True)
 
-       if "condition_count" not in st.session_state:
-          st.session_state.condition_count = 1
-       if "conditions" not in st.session_state:
-          st.session_state.conditions = [{} for _ in range(st.session_state.condition_count)]
-
        results_all = [] 
        st.subheader("🧩 条件設定")
        if "current_condition" not in st.session_state:
