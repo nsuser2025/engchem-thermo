@@ -1,5 +1,7 @@
+import streamlit as st
+import io
+import pandas as pd
 
-# 条件を指定して結果ファイル名を返す
 def condition_selector(df, images, key_prefix=""):
     selected_exam = st.selectbox("試験を選んでください", ["指定しない"]+df["試験"].unique().tolist(), key=f"exam_{key_prefix}")
     selected_face = st.selectbox("測定面を選んでください", ["指定しない"]+df["測定面"].unique().tolist(), key=f"face_{key_prefix}")
