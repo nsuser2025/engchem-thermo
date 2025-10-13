@@ -40,7 +40,10 @@ def mkslide_gui():
           st.session_state.condition_count += 1
           st.session_state.conditions.append({})
 
-       st.subheader("🧩 条件設定") 
+       results_all = [] 
+       st.subheader("🧩 条件設定")
+       #for i in range(st.session_state.condition_count): 
+       #    st.markdown(f"### 条件セット {i+1}")
        selected_exam = st.selectbox("試験を選んでください", ["指定しない"]+df["試験"].unique().tolist())
        selected_face = st.selectbox("測定面を選んでください", ["指定しない"]+df["測定面"].unique().tolist())
        selected_cath = st.selectbox("正極を選んでください", ["指定しない"]+df["正極"].unique().tolist()) 
