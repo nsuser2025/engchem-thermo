@@ -46,9 +46,9 @@ def mkslide_gui():
        result = condition_selector(df, images, key_prefix=f"{idx}") or []
        st.session_state.conditions[idx] = result
 
-       if len(result) == 0:
-          st.warning("該当する画像がありません。") 
-       elif len(result) > 0:
+       #if len(result) == 0:
+       #   st.warning("該当する画像がありません。") 
+       if len(result) > 0:
           result_cols = st.columns(3)
           for i, name in enumerate(result):
               if name in images:
