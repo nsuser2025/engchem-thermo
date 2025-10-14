@@ -9,6 +9,17 @@ from .mkpptx import mkpptx_gui
 FILTER_COLS = ["試験", "測定面", "正極", "測定", "電解液", "倍率"]
 COLUMNS_PER_ROW = 3
 
+def sanitize_for_csv_injection(df):
+    for col in df.columns:
+        if df[col].dtype == 'object':
+           df[col] = (
+                df[col]
+                .fillna("")
+                .astype(str)
+                .str.replace(r'^([=+\-@])', r"'\1", regex=True)
+            )
+    return df
+
 def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id: int, filter_cols: List[str]) -> List[str]:
     
     current_df = df.copy()
