@@ -117,7 +117,10 @@ def mkslide_gui():
         cols = condition_container.columns(COLUMNS_PER_ROW)
         for j, name in enumerate(final_results):
             if name in images:
-                cols[j % COLUMNS_PER_ROW].image(images[name], caption=name, use_container_width=True)
+                cols[j % COLUMNS_PER_ROW].image(
+                    images[name], 
+                    caption=name if len(name) <= 10 else name[:10] + "...", 
+                    use_container_width=True)
 
     # --- 5. PPTX 生成 ---
     if final_results:
