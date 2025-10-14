@@ -6,10 +6,13 @@ import numpy as np
 
 def sanitize_for_csv_injection(df):
     for col in df.columns:
-        # 文字列型のカラムのみ処理
         if df[col].dtype == 'object':
-           # =, +, -, @ で始まる文字列に ' を前置
-           df[col] = df[col].astype(str).str.replace(r'^([=+\-@])', r"'\1", regex=True)
+           df[col] = (
+                df[col]
+                .fillna("")
+                .astype(str)
+                .str.replace(r'^([=+\-@])', r"'\1", regex=True)
+            )
     return df
 
 def mkcsv_gui(uploaded_file):
