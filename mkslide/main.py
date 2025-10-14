@@ -180,7 +180,7 @@ def mkslide_gui():
               nhit_image += 1
                
     #condition_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
-    condition_container.subheader(f"✅ 条件に合致する画像 ({len(nhit_image)} 件)")
+    condition_container.subheader(f"✅ 条件に合致する画像 ({nhit_image} 件)")
     if len(final_results) == 0:
        condition_container.warning("条件に合致する画像はありません。")
     else:
