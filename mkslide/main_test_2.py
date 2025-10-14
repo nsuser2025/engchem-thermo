@@ -119,7 +119,7 @@ def mkslide_gui():
             if name in images:
                 cols[j % COLUMNS_PER_ROW].image(
                     images[name], 
-                    caption=name if len(name) <= 10 else name[:10] + "...", 
+                    caption=name if len(name) <= 20 else name[:20] + "...", 
                     use_container_width=True)
 
     # --- 5. PPTX 生成 ---
