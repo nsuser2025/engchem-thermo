@@ -4,6 +4,14 @@ import pandas as pd
 from openpyxl import load_workbook
 import numpy as np
 
+def sanitize_for_csv_injection(df):
+    for col in df.columns:
+        # 文字列型のカラムのみ処理
+        if df[col].dtype == 'object':
+           # =, +, -, @ で始まる文字列に ' を前置
+           df[col] = df[col].astype(str).str.replace(r'^([=+\-@])', r"'\1", regex=True)
+    return df
+
 def mkcsv_gui(uploaded_file):
 
     try:
@@ -83,7 +91,8 @@ def mkcsv_gui(uploaded_file):
 
        df_out = pd.DataFrame(extracted_data)
        st.success(f"選択範囲を結合したCSVを生成しました。（{list(unique_lengths)[0]}行）")
-       st.dataframe(df_out)
+       df_safe = sanitize_for_csv_injection(df_out.copy()) 
+       st.dataframe(df_safe)
        return df_out
 
 # MODULE ERROR MESSAGE
