@@ -4,8 +4,8 @@ import pandas as pd
 from pptx import Presentation
 from pptx.util import Inches
 from PIL import Image
-from .mkcsv import mkcsv_gui
-from .mkpptx import mkpptx_gui
+from mkcsv import mkcsv_gui
+from mkpptx import mkpptx_gui
 
 def mkslide_gui():
 
