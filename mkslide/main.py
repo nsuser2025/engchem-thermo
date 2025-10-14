@@ -44,6 +44,17 @@ def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id:
 
     return current_df["ファイル名"].astype(str).tolist()
 
+def scan_file_with_clamav(uploaded_file) -> bool:
+    """ClamAV でアップロードファイルをスキャン"""
+    cd = clamd.ClamdUnixSocket()  # Linux / Dockerで使用
+    with tempfile.NamedTemporaryFile(delete=False) as tmp:
+        tmp.write(uploaded_file.getbuffer())
+        tmp_path = tmp.name
+    result = cd.scan(tmp_path)
+    if result is None or "OK" in str(result):
+        return True
+    return False
+
 def mkslide_gui():
 
     # EXPLANATIONS
