@@ -111,7 +111,7 @@ def mkpptx0_gui(df, images, result):
 
     # ダウンロード
     st.download_button(
-        "PPTXをダウンロード",
+        "PPTXをダウンロードsarusaru",
         data=output,
         file_name="output.pptx",
         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
