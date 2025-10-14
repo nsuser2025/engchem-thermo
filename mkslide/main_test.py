@@ -111,7 +111,7 @@ def mkslide_gui():
     # 既存の条件ブロックをループで生成・表示
     for i in range(1, st.session_state.condition_count + 1):
         # 独立した条件UIのためのコンテナを作成
-        condition_container = st.expander(f"条件 {i} を設定/確認", expanded=True)
+        condition_container = st.expander(f"条件を設定/確認", expanded=True)
 
         # フィルタリングブロックを実行
         filtered_names, block_container = create_filter_block(df, i, condition_container)
