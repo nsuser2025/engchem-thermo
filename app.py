@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import io
-from mkslide.main import mkslide_gui
+from mkslide.main_test import mkslide_gui
 from visco.kdvisco import kdvisco_gui
 from odesolver.main import ode_gui
 from pic2xlsx.main import pic2xlsx_gui
