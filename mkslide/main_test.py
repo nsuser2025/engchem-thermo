@@ -100,7 +100,7 @@ def mkslide_gui():
             cols[i % COLUMNS_PER_ROW].image(image, caption=name, use_container_width=True)
     
     st.markdown("---")
-    st.header("🔍 独立した条件フィルタリング")
+    #st.header("🔍 独立した条件フィルタリング")
 
     # --- 3. 動的条件ブロックの管理 ---
     
@@ -108,10 +108,10 @@ def mkslide_gui():
     result_container = st.container()
     
     # 条件追加ボタン
-    if st.button("➕ 条件を追加"):
-        # ボタンを押すと条件の数を増やす
-        st.session_state.condition_count += 1
-        # ボタンを押すとStreamlitは再実行され、新しいUIが表示される
+    #if st.button("➕ 条件を追加"):
+    #    # ボタンを押すと条件の数を増やす
+    #    st.session_state.condition_count += 1
+    #    # ボタンを押すとStreamlitは再実行され、新しいUIが表示される
 
     st.markdown("---")
 
