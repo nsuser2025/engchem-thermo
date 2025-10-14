@@ -115,6 +115,7 @@ def mkslide_gui():
     # 実際にアップロードされた画像の名前だけを残す
     #final_results = [name for name in filtered_names if name in images]
     final_results = filtered_names
+    st.write(filtered_names)
 
     result_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
         
