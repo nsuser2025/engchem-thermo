@@ -126,7 +126,7 @@ def mkslide_gui():
     if final_results:
         st.subheader("PPTXファイル生成")
         st.info(f"PPTXファイルには、全ての条件で選択された画像 ({len(final_results)} 件) が含まれます。")
-        mkpptx0_gui(df, images, final_results)
+        mkpptx_gui(df, images, final_results)
 
 
 if __name__ == "__main__":
