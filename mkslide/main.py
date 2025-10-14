@@ -172,16 +172,9 @@ def mkslide_gui():
     # FILLTERING RESULTS
     final_results = get_filtered_names_by_multiselect_full_order(df, condition_id=condition_id, filter_cols=FILTER_COLS)
 
-    # COUNT HIT IMAGES 
-    #if len(final_results) > 0:
-    #   nhit_image = 0 
-    #   for j, name in enumerate(final_results):
-    #       if name in images:
-    #          nhit_image += 1
     display_names = [name for name in final_results if name in images]
                
     condition_container.subheader(f"✅ 条件に合致する画像 ({len(display_names)} 件)")
-    #condition_container.subheader(f"✅ 条件に合致する画像 ({nhit_image} 件)")
     if len(final_results) == 0:
        condition_container.warning("条件に合致する画像はありません。")
     else:
@@ -196,8 +189,7 @@ def mkslide_gui():
     # PPTX GENERATOR
     if final_results:
        st.subheader("PPTXファイル生成")
-       st.info(f"PPTXファイルには、全ての条件で選択された画像 ({len(final_results)} 件) が含まれます。")
-       #st.info(f"PPTXファイルには、全ての条件で選択された画像 ({nhit_image} 件) が含まれます。") 
+       st.info(f"PPTXファイルには、全ての条件で選択された画像 ({len(display_names)} 件) が含まれます。")
        mkpptx_gui(df, images, final_results)
 
 # MODULE ERROR MESSAGE
