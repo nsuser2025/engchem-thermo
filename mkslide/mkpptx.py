@@ -16,19 +16,11 @@ def mkpptx0_gui(df, images, result):
        prs = Presentation("./default_template.pptx")     
 
     cover_slide = prs.slides[0] 
-    #if len(prs.slides) > 0:
-    #   cover_slide = prs.slides[0]
-    #else:
-    #   # 空のプレゼンなら新しいスライドを追加
-    #   slide_layout = prs.slide_layouts[0]
-    #   cover_slide = prs.slides.add_slide(slide_layout)
     
     rows, cols_num = 2, 3
     width = Inches(2.8) 
     height = Inches(2.1)
     spacing_x, spacing_y = Inches(0.2), Inches(0.6)
-    # left_margin increase -> 図を右にシフト
-    # bottom_margin increase -> 図を上にシフト
     left_margin, bottom_margin = Inches(0.7), Inches(0.8)
     slide_width = prs.slide_width
     slide_height = prs.slide_height
