@@ -113,7 +113,8 @@ def mkslide_gui():
     filtered_names, block_container = create_filter_block(df, condition_container)
         
     # 実際にアップロードされた画像の名前だけを残す
-    final_results = [name for name in filtered_names if name in images]
+    #final_results = [name for name in filtered_names if name in images]
+    final_results = filtered_names.tolist()
 
     result_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
         
