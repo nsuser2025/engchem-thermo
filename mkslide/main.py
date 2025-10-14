@@ -6,15 +6,11 @@ from PIL import Image
 from .mkcsv import mkcsv_gui
 from .mkpptx import mkpptx_gui
 
-# フィルタリング対象の列名リスト
 FILTER_COLS = ["試験", "測定面", "正極", "測定", "電解液", "倍率"]
 COLUMNS_PER_ROW = 3
 
 def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id: int, filter_cols: List[str]) -> List[str]:
-    """
-    複数列の multiselect の選択順序をすべて尊重して DataFrame をフィルタリング。
-    ファイル名のリストを返す。
-    """
+    
     current_df = df.copy()
     category_definitions = {}
 
@@ -23,21 +19,22 @@ def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id:
         selected_values = st.session_state.get(key_multiselect, ["全て選択"])
 
         if selected_values and "全て選択" not in selected_values:
-            current_df = current_df[current_df[col_name].astype(str).isin(selected_values)]
-            category_definitions[col_name] = selected_values
+           current_df = current_df[current_df[col_name].astype(str).isin(selected_values)]
+           category_definitions[col_name] = selected_values
 
     if category_definitions:
-        sort_by_cols = []
-        for col_name, categories in category_definitions.items():
-            cat_type = pd.CategoricalDtype(categories=categories, ordered=True)
-            current_df[col_name] = current_df[col_name].astype(str).astype(cat_type)
-            sort_by_cols.append(col_name)
-        current_df = current_df.sort_values(by=sort_by_cols)
+       sort_by_cols = []
+       for col_name, categories in category_definitions.items():
+           cat_type = pd.CategoricalDtype(categories=categories, ordered=True)
+           current_df[col_name] = current_df[col_name].astype(str).astype(cat_type)
+           sort_by_cols.append(col_name)
+       current_df = current_df.sort_values(by=sort_by_cols)
 
     return current_df["ファイル名"].astype(str).tolist()
 
 def mkslide_gui():
-    # --- セッションステート初期化 ---
+    
+    # INITIALIZE SESSIONS
     if 'data_df' not in st.session_state:
         st.session_state.data_df = None
     if 'condition_count' not in st.session_state:
@@ -45,9 +42,7 @@ def mkslide_gui():
     if 'all_images' not in st.session_state:
         st.session_state.all_images = {}
 
-    st.header("データと画像のアップロード")
-
-    # --- 1. データファイル ---
+    # CSV FILE READER
     uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", type=["xlsx", "xls", "csv"])
     option_form = st.radio("MKSLIDEが作成したCSVファイルですか？", ["Yes", "No"], 
                            index=1 if st.session_state.data_df is None else 0,
@@ -73,7 +68,7 @@ def mkslide_gui():
 
     st.markdown("---")
 
-    # --- 2. 画像ファイル ---
+    # UPLOADED FILES
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                                      type=["png", "jpg", "jpeg"], accept_multiple_files=True)
     if uploaded_pict:
@@ -85,7 +80,7 @@ def mkslide_gui():
         st.info("画像ファイルをアップロードしてください。")
         return
 
-    # --- 3. 条件ブロック UI ---
+    # SELECT
     condition_id = 1
     current_df_ui = df.copy()
     condition_container = st.expander(f"条件を設定/確認", expanded=True)
@@ -103,29 +98,29 @@ def mkslide_gui():
         )
 
         if selected_values and "全て選択" not in selected_values:
-            current_df_ui = current_df_ui[current_df_ui[col_name].astype(str).isin(selected_values)]
+           current_df_ui = current_df_ui[current_df_ui[col_name].astype(str).isin(selected_values)]
 
-    # --- 4. 選択順序を反映したフィルタリング ---
+    # FILLTERING RESULTS
     final_results = get_filtered_names_by_multiselect_full_order(df, condition_id=condition_id, filter_cols=FILTER_COLS)
 
     condition_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
     if len(final_results) == 0:
-        condition_container.warning("条件に合致する画像はありません。")
+       condition_container.warning("条件に合致する画像はありません。")
     else:
-        cols = condition_container.columns(COLUMNS_PER_ROW)
-        for j, name in enumerate(final_results):
-            if name in images:
-                cols[j % COLUMNS_PER_ROW].image(
-                    images[name], 
-                    caption=name if len(name) <= 40 else name[:40] + "...", 
-                    use_container_width=True)
+       cols = condition_container.columns(COLUMNS_PER_ROW)
+       for j, name in enumerate(final_results):
+           if name in images:
+              cols[j % COLUMNS_PER_ROW].image(
+                   images[name], 
+                   caption=name if len(name) <= 40 else name[:40] + "...", 
+                   use_container_width=True)
 
-    # --- 5. PPTX 生成 ---
+    # PPTX GENERATOR
     if final_results:
-        st.subheader("PPTXファイル生成")
-        st.info(f"PPTXファイルには、全ての条件で選択された画像 ({len(final_results)} 件) が含まれます。")
-        mkpptx_gui(df, images, final_results)
+       st.subheader("PPTXファイル生成")
+       st.info(f"PPTXファイルには、全ての条件で選択された画像 ({len(final_results)} 件) が含まれます。")
+       mkpptx_gui(df, images, final_results)
 
-
+# MODULE ERROR MESSAGE
 if __name__ == "__main__":
-    raise RuntimeError("Do not run this file直接実行禁止; use it as a module.")
+   raise RuntimeError("Do not run this file directly; use it as a module.")
