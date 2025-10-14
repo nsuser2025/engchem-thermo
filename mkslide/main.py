@@ -50,8 +50,7 @@ def mkslide_gui():
 
     if uploaded_file:
        if option_form == "No":
-          try: 
-             mkcsv_gui(df, uploaded_file)
+          mkcsv_gui(df, uploaded_file)
        elif option_form == "Yes":
           try:
              df = pd.read_csv(uploaded_file)
