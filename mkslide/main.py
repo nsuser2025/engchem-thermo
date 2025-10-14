@@ -10,6 +10,7 @@ from .mkpptx import mkpptx_gui
 FILTER_COLS = ["試験", "測定面", "正極", "測定", "電解液", "倍率"]
 COLUMNS_PER_ROW = 3
 
+# SAFETY TOOLS
 def sanitize_for_csv_injection(df):
     for col in df.columns:
         if df[col].dtype == 'object':
@@ -21,6 +22,35 @@ def sanitize_for_csv_injection(df):
             )
     return df
 
+def sanitize_filename(name: str) -> str:
+    name = name.replace(" ", "_")
+    return re.sub(r"[^A-Za-z0-9._-]", "", name)[:200]
+
+def safe_open_image(uploaded_file) -> Image.Image:
+    """画像を安全に開く（巨大画像・破損チェック・EXIF除去）"""
+    uploaded_file.seek(0)
+    img = Image.open(uploaded_file)
+    img.verify()  # 破損や不正データの簡易チェック
+    uploaded_file.seek(0)
+    img = Image.open(uploaded_file).convert("RGB")  # 再オープンしてRGB化
+    # 再エンコードしてEXIF除去
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG", quality=85)
+    buf.seek(0)
+    return Image.open(buf)
+
+def scan_file_with_clamav(uploaded_file) -> bool:
+    """ClamAV でアップロードファイルをスキャン"""
+    cd = clamd.ClamdUnixSocket()  # Linux / Dockerで使用
+    with tempfile.NamedTemporaryFile(delete=False) as tmp:
+        tmp.write(uploaded_file.getbuffer())
+        tmp_path = tmp.name
+    result = cd.scan(tmp_path)
+    if result is None or "OK" in str(result):
+        return True
+    return False
+
+# CSV FILLTERING TOOL
 def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id: int, filter_cols: List[str]) -> List[str]:
     
     current_df = df.copy()
@@ -43,17 +73,6 @@ def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id:
        current_df = current_df.sort_values(by=sort_by_cols)
 
     return current_df["ファイル名"].astype(str).tolist()
-
-def scan_file_with_clamav(uploaded_file) -> bool:
-    """ClamAV でアップロードファイルをスキャン"""
-    cd = clamd.ClamdUnixSocket()  # Linux / Dockerで使用
-    with tempfile.NamedTemporaryFile(delete=False) as tmp:
-        tmp.write(uploaded_file.getbuffer())
-        tmp_path = tmp.name
-    result = cd.scan(tmp_path)
-    if result is None or "OK" in str(result):
-        return True
-    return False
 
 def mkslide_gui():
 
