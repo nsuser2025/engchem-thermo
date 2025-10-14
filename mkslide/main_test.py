@@ -7,16 +7,14 @@ from .mkpptx_test import mkpptx0_gui
 
 # フィルタリング対象の列名リスト
 FILTER_COLS = ["試験", "測定面", "正極", "測定", "電解液", "倍率"]
-COLUMNS_PER_ROW = 3 # 画像表示の列数
+COLUMNS_PER_ROW = 3
 
 # --- 条件選択UIブロックを生成する関数 ---
-def create_filter_block(df, condition_index, condition_container):
+def create_filter_block(df, condition_container):
     """一つの独立したフィルタリングブロック（条件）を生成する"""
     
     # フィルタリングはこのブロック内だけで完結させる
     current_df = df.copy() 
-    
-    #condition_container.markdown(f"### ⚙️ 条件 {condition_index}")
     
     # 各フィルタを順番に適用（カスケードフィルタリング）
     for col_name in FILTER_COLS:
@@ -24,7 +22,7 @@ def create_filter_block(df, condition_index, condition_container):
         options = ["全て選択"] + current_df[col_name].astype(str).unique().tolist()
         
         # セッションステートのキーを条件番号と列名で一意にする
-        key_multiselect = f'condition_{condition_index}_{col_name}'
+        key_multiselect = f'condition_{col_name}'
         
         selected_values = condition_container.multiselect(
             f"▼ {col_name} を選んでください（複数選択可）", 
@@ -108,32 +106,30 @@ def mkslide_gui():
 
     all_filtered_results = []
 
-    # 既存の条件ブロックをループで生成・表示
-    for i in range(1, st.session_state.condition_count + 1):
-        # 独立した条件UIのためのコンテナを作成
-        condition_container = st.expander(f"条件を設定/確認", expanded=True)
+    # 独立した条件UIのためのコンテナを作成
+    condition_container = st.expander(f"条件を設定/確認", expanded=True)
 
-        # フィルタリングブロックを実行
-        filtered_names, block_container = create_filter_block(df, i, condition_container)
+    # フィルタリングブロックを実行
+    filtered_names, block_container = create_filter_block(df, condition_container)
         
-        # 実際にアップロードされた画像の名前だけを残す
-        final_results = [name for name in filtered_names if name in images]
+    # 実際にアップロードされた画像の名前だけを残す
+    final_results = [name for name in filtered_names if name in images]
 
-        result_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
+    result_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
         
-        if len(final_results) == 0:
-            result_container.warning(f"条件に合致する画像はありません。")
-        else:
-            # 各条件に一致する画像を3列で表示
-            cols = result_container.columns(COLUMNS_PER_ROW)
-            for j, name in enumerate(final_results):
-                image = images[name]
-                cols[j % COLUMNS_PER_ROW].image(image, caption=name, use_container_width=True)
+    if len(final_results) == 0:
+        result_container.warning(f"条件に合致する画像はありません。")
+    else:
+        # 各条件に一致する画像を3列で表示
+        cols = result_container.columns(COLUMNS_PER_ROW)
+        for j, name in enumerate(final_results):
+            image = images[name]
+            cols[j % COLUMNS_PER_ROW].image(image, caption=name, use_container_width=True)
 
-        result_container.markdown("---")
+    result_container.markdown("---")
         
-        # PowerPoint生成用に全ての画像結果をリストに保持
-        all_filtered_results.extend(final_results)
+    # PowerPoint生成用に全ての画像結果をリストに保持
+    all_filtered_results.extend(final_results)
 
     # --- 4. PowerPointファイル生成 (全ての条件でフィルタされた結果を統合) ---
     # ここでは、すべての条件ブロックで表示された画像を重複排除してPPTXに渡すのが一般的です。
