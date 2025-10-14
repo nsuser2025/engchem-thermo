@@ -4,7 +4,7 @@ import pandas as pd
 from openpyxl import load_workbook
 import numpy as np
 
-def mkcsv_gui(uploaded_file):
+def mkcsv_gui(df, uploaded_file):
 
     try:
         wb = load_workbook(uploaded_file, data_only=True)
@@ -52,38 +52,38 @@ def mkcsv_gui(uploaded_file):
             return None, f"'{range_str}' の範囲指定が無効です。"
 
     if st.button("CSVファイルを生成"):
-        extracted_data = {}
-        error_messages = []
+       extracted_data = {}
+       error_messages = []
 
-        for col_name, range_str in range_inputs.items():
-            data_list, error = extract_range_data(range_str)
-            if error:
-                error_messages.append(f"列 '{col_name}': {error}")
-            extracted_data[col_name] = data_list
+       for col_name, range_str in range_inputs.items():
+           data_list, error = extract_range_data(range_str)
+           if error:
+                 error_messages.append(f"列 '{col_name}': {error}")
+           extracted_data[col_name] = data_list
 
-        if error_messages:
-            st.error("以下のエラーのため、DataFrameを生成できませんでした。")
-            for msg in error_messages:
-                st.write(f"- {msg}")
-            st.stop()
+       if error_messages:
+          st.error("以下のエラーのため、DataFrameを生成できませんでした。")
+          for msg in error_messages:
+              st.write(f"- {msg}")
+          st.stop()
         
-        lengths = {name: len(lst) for name, lst in extracted_data.items() if lst is not None}
-        unique_lengths = set(lengths.values())
+    
+       lengths = {name: len(lst) for name, lst in extracted_data.items() if lst is not None}
+       unique_lengths = set(lengths.values())
 
-        if len(unique_lengths) > 1:
-            st.error("抽出したリストの長さが一致しません")
-            st.warning("DataFrameの列として結合するには、全てのリストが同じ長さである必要があります。")
-            st.json(lengths)
-            st.stop()
+       if len(unique_lengths) > 1:
+          st.error("抽出したリストの長さが一致しません")
+          st.warning("DataFrameの列として結合するには、全てのリストが同じ長さである必要があります。")
+          st.json(lengths)
+          st.stop()
         
-        if not unique_lengths:
-            st.warning("全ての範囲が空でした。DataFrameを生成できません")
-            st.stop()
+       if not unique_lengths:
+          st.warning("全ての範囲が空でした。DataFrameを生成できません")
+          st.stop()
 
-        df = pd.DataFrame(extracted_data)
-        st.success(f"選択範囲を結合したCSVを生成しました。（{list(unique_lengths)[0]}行）")
-        st.dataframe(df)
-        retrun df
+       df = pd.DataFrame(extracted_data)
+       st.success(f"選択範囲を結合したCSVを生成しました。（{list(unique_lengths)[0]}行）")
+       st.dataframe(df)
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
