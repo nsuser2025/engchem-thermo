@@ -4,7 +4,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from PIL import Image
 
-def mkpptx0_gui(df, images, result):
+def mkpptx_gui(df, images, result):
     template_form = st.radio("テンプレートを使用しますか？", ["Yes", "No"], index=1, horizontal=True)
     
     # テンプレートの読み込み
