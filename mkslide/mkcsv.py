@@ -83,6 +83,7 @@ def mkcsv_gui(uploaded_file):
         df = pd.DataFrame(extracted_data)
         st.success(f"選択範囲を結合したCSVを生成しました。（{list(unique_lengths)[0]}行）")
         st.dataframe(df)
+        retrun df
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
