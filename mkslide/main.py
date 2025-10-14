@@ -88,3 +88,7 @@ def mkslide_gui():
 
           with open(pptx_path, "rb") as f:
                st.download_button("PPTXをダウンロード", f, file_name="output.pptx")
+
+# MODULE ERROR MESSAGE
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
