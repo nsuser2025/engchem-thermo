@@ -28,7 +28,8 @@ def mkcsv_gui(uploaded_file):
     df_orig = pd.read_excel(uploaded_file, header=None)
     df_orig.columns = list(string.ascii_uppercase[:len(df_orig.columns)])
     df_orig.index = range(1, len(df_orig) + 1)
-    st.dataframe(df_orig) 
+    df_orig_safe = sanitize_for_csv_injection(df_orig.copy()) 
+    st.dataframe(df_orig_safe) 
     st.markdown("---")
     
     st.markdown("**各データのExcel範囲をA1:A10のように入力してください。（1列のみ対応）**")
