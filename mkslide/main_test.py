@@ -2,17 +2,8 @@ import streamlit as st
 import io
 import pandas as pd
 from PIL import Image
-# from .mkcsv import mkcsv_gui  # 外部モジュールとして仮定
-# from .mkpptx_test import mkpptx0_gui # 外部モジュールとして仮定
-
-# 外部モジュールの代わりにダミー関数を定義 (実際のコードでは削除してください)
-def mkcsv_gui(uploaded_file):
-    # mkcsv_guiの処理をここに記述
-    st.info("mkcsv_guiが実行されました。CSVファイルを生成したら 'Yes' を選択して再度アップロードしてください。")
-    st.stop()
-def mkpptx0_gui(df, images, result):
-    # st.success(f"PowerPoint生成関数が呼ばれました。対象画像数: {len(result)}")
-    pass # pptx生成ロジックは省略
+from .mkcsv import mkcsv_gui
+from .mkpptx_test import mkpptx0_gui
 
 # フィルタリング対象の列名リスト
 FILTER_COLS = ["試験", "測定面", "正極", "測定", "電解液", "倍率"]
