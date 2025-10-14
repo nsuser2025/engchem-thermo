@@ -100,20 +100,11 @@ def mkslide_gui():
             cols[i % COLUMNS_PER_ROW].image(image, caption=name, use_container_width=True)
     
     st.markdown("---")
-    #st.header("🔍 独立した条件フィルタリング")
-
+    
     # --- 3. 動的条件ブロックの管理 ---
     
     # 条件ブロック全体を保持するコンテナ
     result_container = st.container()
-    
-    # 条件追加ボタン
-    #if st.button("➕ 条件を追加"):
-    #    # ボタンを押すと条件の数を増やす
-    #    st.session_state.condition_count += 1
-    #    # ボタンを押すとStreamlitは再実行され、新しいUIが表示される
-
-    st.markdown("---")
 
     all_filtered_results = []
 
@@ -128,10 +119,10 @@ def mkslide_gui():
         # 実際にアップロードされた画像の名前だけを残す
         final_results = [name for name in filtered_names if name in images]
 
-        result_container.subheader(f"✅ 条件 {i} に合致する画像 ({len(final_results)} 件)")
+        result_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
         
         if len(final_results) == 0:
-            result_container.warning(f"条件 {i} に合致する画像はありません。")
+            result_container.warning(f"条件に合致する画像はありません。")
         else:
             # 各条件に一致する画像を3列で表示
             cols = result_container.columns(COLUMNS_PER_ROW)
