@@ -80,7 +80,8 @@ def mkslide_gui():
           try:
              df = pd.read_csv(uploaded_file)
              st.session_state.data_df = df
-             st.dataframe(df, use_container_width=True)
+             df_safe = sanitize_for_csv_injection(df_out.copy()) 
+             st.dataframe(df_safe, use_container_width=True) 
           except Exception as e:
              st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
              st.session_state.data_df = None
