@@ -13,7 +13,6 @@ def mkslide_gui():
     uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", type=["xlsx", "xls", "csv"])
     option_form = st.radio("MKSLIDEが作成したCSVファイルですか？", ["Yes", "No"], index = 1, horizontal = True)
 
-    df = None
     if uploaded_file and option_form == "No":
        mkcsv_gui(df, uploaded_file)
     elif uploaded_file and option_form == "Yes":
