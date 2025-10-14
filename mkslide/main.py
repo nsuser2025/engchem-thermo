@@ -49,22 +49,22 @@ def mkslide_gui():
                            horizontal=True)
 
     if uploaded_file:
-        if option_form == "No":
-            mkcsv_gui(uploaded_file)
-        elif option_form == "Yes":
-            try:
-                df = pd.read_csv(uploaded_file)
-                st.session_state.data_df = df
-                st.dataframe(df, use_container_width=True)
-            except Exception as e:
-                st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
-                st.session_state.data_df = None
-                st.stop()
+       if option_form == "No":
+          df = mkcsv_gui(uploaded_file)
+       elif option_form == "Yes":
+          try:
+             df = pd.read_csv(uploaded_file)
+             st.session_state.data_df = df
+             st.dataframe(df, use_container_width=True)
+          except Exception as e:
+             st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
+             st.session_state.data_df = None
+             st.stop()
     
     df = st.session_state.data_df
     if df is None:
-        st.info("データファイル（CSV）をアップロードして「Yes」を選択してください。")
-        return
+       st.info("データファイル（CSV）をアップロードして「Yes」を選択してください。")
+       return
 
     st.markdown("---")
 
@@ -72,13 +72,13 @@ def mkslide_gui():
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                                      type=["png", "jpg", "jpeg"], accept_multiple_files=True)
     if uploaded_pict:
-        st.session_state.all_images = {pic.name: Image.open(pic) for pic in uploaded_pict}
-        st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
+       st.session_state.all_images = {pic.name: Image.open(pic) for pic in uploaded_pict}
+       st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
 
     images = st.session_state.all_images
     if not images:
-        st.info("画像ファイルをアップロードしてください。")
-        return
+       st.info("画像ファイルをアップロードしてください。")
+       return
 
     # SELECT
     condition_id = 1
