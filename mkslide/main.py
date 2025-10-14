@@ -37,7 +37,7 @@ def mkslide_gui():
     # EXPLANATIONS
     st.markdown("---")
     st.markdown("#### MKSLIDE")
-    st.markdown("""画像を条件別に抽出・表示するツールです。""")
+    st.markdown("""エクセルファイルに記載された情報をもとに、画像ファイルを条件ごとに抽出・表示するツールです。""")
     st.markdown("""時刻t=0の[A]の値（初期値）を用いてODEを解けば、任意の時刻における[A]を決めることができます。これを初期値問題といいます。
                  ODE Solverは、ユーザーが入力したODEの式（上式では右辺）、パラメータの値、初期値から初期値問題を解くツールです。""") 
     st.markdown("---")
