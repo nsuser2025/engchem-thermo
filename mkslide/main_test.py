@@ -16,7 +16,7 @@ def create_filter_block(df, condition_index, condition_container):
     # フィルタリングはこのブロック内だけで完結させる
     current_df = df.copy() 
     
-    condition_container.markdown(f"### ⚙️ 条件 {condition_index}")
+    #condition_container.markdown(f"### ⚙️ 条件 {condition_index}")
     
     # 各フィルタを順番に適用（カスケードフィルタリング）
     for col_name in FILTER_COLS:
