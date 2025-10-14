@@ -21,7 +21,7 @@ def create_filter_block(df, condition_index, condition_container):
     # 各フィルタを順番に適用（カスケードフィルタリング）
     for col_name in FILTER_COLS:
         # その列のユニークな値を取得
-        options = ["**全て選択**"] + current_df[col_name].astype(str).unique().tolist()
+        options = ["全て選択"] + current_df[col_name].astype(str).unique().tolist()
         
         # セッションステートのキーを条件番号と列名で一意にする
         key_multiselect = f'condition_{condition_index}_{col_name}'
@@ -29,12 +29,12 @@ def create_filter_block(df, condition_index, condition_container):
         selected_values = condition_container.multiselect(
             f"▼ {col_name} を選んでください（複数選択可）", 
             options=options,
-            default=["**全て選択**"],
+            default=["全て選択"],
             key=key_multiselect
         )
 
         # フィルタを適用して次の選択肢を絞り込む
-        if selected_values and "**全て選択**" not in selected_values:
+        if selected_values and "全て選択" not in selected_values:
             current_df = current_df[current_df[col_name].astype(str).isin(selected_values)]
             
     # フィルタリングされたファイル名リストを取得
