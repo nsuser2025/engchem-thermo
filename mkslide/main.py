@@ -172,7 +172,8 @@ def mkslide_gui():
     # FILLTERING RESULTS
     final_results = get_filtered_names_by_multiselect_full_order(df, condition_id=condition_id, filter_cols=FILTER_COLS)
 
-    condition_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
+    #condition_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
+    condition_container.subheader(f"✅ 条件に合致する画像 ({len(condition_container.columns(COLUMNS_PER_ROW))} 件)")
     if len(final_results) == 0:
        condition_container.warning("条件に合致する画像はありません。")
     else:
