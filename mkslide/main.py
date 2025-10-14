@@ -178,8 +178,9 @@ def mkslide_gui():
     #   for j, name in enumerate(final_results):
     #       if name in images:
     #          nhit_image += 1
+    display_names = [name for name in final_results if name in images]
                
-    condition_container.subheader(f"✅ 条件に合致する画像 ({len(final_results)} 件)")
+    condition_container.subheader(f"✅ 条件に合致する画像 ({len(display_names)} 件)")
     #condition_container.subheader(f"✅ 条件に合致する画像 ({nhit_image} 件)")
     if len(final_results) == 0:
        condition_container.warning("条件に合致する画像はありません。")
