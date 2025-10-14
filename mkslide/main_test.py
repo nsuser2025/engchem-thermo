@@ -33,7 +33,7 @@ def create_filter_block(df, condition_container):
 
         # フィルタを適用して次の選択肢を絞り込む
         if selected_values and "全て選択" not in selected_values:
-            current_df = current_df[current_df[col_name].astype(str).isin(selected_values)]
+           current_df = current_df[current_df[col_name].astype(str).isin(selected_values)]
             
     # フィルタリングされたファイル名リストを取得
     result_names = current_df["ファイル名"].astype(str).tolist()
