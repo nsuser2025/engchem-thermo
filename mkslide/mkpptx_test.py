@@ -18,12 +18,13 @@ def mkpptx0_gui(df, images, result):
     else:
         # テンプレート読み込みのフォールバックは健全だが、
         # GitHub上のファイルを BytesIO 経由で読み込む方がより堅牢 (外部リソース読み込みコードが必要)
-        try:
-            # 現在の動作を尊重しつつ、エラー時の組み込みテンプレートへフォールバック
-            prs = Presentation("./default_template.pptx")
-        except FileNotFoundError:
-            prs = Presentation() # 組み込みの標準テンプレートを使用
-
+        #try:
+        #    # 現在の動作を尊重しつつ、エラー時の組み込みテンプレートへフォールバック
+        #    prs = Presentation("./default_template.pptx")
+        #except FileNotFoundError:
+        #    prs = Presentation() # 組み込みの標準テンプレートを使用
+        prs = Presentation()
+        
     # レイアウト設定
     rows, cols_num = 2, 3
     width = Inches(2.8) 
@@ -111,7 +112,7 @@ def mkpptx0_gui(df, images, result):
 
     # ダウンロード
     st.download_button(
-        "PPTXをダウンロードsarusaru",
+        "PPTXをダウンロード",
         data=output,
         file_name="output.pptx",
         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
