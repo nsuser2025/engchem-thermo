@@ -195,7 +195,8 @@ def mkslide_gui():
     # PPTX GENERATOR
     if final_results:
        st.subheader("PPTXファイル生成")
-       st.info(f"PPTXファイルには、全ての条件で選択された画像 ({len(final_results)} 件) が含まれます。")
+       #st.info(f"PPTXファイルには、全ての条件で選択された画像 ({len(final_results)} 件) が含まれます。")
+       st.info(f"PPTXファイルには、全ての条件で選択された画像 ({nhit_image} 件) が含まれます。") 
        mkpptx_gui(df, images, final_results)
 
 # MODULE ERROR MESSAGE
