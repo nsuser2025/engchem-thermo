@@ -10,7 +10,6 @@ from .mkpptx import mkpptx_gui
 FILTER_COLS = ["試験", "測定面", "正極", "測定", "電解液", "倍率"]
 COLUMNS_PER_ROW = 3
 
-
 def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id: int, filter_cols: List[str]) -> List[str]:
     """
     複数列の multiselect の選択順序をすべて尊重して DataFrame をフィルタリング。
@@ -36,7 +35,6 @@ def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id:
         current_df = current_df.sort_values(by=sort_by_cols)
 
     return current_df["ファイル名"].astype(str).tolist()
-
 
 def mkslide_gui():
     # --- セッションステート初期化 ---
