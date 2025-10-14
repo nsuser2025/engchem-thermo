@@ -1,5 +1,5 @@
 import streamlit as st
-import clamd
+#import clamd
 import io
 import pandas as pd
 from typing import List
@@ -39,16 +39,16 @@ def safe_open_image(uploaded_file) -> Image.Image:
     buf.seek(0)
     return Image.open(buf)
 
-def scan_file_with_clamav(uploaded_file) -> bool:
-    """ClamAV でアップロードファイルをスキャン"""
-    cd = clamd.ClamdUnixSocket()  # Linux / Dockerで使用
-    with tempfile.NamedTemporaryFile(delete=False) as tmp:
-        tmp.write(uploaded_file.getbuffer())
-        tmp_path = tmp.name
-    result = cd.scan(tmp_path)
-    if result is None or "OK" in str(result):
-        return True
-    return False
+#def scan_file_with_clamav(uploaded_file) -> bool:
+#    """ClamAV でアップロードファイルをスキャン"""
+#    cd = clamd.ClamdUnixSocket()  # Linux / Dockerで使用
+#    with tempfile.NamedTemporaryFile(delete=False) as tmp:
+#        tmp.write(uploaded_file.getbuffer())
+#        tmp_path = tmp.name
+#    result = cd.scan(tmp_path)
+#    if result is None or "OK" in str(result):
+#        return True
+#    return False
 
 # CSV FILLTERING TOOL
 def get_filtered_names_by_multiselect_full_order(df: pd.DataFrame, condition_id: int, filter_cols: List[str]) -> List[str]:
@@ -130,17 +130,18 @@ def mkslide_gui():
     # UPLOADED FILES
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                                      type=["png", "jpg", "jpeg"], accept_multiple_files=True)
-    safe_images = {}
-    if uploaded_pict:
-       for pic in uploaded_pict:
-           if not scan_file_with_clamav(pic):
-              st.error(f"ウイルス検出: {pic.name} を拒否しました")
-              continue
-           safe_images[sanitize_filename(pic.name)] = safe_open_image(pic)
-       st.session_state.all_images = safe_images
-       st.success(f"{len(safe_images)} 件の画像をアップロードしました") 
-       #st.session_state.all_images = {pic.name: Image.open(pic) for pic in uploaded_pict}
-       #st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
+    #safe_images = {}
+    #if uploaded_pict:
+    #   for pic in uploaded_pict:
+    #       if not scan_file_with_clamav(pic):
+    #          st.error(f"ウイルス検出: {pic.name} を拒否しました")
+    #          continue
+    #       safe_images[sanitize_filename(pic.name)] = safe_open_image(pic)
+    #   st.session_state.all_images = safe_images
+    #   st.success(f"{len(safe_images)} 件の画像をアップロードしました") 
+
+    st.session_state.all_images = {pic.name: Image.open(pic) for pic in uploaded_pict}
+    st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
 
     images = st.session_state.all_images
     if not images:
