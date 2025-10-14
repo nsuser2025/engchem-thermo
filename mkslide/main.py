@@ -179,12 +179,19 @@ def mkslide_gui():
        condition_container.warning("条件に合致する画像はありません。")
     else:
        cols = condition_container.columns(COLUMNS_PER_ROW)
-       for j, name in enumerate(final_results):
-           if name in images:
-              cols[j % COLUMNS_PER_ROW].image(
-                   images[name], 
-                   caption=name if len(name) <= 40 else name[:40] + "...", 
-                   use_container_width=True)
+       for j, name in enumerate(display_names):
+           col = cols[j % COLUMNS_PER_ROW]
+           #col.image(images[name], use_container_width=True) 
+           col.image(images[name], 
+                     caption=name if len(name) <= 40 else name[:40] + "...", 
+                     use_container_width=True)
+       #cols = condition_container.columns(COLUMNS_PER_ROW)
+       #for j, name in enumerate(final_results):
+       #    if name in images:
+       #       cols[j % COLUMNS_PER_ROW].image(
+       #            images[name], 
+       #            caption=name if len(name) <= 40 else name[:40] + "...", 
+       #            use_container_width=True)
 
     # PPTX GENERATOR
     if final_results:
