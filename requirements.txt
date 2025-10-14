@@ -9,7 +9,3 @@ python-pptx
 pytesseract
 Pillow
 openpyxl
-torch
-torchvision
-torchaudio
-clamd
