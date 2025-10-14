@@ -4,7 +4,7 @@ import pandas as pd
 from typing import List
 from PIL import Image
 from .mkcsv import mkcsv_gui
-from .mkpptx_test import mkpptx0_gui
+from .mkpptx import mkpptx0_gui
 
 # フィルタリング対象の列名リスト
 FILTER_COLS = ["試験", "測定面", "正極", "測定", "電解液", "倍率"]
