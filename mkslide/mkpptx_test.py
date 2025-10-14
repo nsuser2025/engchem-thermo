@@ -18,12 +18,11 @@ def mkpptx0_gui(df, images, result):
     else:
         # テンプレート読み込みのフォールバックは健全だが、
         # GitHub上のファイルを BytesIO 経由で読み込む方がより堅牢 (外部リソース読み込みコードが必要)
-        #try:
-        #    # 現在の動作を尊重しつつ、エラー時の組み込みテンプレートへフォールバック
-        #    prs = Presentation("./default_template.pptx")
-        #except FileNotFoundError:
-        #    prs = Presentation() # 組み込みの標準テンプレートを使用
-        prs = Presentation()
+        try:
+            # 現在の動作を尊重しつつ、エラー時の組み込みテンプレートへフォールバック
+            prs = Presentation("./default_template.pptx")
+        except FileNotFoundError:
+            prs = Presentation() # 組み込みの標準テンプレートを使用
         
     # レイアウト設定
     rows, cols_num = 2, 3
@@ -48,7 +47,7 @@ def mkpptx0_gui(df, images, result):
             if name in images:
                 image = images[name]
                 
-                # 💡 BytesIO 改良点 1: PIL Image をメモリバッファ (BytesIO) に保存
+                # BytesIO 改良点 1: PIL Image をメモリバッファ (BytesIO) に保存
                 image_stream = BytesIO()
                 # add_pictureが識別しやすいようにPNG形式で保存することが多い
                 image.save(image_stream, format='PNG') 
@@ -59,7 +58,7 @@ def mkpptx0_gui(df, images, result):
                 left = left_margin + col * (width + spacing_x)
                 top = slide_height - total_height - bottom_margin + row * (height + spacing_y)
                 
-                # 💡 BytesIO 改良点 2: add_picture に BytesIO オブジェクトを直接渡す
+                # BytesIO 改良点 2: add_picture に BytesIO オブジェクトを直接渡す
                 try:
                     image_slide.shapes.add_picture(image_stream, left, top, width=width, height=height)
                 except Exception as e:
@@ -80,7 +79,7 @@ def mkpptx0_gui(df, images, result):
                     textbox_left = left
                     textbox_top = top + height + Inches(0.05) 
                     textbox_width = width
-                    # 💡 Inches 統一: テキストボックスの高さを Inches で指定
+                    # Inches 統一: テキストボックスの高さを Inches で指定
                     textbox_height = Inches(0.5) 
                     textbox = image_slide.shapes.add_textbox(textbox_left, textbox_top, textbox_width, textbox_height)
                     text_frame = textbox.text_frame
@@ -97,7 +96,7 @@ def mkpptx0_gui(df, images, result):
                             p.text = line
                             p.font.size = Pt(9)
 
-    # 💡 BytesIO 改良点 3: 最終PPTXファイルをメモリ (BytesIO) に保存
+    # BytesIO 改良点 3: 最終PPTXファイルをメモリ (BytesIO) に保存
     output = BytesIO()
     try:
         prs.save(output)
@@ -108,7 +107,7 @@ def mkpptx0_gui(df, images, result):
     output.seek(0)
     st.success("PPTXファイルの準備ができました。")
     
-    # 💡 クリーンアップ不要: ディスクI/Oがないため、残ファイル削除コードは不要
+    # クリーンアップ不要: ディスクI/Oがないため、残ファイル削除コードは不要
 
     # ダウンロード
     st.download_button(
