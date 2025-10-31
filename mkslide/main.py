@@ -122,7 +122,8 @@ def mkslide_gui():
                 raise ValueError("対応していないファイル形式です。")
              st.session_state.data_df = df
              df_safe = sanitize_for_csv_injection(df.copy())
-             st.dataframe(df_safe, use_container_width=True)   
+             #st.dataframe(df_safe, use_container_width=True)
+             st.dataframe(df_safe, width="content")
              #df = pd.read_csv(uploaded_file)
              #st.session_state.data_df = df
              #df_safe = sanitize_for_csv_injection(df.copy()) 
