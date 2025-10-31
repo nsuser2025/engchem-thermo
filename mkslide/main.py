@@ -194,9 +194,12 @@ def mkslide_gui():
        for j, name in enumerate(display_names):
            col = cols[j % COLUMNS_PER_ROW]
            #col.image(images[name], use_container_width=True) 
+           #col.image(images[name], 
+           #          caption=name if len(name) <= 40 else name[:40] + "...", 
+           #          use_container_width=True)
            col.image(images[name], 
                      caption=name if len(name) <= 40 else name[:40] + "...", 
-                     use_container_width=True)
+                     width="content")
     # PPTX GENERATOR
     if final_results:
        st.subheader("PPTXファイル生成")
