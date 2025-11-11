@@ -12,14 +12,14 @@ st.image("zkanics_cute_logo.png", caption="Supported by Zkanics F. P. S. since 2
 st.markdown("---")
 
 select = ["MKSLIDE", "KD Viscosity", "ODE Solver", "PIC2XLSX"]
-#page = st.selectbox("計算を選択してください", select)
-#if page == "MKSLIDE":
-#   mkslide_gui ()
-#elif page == "KD Viscosity":
-#   kdvisco_gui ()
-#elif page == "ODE Solver":
-#   ode_gui ()
-#elif page == "PIC2XLSX":
-#   pic2xlsx_gui ()
-#else:
-#   pass
+page = st.selectbox("計算を選択してください", select)
+if page == "MKSLIDE":
+   mkslide_gui ()
+elif page == "KD Viscosity":
+   kdvisco_gui ()
+elif page == "ODE Solver":
+   ode_gui ()
+elif page == "PIC2XLSX":
+   pic2xlsx_gui ()
+else:
+   pass
