@@ -123,6 +123,9 @@ def mkslide_gui():
              st.session_state.data_df = df
              df_safe = sanitize_for_csv_injection(df.copy())
              #st.dataframe(df_safe, use_container_width=True)
+             # 2025/12/03 START
+             df_safe.columns = df_safe.columns.map(str)
+             # 2025/12/03 END 
              st.dataframe(df_safe, width="content")
              #df = pd.read_csv(uploaded_file)
              #st.session_state.data_df = df
