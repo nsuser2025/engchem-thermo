@@ -29,6 +29,9 @@ def mkcsv_gui(uploaded_file):
     df_orig.columns = list(string.ascii_uppercase[:len(df_orig.columns)])
     df_orig.index = range(1, len(df_orig) + 1)
     df_orig_safe = sanitize_for_csv_injection(df_orig.copy()) 
+    # 追加：列名をすべてstrに統一 2025/12/03 START
+    df_orig_safe.columns = df_orig_safe.columns.map(str)
+    # 2025/12/03 END
     st.dataframe(df_orig_safe) 
     st.markdown("---")
     
@@ -96,6 +99,9 @@ def mkcsv_gui(uploaded_file):
        df_out = pd.DataFrame(extracted_data)
        st.success(f"選択範囲を結合したCSVを生成しました。（{list(unique_lengths)[0]}行）")
        df_safe = sanitize_for_csv_injection(df_out.copy()) 
+       # 追加：列名をすべて str に統一 2025/12/03 START
+       df_safe.columns = df_safe.columns.map(str) 
+       # 2025/12/03 END
        st.dataframe(df_safe)
        return df_out
 
