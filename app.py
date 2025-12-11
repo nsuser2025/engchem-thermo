@@ -16,7 +16,8 @@ page = st.selectbox("計算を選択してください", select)
 if page == "MKSLIDE":
    mkslide_gui ()
 elif page == "ODE Solver":
-   ode_gui ()
+   #ode_gui ()
+   cielab_gui ()
 elif page == "PIC2XLSX":
    pic2xlsx_gui ()
 else:
