@@ -19,10 +19,10 @@ def cielab_gui():
     uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", 
                     type=["xlsx", "xls", "xlsm", "csv"])
 
-    if uploaded_file:
-       df = mkcsv_gui(uploaded_file)
-       df = None 
-       st.session_state.data_df = df
+    #if uploaded_file:
+    #   df = mkcsv_gui(uploaded_file)
+    #   df = None 
+    #   st.session_state.data_df = df
        
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
