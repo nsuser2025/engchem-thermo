@@ -129,16 +129,7 @@ def cielab_gui():
     # UPLOADED FILES
     uploaded_pict = st.file_uploader("画像ファイルを選択してください（複数可）",
                                      type=["png", "jpg", "jpeg"], accept_multiple_files=True)
-    #safe_images = {}
-    #if uploaded_pict:
-    #   for pic in uploaded_pict:
-    #       if not scan_file_with_clamav(pic):
-    #          st.error(f"ウイルス検出: {pic.name} を拒否しました")
-    #          continue
-    #       safe_images[sanitize_filename(pic.name)] = safe_open_image(pic)
-    #   st.session_state.all_images = safe_images
-    #   st.success(f"{len(safe_images)} 件の画像をアップロードしました") 
-
+    
     st.session_state.all_images = {pic.name: Image.open(pic) for pic in uploaded_pict}
     st.success(f"{len(uploaded_pict)} 件の画像をアップロードしました")
 
