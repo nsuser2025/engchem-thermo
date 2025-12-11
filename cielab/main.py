@@ -30,7 +30,7 @@ def cielab_gui():
 
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
-       df = None 
+       #df = None 
        st.session_state.data_df = df
     
     df = st.session_state.data_df
