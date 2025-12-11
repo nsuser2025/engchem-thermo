@@ -1,8 +1,6 @@
 import streamlit as st
 import io
 import pandas as pd
-from typing import List
-from PIL import Image
 
 def cielab_gui():
 
