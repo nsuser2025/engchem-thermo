@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import io
 from mkslide.main import mkslide_gui
-from cielab.main import cielab_gui
+from cielab.main_new import cielab_gui
 from odesolver.main import ode_gui
 from pic2xlsx.main import pic2xlsx_gui
 
