@@ -11,7 +11,7 @@ from pic2xlsx.main import pic2xlsx_gui
 st.image("zkanics_cute_logo.png", caption="Supported by Zkanics F. P. S. since 2024", width=250)
 st.markdown("---")
 
-select = ["MKSLIDE", "KD Viscosity", "ODE Solver", "PIC2XLSX"]
+select = ["MKSLIDE", "CIE Lab変換", "ODE Solver", "PIC2XLSX"]
 page = st.selectbox("計算を選択してください", select)
 if page == "MKSLIDE":
    mkslide_gui ()
