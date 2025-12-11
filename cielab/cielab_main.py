@@ -18,6 +18,13 @@ def cielab_gui():
     # CSV FILE READER
     uploaded_file = st.file_uploader("Excel/CSVファイルをアップロード", 
                                      type=["xlsx", "xls", "xlsm", "csv"])
+    
+    # --- デバッグ行を追加 ---
+    if uploaded_file is None:
+        st.info("⬆️ 上記にファイルアップローダーが表示されているはずです。")
+    else:
+        st.success(f"ファイル名: {uploaded_file.name} を受け取りました。")
+    # -----------------------
 
     #if uploaded_file:
     #   df = mkcsv_gui(uploaded_file)
