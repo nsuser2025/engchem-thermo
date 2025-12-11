@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import io
 from mkslide.main import mkslide_gui
-from visco.kdvisco import kdvisco_gui
+from cielab.main import cielab_gui
 from odesolver.main import ode_gui
 from pic2xlsx.main import pic2xlsx_gui
 
@@ -16,7 +16,7 @@ page = st.selectbox("計算を選択してください", select)
 if page == "MKSLIDE":
    mkslide_gui ()
 elif page == "CIE Lab変換":
-   kdvisco_gui ()
+   cielab_gui ()
 elif page == "ODE Solver":
    ode_gui ()
 elif page == "PIC2XLSX":
