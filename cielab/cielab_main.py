@@ -20,10 +20,9 @@ def cielab_gui():
                     type=["xlsx", "xls", "xlsm", "csv"])
 
     if uploaded_file:
-       if option_form == "No":
-          df = mkcsv_gui(uploaded_file)
-          df = None 
-          st.session_state.data_df = df
+       df = mkcsv_gui(uploaded_file)
+       df = None 
+       st.session_state.data_df = df
        
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
