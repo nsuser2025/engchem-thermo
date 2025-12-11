@@ -91,7 +91,7 @@ def cielab_gui():
 
     if uploaded_file:
        if option_form == "No":
-          df = mkcsv_gui(uploaded_file)
+          #df = mkcsv_gui(uploaded_file)
           df = None 
           st.session_state.data_df = df
        elif option_form == "Yes":
