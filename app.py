@@ -15,7 +15,7 @@ select = ["MKSLIDE", "KD Viscosity", "ODE Solver", "PIC2XLSX"]
 page = st.selectbox("計算を選択してください", select)
 if page == "MKSLIDE":
    mkslide_gui ()
-elif page == "KD Viscosity":
+elif page == "CIE Lab変換":
    kdvisco_gui ()
 elif page == "ODE Solver":
    ode_gui ()
