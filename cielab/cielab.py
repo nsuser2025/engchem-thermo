@@ -74,7 +74,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     Xn = k * np.sum(1.0 * s * xbar * deltas)
     Yn = k * np.sum(1.0 * s * ybar * deltas)
     Zn = k * np.sum(1.0 * s * zbar * deltas)
-    st.write(Xn)
+    st.write(Yn)
 
     #fx_ = f_lab(X / Xn)
     #fy_ = f_lab(Y / Yn)
