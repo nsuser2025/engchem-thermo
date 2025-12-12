@@ -112,7 +112,7 @@ def cielab_core (df):
     mask = (wl >= 380.0) & (wl <= 780.0)
     wl_vis = wl[mask]
     vals_vis = vals[mask]
-    if wl_vis.size == 0:
+    #if wl_vis.size == 0:
     #    print("No data in 380-780 nm range. Exiting.")
     #    sys.exit(1)
 
