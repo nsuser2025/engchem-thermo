@@ -77,8 +77,8 @@ def cielab_core (df):
     base_dir = os.path.dirname(__file__)
     xyz_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
     ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
-    df_xyz = pd.read_csv(xyz_path, head=None)
-    df_ill = pd.read_csv(ill_path, head=None)   
+    df_xyz = pd.read_csv(xyz_path, header=None)
+    df_ill = pd.read_csv(ill_path, header=None)   
     
     wl, vals = load_measurements (df)
 
