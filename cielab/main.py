@@ -38,6 +38,8 @@ def cielab_gui():
        st.session_state.data_df = df
        st.write("補間前")
        cielab_core (df)
+       st.write("補間後")
+       cielab_core (df)
     
     df = st.session_state.data_df
     if df is None:
