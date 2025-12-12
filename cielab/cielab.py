@@ -19,16 +19,14 @@ def load_measurements (df):
 
 def compute_deltas(wl):
     dw = np.diff(wl)
-    st.write(wl)
-    st.write(dw) 
     if dw.size == 0:
         return np.array([1.0])
     if np.allclose(dw, dw[0]):
         return np.full_like(wl, dw[0], dtype=float)
     deltas = np.empty_like(wl, dtype=float)
-    deltas[0] = wl[1]-wl[0]
-    deltas[-1] = wl[-1]-wl[-2]
-    deltas[1:-1] = 0.5*(wl[2:]-wl[:-2])
+    deltas[0] = wl[1] - wl[0]
+    deltas[-1] = wl[-1] - wl[-2]
+    deltas[1:-1] = 0.5 * (wl[2:] - wl[:-2])
     return deltas
     
 def f_lab(t):
@@ -61,12 +59,13 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
 
     deltas = compute_deltas(wl_vis)
 
-    #st.write(deltas)
+    denom = np.sum(s * ybar * deltas)
+    if denom == 0:
+       st.error("❌ k の分母が 0 です。照明光（illuminant）と色度関数（CMF）の波長範囲を確認してください。")
+       st.stop()
 
-    #denom = np.sum(S * ybar * deltas)
-    #if denom == 0:
-    #    raise RuntimeError("Denominator for k is zero; check illuminant and cmf coverage.")
-    #k = 100.0 / denom
+    k = 100.0 / denom
+    st.write (k)
 
     #X = k * np.sum(spec * S * xbar * deltas)
     #Y = k * np.sum(spec * S * ybar * deltas)
