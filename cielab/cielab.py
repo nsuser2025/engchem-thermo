@@ -90,6 +90,6 @@ def cielab_core (df):
     #    print("No data in 380-780 nm range. Exiting.")
     #    sys.exit(1)
 
-    res = spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=ASSUME_PERCENT)
+    res = spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=True)
     
     
