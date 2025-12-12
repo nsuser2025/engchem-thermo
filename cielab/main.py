@@ -44,6 +44,8 @@ def cielab_gui():
     df_cie = pd.read_csv(cie_path)
     df_ill = pd.read_csv(ill_path)
 
+    st.dataframe(df_cie)
+
     st.markdown("---")
 
 
