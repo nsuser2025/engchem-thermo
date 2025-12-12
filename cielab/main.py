@@ -5,6 +5,7 @@ import pandas as pd
 from typing import List
 from PIL import Image
 from .mkcsv import mkcsv_gui
+from .cielab import cielab_core
 
 def cielab_gui():
 
