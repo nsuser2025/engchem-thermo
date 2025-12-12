@@ -42,6 +42,7 @@ def cielab_gui():
        #ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
        #df_cie = pd.read_csv(cie_path)
        #df_ill = pd.read_csv(ill_path)
+       st.markdown("""補間前""")
        cielab_core (df)
     
     df = st.session_state.data_df
