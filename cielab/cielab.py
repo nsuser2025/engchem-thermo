@@ -38,14 +38,14 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     fx = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
     fy = interp1d(df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
     fz = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
-    fS = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
+    fs = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
 
-    st.write(fx)
+    xbar = fx(meas_wl)
+    ybar = fy(meas_wl)
+    zbar = fz(meas_wl)
+    s = fs(meas_wl)
 
-    #xbar = fx(meas_wl)
-    #ybar = fy(meas_wl)
-    #zbar = fz(meas_wl)
-    #S = fS(meas_wl)
+    st.write(s)
 
     #deltas = compute_deltas(meas_wl)
 
