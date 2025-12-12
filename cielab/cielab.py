@@ -12,17 +12,18 @@ def load_measurements (df):
     wl = df.iloc[:,0].to_numpy(dtype=float)
     vals = df.iloc[:,1].to_numpy(dtype=float)
     
-    # sort ascending by wavelength
+    ### sort ascending by wavelength ###
     order = np.argsort(wl)
     return wl[order], vals[order]
 
 def f_lab(t):
-    delta = 6.0/29.0
-    st.write(delta**3)
-    if t > delta**3:
+    delta = 6.0 / 29.0
+    delta2 = delta * delta
+    delta3 = delta2 * delta
+    if t > delta3:
         return t**(1/3)
     else:
-        return t/(3*delta**2) + 4.0/29.0
+        return (t / (3 * delta2) + (4.0 / 29.0)
 
 def cielab_core (df):
 
@@ -34,7 +35,9 @@ def cielab_core (df):
     
     wl, vals = load_measurements (df)
 
-    f = f_lab(1.0)
+    ### restrict to 380-780 nm ###
+    mask = (wl >= 380.0) & (wl <= 780.0)
+    st.write(mas)
     
     #st.write(wl)
     #st.write(vals)
