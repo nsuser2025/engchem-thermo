@@ -30,10 +30,11 @@ def spectrum_to_lab(meas_wl, meas_vals, cmf_df, illum_df, assume_percent=True):
     
     ### convert percent -> 0..1 if needed ###
     spec = meas_vals.copy().astype(float)
+    st.write('saru')
     st.write(spec)
     
-    #if assume_percent:
-    #    spec = spec / 100.0
+    if assume_percent:
+       spec = spec / 100.0
 
     # interpolate cmf and illuminant to measured wavelengths
     #fx = interp1d(cmf_df['wl'], cmf_df['xbar'], bounds_error=False, fill_value=0.0)
