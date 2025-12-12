@@ -135,3 +135,4 @@ def cielab_core (df):
     ### 色の矩形表示 ###
     r, g, b_ = (srgb * 255).astype(int)
     st.markdown(f"<div style='width:100px;height:50px;background-color:rgb({r},{g},{b_});'></div>", unsafe_allow_html=True)
+    st.write("saru")
