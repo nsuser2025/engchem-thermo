@@ -19,6 +19,7 @@ def load_measurements (df):
 
 def compute_deltas(wl):
     dw = np.diff(wl)
+    st.write(dw) 
     if dw.size == 0:
         return np.array([1.0])
     if np.allclose(dw, dw[0]):
@@ -59,7 +60,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
 
     deltas = compute_deltas(wl_vis)
 
-    st.write(deltas)
+    #st.write(deltas)
 
     #denom = np.sum(S * ybar * deltas)
     #if denom == 0:
