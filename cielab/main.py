@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import io
 import pandas as pd
 from typing import List
@@ -30,13 +31,16 @@ def cielab_gui():
 
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
-       #df = None 
        st.session_state.data_df = df
     
     df = st.session_state.data_df
     if df is None:
        st.info("データファイル（CSV）をアップロードしてください。")
        return
+
+    base_dir = os.path.dirname(__file__)
+    cie_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
+    ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
 
     st.markdown("---")
 
