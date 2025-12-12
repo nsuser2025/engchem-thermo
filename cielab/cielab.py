@@ -47,14 +47,14 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
        spec = spec / 100.0
     
     # interpolate cmf and illuminant to measured wavelengths
-    fx = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
-    fy = interp1d(df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
-    fz = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
+    fx_bar = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
+    fy_bar = interp1d(df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
+    fz_bar = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
     fs = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
 
-    xbar = fx(wl_vis)
-    ybar = fy(wl_vis)
-    zbar = fz(wl_vis)
+    xbar = fx_bar(wl_vis)
+    ybar = fy_bar(wl_vis)
+    zbar = fz_bar(wl_vis)
     s = fs(wl_vis)
 
     deltas = compute_deltas(wl_vis)
@@ -74,16 +74,15 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     Xn = k * np.sum(1.0 * s * xbar * deltas)
     Yn = k * np.sum(1.0 * s * ybar * deltas)
     Zn = k * np.sum(1.0 * s * zbar * deltas)
-    st.write(Yn)
 
-    #fx_ = f_lab(X / Xn)
-    #fy_ = f_lab(Y / Yn)
-    #fz_ = f_lab(Z / Zn)
-    #L = 116.0 * fy_ - 16.0
-    #a = 500.0 * (fx_ - fy_)
-    #b = 200.0 * (fy_ - fz_)
+    fx = f_lab (X / Xn)
+    fy = f_lab (Y / Yn)
+    fz = f_lab (Z / Zn)
+    L = (116.0 * fy) - 16.0
+    a = 500.0 * (fx - fy)
+    b = 200.0 * (fy - fz)
 
-    #return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
+    return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
 
 def cielab_core (df):
 
@@ -105,4 +104,7 @@ def cielab_core (df):
 
     res = spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
     
-    
+    st.write("Using illuminant:", "D65")
+    st.write("k =", res["k"])
+    st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
+    st.write("Lab L*a*b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
