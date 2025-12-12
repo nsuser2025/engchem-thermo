@@ -19,6 +19,7 @@ def load_measurements (df):
 
 def compute_deltas(wl):
     dw = np.diff(wl)
+    st.write(wl)
     st.write(dw) 
     if dw.size == 0:
         return np.array([1.0])
