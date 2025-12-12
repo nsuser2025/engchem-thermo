@@ -107,4 +107,4 @@ def cielab_core (df):
     st.write("Using illuminant:", "D65")
     st.write("k =", res["k"])
     st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
-    st.write("Lab L*a*b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
+    st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
