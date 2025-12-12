@@ -26,7 +26,7 @@ def f_lab(t):
     else:
         return (t / (3 * delta2)) + (4.0 / 29.0)
 
-def spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=True):
+def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     
     ### convert percent -> 0..1 if needed ###
     spec = vals_vis.copy().astype(float)
@@ -34,6 +34,8 @@ def spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=True):
     if assume_percent:
        spec = spec / 100.0
 
+    st.write(df_xyz.head())
+    
     # interpolate cmf and illuminant to measured wavelengths
     #fx = interp1d(cmf_df['wl'], cmf_df['xbar'], bounds_error=False, fill_value=0.0)
     #fy = interp1d(cmf_df['wl'], cmf_df['ybar'], bounds_error=False, fill_value=0.0)
@@ -73,9 +75,9 @@ def spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=True):
 def cielab_core (df):
 
     base_dir = os.path.dirname(__file__)
-    cie_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
+    xyz_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
     ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
-    df_cie = pd.read_csv(cie_path)
+    df_xyz = pd.read_csv(xyz_path)
     df_ill = pd.read_csv(ill_path)   
     
     wl, vals = load_measurements (df)
@@ -88,6 +90,6 @@ def cielab_core (df):
     #    print("No data in 380-780 nm range. Exiting.")
     #    sys.exit(1)
 
-    res = spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=True)
+    res = spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
     
     
