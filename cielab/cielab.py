@@ -18,7 +18,7 @@ def load_measurements (df):
 
 def f_lab(t):
     delta = 6.0/29.0
-    st.write(delta)
+    st.write(delta**3)
     if t > delta**3:
         return t**(1/3)
     else:
