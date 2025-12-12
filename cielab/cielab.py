@@ -5,14 +5,8 @@ import numpy as np
 from scipy.interpolate import interp1d
 
 def load_measurements (df):
-    #try:
-    #    df = pd.read_csv(path)
-    #except Exception:
-    #    df = pd.read_csv(path, header=None)
-    
     wl = df.iloc[:,0].to_numpy(dtype=float)
     vals = df.iloc[:,1].to_numpy(dtype=float)
-    
     ### sort ascending by wavelength ###
     order = np.argsort(wl)
     return wl[order], vals[order]
@@ -118,13 +112,12 @@ def cielab_core (df):
     mask = (wl >= 380.0) & (wl <= 780.0)
     wl_vis = wl[mask]
     vals_vis = vals[mask]
-    #if wl_vis.size == 0:
+    if wl_vis.size == 0:
     #    print("No data in 380-780 nm range. Exiting.")
     #    sys.exit(1)
 
     res = spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
     
-    st.write("Using illuminant:", "D65")
     st.write("k =", res["k"])
     st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
     st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
