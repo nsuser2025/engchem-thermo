@@ -69,7 +69,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     X = k * np.sum(spec * s * xbar * deltas)
     Y = k * np.sum(spec * s * ybar * deltas)
     Z = k * np.sum(spec * s * zbar * deltas)
-    st.write(X)
+    st.write(Y)
 
     ### whitepoint (R=1) ###
     #Xn = k * np.sum(1.0 * S * xbar * deltas)
