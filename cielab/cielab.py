@@ -36,6 +36,6 @@ def cielab_core (df):
 
     f = f_lab(1.0)
     
-    st.write(wl)
-    st.write(vals)
+    #st.write(wl)
+    #st.write(vals)
     
