@@ -23,7 +23,7 @@ def f_lab(t):
     if t > delta3:
         return t**(1/3)
     else:
-        return (t / (3 * delta2) + (4.0 / 29.0)
+        return (t / (3 * delta2)) + (4.0 / 29.0)
 
 def cielab_core (df):
 
