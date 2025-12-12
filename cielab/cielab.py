@@ -15,7 +15,15 @@ def load_measurements (df):
     # sort ascending by wavelength
     order = np.argsort(wl)
     return wl[order], vals[order]
-    
+
+def f_lab(t):
+    delta = 6.0/29.0
+    st.write(delta)
+    if t > delta**3:
+        return t**(1/3)
+    else:
+        return t/(3*delta**2) + 4.0/29.0
+
 def cielab_core (df):
 
     base_dir = os.path.dirname(__file__)
@@ -26,6 +34,8 @@ def cielab_core (df):
     
     wl, vals = load_measurements (df)
 
+    f = f_lab(1.0)
+    
     st.write(wl)
     st.write(vals)
     
