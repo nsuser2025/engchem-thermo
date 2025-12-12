@@ -17,6 +17,18 @@ def load_measurements (df):
     order = np.argsort(wl)
     return wl[order], vals[order]
 
+def compute_deltas(wl):
+    dw = np.diff(wl)
+    if dw.size == 0:
+        return np.array([1.0])
+    if np.allclose(dw, dw[0]):
+        return np.full_like(wl, dw[0], dtype=float)
+    deltas = np.empty_like(wl, dtype=float)
+    deltas[0] = wl[1]-wl[0]
+    deltas[-1] = wl[-1]-wl[-2]
+    deltas[1:-1] = 0.5*(wl[2:]-wl[:-2])
+    return deltas
+    
 def f_lab(t):
     delta = 6.0 / 29.0
     delta2 = delta * delta
@@ -45,9 +57,9 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     zbar = fz(wl_vis)
     s = fs(wl_vis)
 
-    st.write(s)
+    deltas = compute_deltas(wl_vis)
 
-    #deltas = compute_deltas(meas_wl)
+    st.write(deltas)
 
     #denom = np.sum(S * ybar * deltas)
     #if denom == 0:
