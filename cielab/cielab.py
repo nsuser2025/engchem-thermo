@@ -26,4 +26,4 @@ def cielab_core (df):
     
     wl, vals = load_measurements (df)
 
-    st.write(wl)
+    st.write(wl, vals)
