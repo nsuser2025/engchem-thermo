@@ -32,22 +32,20 @@ def cielab_gui():
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
        st.session_state.data_df = df
+
+       base_dir = os.path.dirname(__file__)
+       cie_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
+       ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
+       df_cie = pd.read_csv(cie_path)
+       df_ill = pd.read_csv(ill_path)
+       st.dataframe(df_cie)
     
     df = st.session_state.data_df
     if df is None:
        st.info("データファイル（CSV）をアップロードしてください。")
        return
     
-    base_dir = os.path.dirname(__file__)
-    cie_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
-    ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
-    df_cie = pd.read_csv(cie_path)
-    df_ill = pd.read_csv(ill_path)
-
-    st.dataframe(df_cie)
-
     st.markdown("---")
-
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
