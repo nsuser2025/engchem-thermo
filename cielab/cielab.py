@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 import numpy as np
+from scipy.interpolate import interp1d
 
 def load_measurements (df):
     #try:
@@ -25,6 +26,51 @@ def f_lab(t):
     else:
         return (t / (3 * delta2)) + (4.0 / 29.0)
 
+def spectrum_to_lab(meas_wl, meas_vals, cmf_df, illum_df, assume_percent=True):
+    
+    ### convert percent -> 0..1 if needed ###
+    spec = meas_vals.copy().astype(float)
+    st.write(spec)
+    
+    #if assume_percent:
+    #    spec = spec / 100.0
+
+    # interpolate cmf and illuminant to measured wavelengths
+    #fx = interp1d(cmf_df['wl'], cmf_df['xbar'], bounds_error=False, fill_value=0.0)
+    #fy = interp1d(cmf_df['wl'], cmf_df['ybar'], bounds_error=False, fill_value=0.0)
+    #fz = interp1d(cmf_df['wl'], cmf_df['zbar'], bounds_error=False, fill_value=0.0)
+    #fS = interp1d(illum_df['wl'], illum_df['S'], bounds_error=False, fill_value=0.0)
+
+    #xbar = fx(meas_wl)
+    #ybar = fy(meas_wl)
+    #zbar = fz(meas_wl)
+    #S = fS(meas_wl)
+
+    #deltas = compute_deltas(meas_wl)
+
+    #denom = np.sum(S * ybar * deltas)
+    #if denom == 0:
+    #    raise RuntimeError("Denominator for k is zero; check illuminant and cmf coverage.")
+    #k = 100.0 / denom
+
+    #X = k * np.sum(spec * S * xbar * deltas)
+    #Y = k * np.sum(spec * S * ybar * deltas)
+    #Z = k * np.sum(spec * S * zbar * deltas)
+
+    # whitepoint (R=1)
+    #Xn = k * np.sum(1.0 * S * xbar * deltas)
+    #Yn = k * np.sum(1.0 * S * ybar * deltas)
+    #Zn = k * np.sum(1.0 * S * zbar * deltas)
+
+    #fx_ = f_lab(X / Xn)
+    #fy_ = f_lab(Y / Yn)
+    #fz_ = f_lab(Z / Zn)
+    #L = 116.0 * fy_ - 16.0
+    #a = 500.0 * (fx_ - fy_)
+    #b = 200.0 * (fy_ - fz_)
+
+    #return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
+
 def cielab_core (df):
 
     base_dir = os.path.dirname(__file__)
@@ -43,6 +89,6 @@ def cielab_core (df):
     #    print("No data in 380-780 nm range. Exiting.")
     #    sys.exit(1)
 
-    st.write(wl_vis)
-    #st.write(vals)
+    res = spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=ASSUME_PERCENT)
+    
     
