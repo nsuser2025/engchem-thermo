@@ -40,10 +40,10 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     fz = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
     fs = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
 
-    xbar = fx(meas_wl)
-    ybar = fy(meas_wl)
-    zbar = fz(meas_wl)
-    s = fs(meas_wl)
+    xbar = fx(wl_vis)
+    ybar = fy(wl_vis)
+    zbar = fz(wl_vis)
+    s = fs(wl_vis)
 
     st.write(s)
 
