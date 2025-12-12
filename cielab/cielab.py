@@ -26,14 +26,13 @@ def f_lab(t):
     else:
         return (t / (3 * delta2)) + (4.0 / 29.0)
 
-def spectrum_to_lab(wl_vis, vals_vis, cmf_df, illum_df, assume_percent=True):
+def spectrum_to_lab(wl_vis, vals_vis, df_cie, df_ill, assume_percent=True):
     
     ### convert percent -> 0..1 if needed ###
     spec = vals_vis.copy().astype(float)
     
     if assume_percent:
        spec = spec / 100.0
-    st.write(spec)
 
     # interpolate cmf and illuminant to measured wavelengths
     #fx = interp1d(cmf_df['wl'], cmf_df['xbar'], bounds_error=False, fill_value=0.0)
