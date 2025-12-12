@@ -37,7 +37,7 @@ def cielab_core (df):
 
     ### restrict to 380-780 nm ###
     mask = (wl >= 380.0) & (wl <= 780.0)
-    st.write(mas)
+    st.write(mask)
     
     #st.write(wl)
     #st.write(vals)
