@@ -34,7 +34,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     if assume_percent:
        spec = spec / 100.0
 
-    st.write(df_xyz.head())
+    st.write(df_xyz)
     
     # interpolate cmf and illuminant to measured wavelengths
     fx = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
