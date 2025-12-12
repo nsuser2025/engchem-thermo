@@ -18,10 +18,10 @@ def cielab_gui():
     セッションの終了と同時にサーバー上のスペクトル情報は完全に消去されます。
     また、出力されるCSVにはコードインジェクションの無効化処理が施されています。
     安心してダウンロードしてください。""") 
-    st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
-    st.markdown(r"""$$\eta_{0}$$: 基材粘度（粉体を一切含まない基材の粘度）""")
-    st.markdown(r"$\left[ \eta \right]$: 固有粘度（粉体が球体であれば2.5のままでOK）")
-    st.markdown(r"""$$\phi_{\mathrm{max}}$$: 最大充填体積分率（粘度を決める最も重要なパラメータ。離散要素法や実験から決める。）""")
+    #st.latex(r"\eta = \eta_{0}\biggl( 1 - \frac{\phi}{\phi_{\rm max}} \biggr)^{-[\eta]\phi_{\rm max}}")
+    #st.markdown(r"""$$\eta_{0}$$: 基材粘度（粉体を一切含まない基材の粘度）""")
+    #st.markdown(r"$\left[ \eta \right]$: 固有粘度（粉体が球体であれば2.5のままでOK）")
+    #st.markdown(r"""$$\phi_{\mathrm{max}}$$: 最大充填体積分率（粘度を決める最も重要なパラメータ。離散要素法や実験から決める。）""")
     st.markdown("---")
     
     # INITIALIZE SESSIONS
@@ -38,11 +38,11 @@ def cielab_gui():
        df = mkcsv_gui(uploaded_file)
        st.session_state.data_df = df
 
-       base_dir = os.path.dirname(__file__)
-       cie_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
-       ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
-       df_cie = pd.read_csv(cie_path)
-       df_ill = pd.read_csv(ill_path)
+       #base_dir = os.path.dirname(__file__)
+       #cie_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
+       #ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
+       #df_cie = pd.read_csv(cie_path)
+       #df_ill = pd.read_csv(ill_path)
        cielab_core (df)
     
     df = st.session_state.data_df
