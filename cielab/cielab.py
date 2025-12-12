@@ -137,5 +137,5 @@ def cielab_core (df):
     r, g, b_ = (srgb * 255).astype(int)
     #st.markdown(f"<div style='width:100px;height:50px;background-color:rgb({r},{g},{b_});'></div>", unsafe_allow_html=True)
     st.markdown(f"""<div style="width:300px;height:150px;background-color: rgb({r},{g},{b_});
-                border: 3px solid gray;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+                border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
                 "></div>""",unsafe_allow_html=True)
