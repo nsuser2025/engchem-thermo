@@ -128,7 +128,8 @@ def cielab_core (df):
     st.write("k =", res["k"])
     st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
     st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
-
+    
+    X, Y, Z = res["X"], res["Y"], res["Z"]
     linear_rgb = xyz_to_linear_rgb(X, Y, Z)
     srgb = linear_to_srgb(linear_rgb)
 
