@@ -17,6 +17,26 @@ def load_measurements (df):
     order = np.argsort(wl)
     return wl[order], vals[order]
 
+### XYZ --> linear RGB ###
+def xyz_to_linear_rgb(X, Y, Z):
+    ### sRGB D65 ###
+    M = np.array([[ 3.2406, -1.5372, -0.4986],
+                  [-0.9689,  1.8758,  0.0415],
+                  [ 0.0557, -0.2040,  1.0570]])
+    XYZ = np.array([X, Y, Z]) / 100
+    RGB = M.dot(XYZ) 
+    return RGB
+
+### linear RGB --> sRGB ###
+def linear_to_srgb(RGB):
+    def compand(c):
+        c = np.clip(c, 0, 1)
+        return np.where(c <= 0.0031308,
+                        12.92 * c,
+                        1.055 * c**(1/2.4) - 0.055)
+    return compand(RGB)
+
+
 def compute_deltas(wl):
     dw = np.diff(wl)
     if dw.size == 0:
@@ -108,3 +128,10 @@ def cielab_core (df):
     st.write("k =", res["k"])
     st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
     st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
+
+    linear_rgb = xyz_to_linear_rgb(X, Y, Z)
+    srgb = linear_to_srgb(linear_rgb)
+
+    ### 色の矩形表示 ###
+    r, g, b_ = (srgb * 255).astype(int)
+    st.markdown(f"<div style='width:100px;height:50px;background-color:rgb({r},{g},{b_});'></div>", unsafe_allow_html=True)
