@@ -199,7 +199,7 @@ def cielab_core (mode_spec, mode_intp, df):
        YI = None
     
     ### FIGURE PLOT ###
-    fig, ax = plt.subplots(figsize=(6, 5))
+    fig, ax = plt.subplots(figsize=(6, 6))
     ax.plot(wl_grid, vals_i, lw=2)
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
