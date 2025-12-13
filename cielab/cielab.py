@@ -201,10 +201,10 @@ def cielab_core (mode_spec, mode_intp, df):
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
     if mode_intp == 'なし':
-       ax.plot(wl_grid, vals_i, lw=2, label="measured")
+       ax.plot(wl_grid, vals_i, lw=2, label="Measured")
     else:
-       ax.plot(wl_grid, vals_i, lw=2, label="補間")
-       ax.plot(wl_vis, vals_vis, lw=1, label="measured") 
+       ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
+       ax.plot(wl_vis, vals_vis, lw=1, marker="o", label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
