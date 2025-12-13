@@ -216,12 +216,12 @@ def cielab_core (mode_spec, mode_intp, df):
     col_text, col_plot, col_color = st.columns([2, 1, 1])
     with col_text:
          st.write(f"補間: {mode_intp}")
-         st.write("XYZ = {:.3f}, {:.3f}, {:.3f}".format(res["X"], res["Y"], res["Z"]))
+         st.write("X, Y, Z = {:.3f}, {:.3f}, {:.3f}".format(res["X"], res["Y"], res["Z"]))
          if YI is not None:
-            st.write("Lab L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
+            st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
             st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
          else:
-            st.write("Lab L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
+            st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
             st.caption("※ 透過率モードでは Yellow Index は参考値です")
     with col_plot:
          st.pyplot(fig)
