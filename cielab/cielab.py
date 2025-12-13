@@ -204,7 +204,7 @@ def cielab_core (mode_spec, mode_intp, df):
        ax.plot(wl_grid, vals_i, lw=2, label="実測")
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="補間")
-       ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=3, label="実測") 
+       ax.plot(wl_vis, vals_vis, lw=1, label="実測") 
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
     ax.set_xlim(380, 780)
