@@ -168,14 +168,23 @@ def cielab_core (mode_spec, mode_intp, df):
        st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
        st.stop()
     if mode_intp == "3次スプライン":
-       st.write('neko') 
-       #cs = CubicSpline(, y_sorted, bc_type='natural')
+       wl_grid = np.arange(380.0, 781.0, 1.0)  
+       cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
+       vals_i = cs(wl_grid)
+    elif mode_intp == "線形":
+       wl_grid = np.arange(380.0, 781.0, 1.0)  
+       f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
+       vals_i = f_linear(wl_grid)
+    else:
+       wl_grid = wl_vis
+       vals_i = vals_vis
+    vals_i = np.clip(vals_i, 0.0, 100.0)
 
     ### XYZ --> LAB (MAIN) ###
     if mode_spec == "透過率":
-       res = spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
+       res = spectrum_to_lab_trans(wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
     elif mode_spec == "反射率":
-       res = spectrum_to_lab_refle(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
+       res = spectrum_to_lab_refle(wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
 
     ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
