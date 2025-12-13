@@ -213,3 +213,7 @@ def cielab_core (mode_spec, mode_intp, df):
          st.markdown(f"""<div style="width:100%;height:150px;background-color: rgb({r},{g},{b_});
                      border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
                      "></div>""",unsafe_allow_html=True)
+
+# MODULE ERROR MESSAGE
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
