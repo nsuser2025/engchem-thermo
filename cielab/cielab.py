@@ -186,17 +186,33 @@ def cielab_core (mode, df):
        YI = None
     
     ### RESULTS ###
-    st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
-    r, g, b_ = (srgb * 255).astype(int)
+    #st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
+    #r, g, b_ = (srgb * 255).astype(int)
+    #
+    #if YI is not None:
+    #   st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
+    #   st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
+    #else:
+    #   st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}"
+    #            .format(res["L"], res["a"], res["b"]))
+    #   st.caption("※ 透過率モードでは Yellow Index は参考値です")
+    #
+    #st.markdown(f"""<div style="width:300px;height:150px;background-color: rgb({r},{g},{b_});
+    #            border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    #            "></div>""",unsafe_allow_html=True)
     
-    if YI is not None:
-       st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
-       st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
-    else:
-       st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}"
-                .format(res["L"], res["a"], res["b"]))
-       st.caption("※ 透過率モードでは Yellow Index は参考値です")
+    col_text, col_color = st.columns([2, 1])
+    with col_text:
+         st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
 
-    st.markdown(f"""<div style="width:300px;height:150px;background-color: rgb({r},{g},{b_});
-                border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-                "></div>""",unsafe_allow_html=True)
+         if YI is not None:
+            st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
+            st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
+         else:
+            st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
+            st.caption("※ 透過率モードでは Yellow Index は参考値です")    
+    with col_color:
+         r, g, b_ = (srgb * 255).astype(int)
+         st.markdown(f"""<div style="width:100%;height:150px;background-color: rgb({r},{g},{b_});
+                     border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+                     "></div>""",unsafe_allow_html=True)
