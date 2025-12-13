@@ -204,7 +204,7 @@ def cielab_core (mode_spec, mode_intp, df):
        ax.plot(wl_grid, vals_i, lw=2, label="Measured")
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-       ax.plot(wl_vis, vals_vis, lw=1, marker="o", label="Measured") 
+       ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
