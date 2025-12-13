@@ -76,7 +76,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
 
     ### NORMALIZATION CONSTANT ###
     denom = np.sum(s * ybar * deltas)
-    if denom == 0:
+    if denom <= 1e-12:
        st.error("ZKANICS ERROR CIELAB.py (ZERO DENOM)")
        st.stop()
     k = 100.0 / denom
