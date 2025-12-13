@@ -41,14 +41,14 @@ def cielab_gui():
 
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
-       
+       ### ERROR MESSAGES ###
        if df.shape[1] < 2:
           st.error("波長・スペクトルのペアになっていません")
           st.stop()
        if df.shape[1] % 2 != 0:
           st.error("列数が奇数です（波長・スペクトルのペアになっていません）")
           st.stop()
-        
+       ### CIELAB ### 
        st.session_state.data_df = df
        st.markdown("---")
        for i in range(0, df.shape[1], 2):
@@ -56,6 +56,7 @@ def cielab_gui():
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
            cielab_core (mode_spec, mode_intp, df_pair)
+       cielab_core (mode_spec, mode_intp, df)
        st.markdown("---") 
     
     df = st.session_state.data_df
