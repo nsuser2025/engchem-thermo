@@ -42,7 +42,8 @@ def cielab_gui():
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
        st.session_state.data_df = df
-       st.markdown("---") 
+       st.markdown("---")
+       st.write(df.shape[1])
        cielab_core (mode_spec, mode_intp, df)
        st.markdown("---") 
     
