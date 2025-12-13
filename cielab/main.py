@@ -34,7 +34,9 @@ def cielab_gui():
     # CSV FILE READER
     uploaded_file = st.file_uploader("透過率スペクトルのExcel/CSVファイルをアップロード", 
                     type=["xlsx", "xls", "xlsm", "csv"])
+    st.markdown("---")
     mode = st.radio("スペクトル種別", ["透過率", "反射率"])
+    st.markdown("---")
 
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
