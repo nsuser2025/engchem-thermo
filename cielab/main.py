@@ -42,8 +42,10 @@ def cielab_gui():
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
        st.session_state.data_df = df
+       st.markdown("---") 
        st.write("補間前")
        cielab_core (mode_spec, df)
+       st.markdown("---") 
        #st.write("補間後")
        #cielab_core (mode_spec, df)
     
