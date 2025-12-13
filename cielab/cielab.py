@@ -200,7 +200,11 @@ def cielab_core (mode_spec, mode_intp, df):
     
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
-    ax.plot(wl_grid, vals_i, lw=2)
+    if mode_intp == 'なし':
+       ax.plot(wl_grid, vals_i, lw=2, label="実測")
+    else:
+       ax.plot(wl_grid, vals_i, lw=2, label="補間")
+       ax.plot(wl_vis, vals_vis, lw=2, label="実測") 
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
     ax.set_xlim(380, 780)
