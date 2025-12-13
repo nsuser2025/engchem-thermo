@@ -43,11 +43,8 @@ def cielab_gui():
        df = mkcsv_gui(uploaded_file)
        st.session_state.data_df = df
        st.markdown("---") 
-       st.write("補間前")
-       cielab_core (mode_spec, df)
+       cielab_core (mode_spec, mode_intp, df)
        st.markdown("---") 
-       #st.write("補間後")
-       #cielab_core (mode_spec, df)
     
     df = st.session_state.data_df
     if df is None:
