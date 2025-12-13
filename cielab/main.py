@@ -52,6 +52,8 @@ def cielab_gui():
        st.session_state.data_df = df
        st.markdown("---")
        for i in range(0, df.shape[1], 2):
+           name = df.columns[i+1]
+           st.subheader(f"条件: {name}")
            wl = df.iloc[:, i]
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
