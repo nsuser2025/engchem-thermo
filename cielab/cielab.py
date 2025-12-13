@@ -54,32 +54,34 @@ def f_lab(t):
 
 def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     
-    ### convert percent -> 0..1 if needed ###
+    ### CONVERT PERCENT 0 <= REFLACTANCE <= 1 ###
     spec = vals_vis.copy().astype(float)
-    
     if assume_percent:
        spec = spec / 100.0
     
-    # interpolate cmf and illuminant to measured wavelengths
+    # INTERPOLATE CIE FUNCTIONS
     fx_bar = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
     fy_bar = interp1d(df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
     fz_bar = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
     fs = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
 
+    # --> CIE FUNCTIONS
     xbar = fx_bar(wl_vis)
     ybar = fy_bar(wl_vis)
     zbar = fz_bar(wl_vis)
     s = fs(wl_vis)
 
+    ### GRID SETTING ###
     deltas = compute_deltas(wl_vis)
 
+    ### NORMALIZATION CONSTANT ###
     denom = np.sum(s * ybar * deltas)
     if denom == 0:
-       st.error("❌ k の分母が 0 です。照明光（illuminant）と色度関数（CMF）の波長範囲を確認してください。")
+       st.error("ZKANICS ERROR CIELAB.py (ZERO DENOM)")
        st.stop()
-
     k = 100.0 / denom
 
+    ### --> X, Y, Z
     X = k * np.sum(spec * s * xbar * deltas)
     Y = k * np.sum(spec * s * ybar * deltas)
     Z = k * np.sum(spec * s * zbar * deltas)
@@ -89,6 +91,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     Yn = k * np.sum(1.0 * s * ybar * deltas)
     Zn = k * np.sum(1.0 * s * zbar * deltas)
 
+    ### --> L*, a*, b*
     fx = f_lab (X / Xn)
     fy = f_lab (Y / Yn)
     fz = f_lab (Z / Zn)
@@ -108,27 +111,27 @@ def cielab_core (df):
     
     wl, vals = load_measurements (df)
 
-    ### restrict to 380-780 nm ###
+    ### RESTRICT TO 380-780 NM ###
     mask = (wl >= 380.0) & (wl <= 780.0)
     wl_vis = wl[mask]
     vals_vis = vals[mask]
-    #if wl_vis.size == 0:
-    #    print("No data in 380-780 nm range. Exiting.")
-    #    sys.exit(1)
+    if wl_vis.size == 0:
+       st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
+       st.stop()
 
+    ### XYZ --> LAB (MAIN) ###
     res = spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
-    
-    st.write("k =", res["k"])
-    st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
-    st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
-    
+
+    ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
     linear_rgb = xyz_to_linear_rgb(X, Y, Z)
     srgb = linear_to_srgb(linear_rgb)
 
-    ### 色の矩形表示 ###
+    ### RESULTS ###
+    st.write("k =", res["k"])
+    st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
+    st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
     r, g, b_ = (srgb * 255).astype(int)
-    #st.markdown(f"<div style='width:100px;height:50px;background-color:rgb({r},{g},{b_});'></div>", unsafe_allow_html=True)
     st.markdown(f"""<div style="width:300px;height:150px;background-color: rgb({r},{g},{b_});
                 border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
                 "></div>""",unsafe_allow_html=True)
