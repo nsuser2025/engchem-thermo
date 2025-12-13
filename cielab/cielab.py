@@ -178,12 +178,13 @@ def cielab_core (mode, df):
 
     ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
+    YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
     linear_rgb = xyz_to_linear_rgb(X, Y, Z)
     srgb = linear_to_srgb(linear_rgb)
 
     ### RESULTS ###
     st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
-    st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
+    st.write("Lab L*, a*, b*, YI = {:.4f}, {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"], YI))
     r, g, b_ = (srgb * 255).astype(int)
     st.markdown(f"""<div style="width:300px;height:150px;background-color: rgb({r},{g},{b_});
                 border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
