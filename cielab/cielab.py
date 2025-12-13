@@ -171,7 +171,10 @@ def cielab_core (mode, df):
        st.stop()
 
     ### XYZ --> LAB (MAIN) ###
-    res = spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
+    if mode == "透過率":
+       res = spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
+    elif mode == "反射率":
+       res = spectrum_to_lab_refle(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
 
     ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
