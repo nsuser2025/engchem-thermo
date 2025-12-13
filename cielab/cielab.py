@@ -208,7 +208,7 @@ def cielab_core (mode_spec, mode_intp, df):
     ax.grid(True)
 
     ### RESULTS ###
-    col_text, col_plot, col_color = st.columns([1, 2, 1])
+    col_text, col_plot, col_color = st.columns([1, 1, 1])
     with col_text:
          st.write(f"補間: {mode_intp}")
          st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
