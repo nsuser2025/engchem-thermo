@@ -51,7 +51,11 @@ def cielab_gui():
         
        st.session_state.data_df = df
        st.markdown("---")
-       cielab_core (mode_spec, mode_intp, df)
+       for i in range(0, df.shape[1], 2):
+           wl = df.iloc[:, i]
+           spec = df.iloc[:, i+1]
+           df_pair = pd.DataFrame({"wl": wl,"spec": spec})
+           cielab_core (mode_spec, mode_intp, df_pair)
        st.markdown("---") 
     
     df = st.session_state.data_df
