@@ -54,7 +54,7 @@ def f_lab(t):
 
 def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     
-    ### CONVERT PERCENT 0 <= REFLACTANCE <= 1 ###
+    ### CONVERT PERCENT 0 <= TRANSMITTANCE <= 1 ###
     spec = vals_vis.copy().astype(float)
     if assume_percent:
        spec = spec / 100.0
@@ -86,7 +86,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     Y = k * np.sum(spec * s * ybar * deltas)
     Z = k * np.sum(spec * s * zbar * deltas)
 
-    ### whitepoint (R=1) ###
+    ### whitepoint (T=1, no sample) ###
     Xn = k * np.sum(1.0 * s * xbar * deltas)
     Yn = k * np.sum(1.0 * s * ybar * deltas)
     Zn = k * np.sum(1.0 * s * zbar * deltas)
