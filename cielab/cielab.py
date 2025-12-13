@@ -188,7 +188,7 @@ def cielab_core (mode_spec, mode_intp, df):
     ### RESULTS ###
     col_text, col_color = st.columns([2, 1])
     with col_text:
-         st.write(mode_intp)
+         st.write(f"補間: {mode_intp}")
          st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
          if YI is not None:
             st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
