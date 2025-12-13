@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d, CubicSpline
+import matplotlib.pyplot as plt
 
 def load_measurements (df):
     wl = df.iloc[:,0].to_numpy(dtype=float)
@@ -197,8 +198,17 @@ def cielab_core (mode_spec, mode_intp, df):
     else:
        YI = None
     
+    ### FIGURE PLOT ###
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.plot(wl_grid, vals_i, lw=2)
+    ax.set_xlabel("Wavelength [nm]")
+    ax.set_ylabel("Transmittance / Reflectance [%]")
+    ax.set_xlim(380, 780)
+    ax.set_ylim(0, 100)
+    ax.grid(True)
+
     ### RESULTS ###
-    col_text, col_color = st.columns([2, 1])
+    col_text, col_plot, col_color = st.columns([1, 3, 1])
     with col_text:
          st.write(f"補間: {mode_intp}")
          st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
@@ -207,7 +217,9 @@ def cielab_core (mode_spec, mode_intp, df):
             st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
          else:
             st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
-            st.caption("※ 透過率モードでは Yellow Index は参考値です")    
+            st.caption("※ 透過率モードでは Yellow Index は参考値です")
+    with col_plot:
+         st.pyplot(fig)
     with col_color:
          r, g, b_ = (srgb * 255).astype(int)
          st.markdown(f"""<div style="width:100%;height:150px;background-color: rgb({r},{g},{b_});
