@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 import numpy as np
-from scipy.interpolate import interp1d
+from scipy.interpolate import interp1d, CubicSpline
 
 def load_measurements (df):
     wl = df.iloc[:,0].to_numpy(dtype=float)
@@ -167,6 +167,9 @@ def cielab_core (mode_spec, mode_intp, df):
     if wl_vis.size == 0:
        st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
        st.stop()
+    if mode_intp == "3次スプライン":
+       st.write('neko') 
+       #cs = CubicSpline(, y_sorted, bc_type='natural')
 
     ### XYZ --> LAB (MAIN) ###
     if mode_spec == "透過率":
