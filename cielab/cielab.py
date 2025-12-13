@@ -191,7 +191,7 @@ def cielab_core (mode, df):
     
     if YI is not None:
        st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
-        st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
+       st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
     else:
        st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}"
                 .format(res["L"], res["a"], res["b"]))
