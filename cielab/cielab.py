@@ -150,8 +150,10 @@ def spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
 
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
     
-def cielab_core (df):
+def cielab_core (mode, df):
 
+    st.write(mode)
+    
     base_dir = os.path.dirname(__file__)
     xyz_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
     ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
