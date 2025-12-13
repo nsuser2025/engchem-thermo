@@ -150,13 +150,13 @@ def spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
 
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
     
-def cielab_core (mode, df):
+def cielab_core (mode_spec, mode_intp, df):
    
     base_dir = os.path.dirname(__file__)
     xyz_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
     ill_path = os.path.join(base_dir, "CIE_std_illum_D65.csv")
     df_xyz = pd.read_csv(xyz_path, header=None, names=["wl", "xbar", "ybar", "zbar"])
-    df_ill = pd.read_csv(ill_path, header=None, names=["wl", "S"])   
+    df_ill = pd.read_csv(ill_path, header=None, names=["wl", "S"])
     
     wl, vals = load_measurements (df)
 
@@ -169,9 +169,9 @@ def cielab_core (mode, df):
        st.stop()
 
     ### XYZ --> LAB (MAIN) ###
-    if mode == "透過率":
+    if mode_spec == "透過率":
        res = spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
-    elif mode == "反射率":
+    elif mode_spec == "反射率":
        res = spectrum_to_lab_refle(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
 
     ### XYZ --> RGB ###
@@ -180,31 +180,15 @@ def cielab_core (mode, df):
     srgb = linear_to_srgb(linear_rgb)
 
     ### YELLOW INDEX ###
-    if mode == "反射率":
+    if mode_spec == "反射率":
        YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
     else:
        YI = None
     
     ### RESULTS ###
-    #st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
-    #r, g, b_ = (srgb * 255).astype(int)
-    #
-    #if YI is not None:
-    #   st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
-    #   st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
-    #else:
-    #   st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}"
-    #            .format(res["L"], res["a"], res["b"]))
-    #   st.caption("※ 透過率モードでは Yellow Index は参考値です")
-    #
-    #st.markdown(f"""<div style="width:300px;height:150px;background-color: rgb({r},{g},{b_});
-    #            border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-    #            "></div>""",unsafe_allow_html=True)
-    
     col_text, col_color = st.columns([2, 1])
     with col_text:
          st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
-
          if YI is not None:
             st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
             st.write("Yellow Index (ASTM E313, ref.) = {:.4f}".format(YI))
