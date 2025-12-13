@@ -36,17 +36,17 @@ def cielab_gui():
                     type=["xlsx", "xls", "xlsm", "csv"])
     
     st.markdown("---")
-    st.markdown("#### スペクトル種別")
-    mode = st.radio("", ["透過率", "反射率"], horizontal=True)
+    mode_spec = st.radio("スペクトル種別", ["透過率", "反射率"], horizontal=True)
+    mode_intp = st.radio("補間方法", ["なし", "線形", "3次スプライン"], horizontal=True)
     st.markdown("---")
 
     if uploaded_file:
        df = mkcsv_gui(uploaded_file)
        st.session_state.data_df = df
        st.write("補間前")
-       cielab_core (mode, df)
-       st.write("補間後")
-       cielab_core (mode, df)
+       cielab_core (mode_spec, df)
+       #st.write("補間後")
+       #cielab_core (mode_spec, df)
     
     df = st.session_state.data_df
     if df is None:
