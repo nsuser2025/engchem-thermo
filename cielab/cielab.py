@@ -52,7 +52,56 @@ def f_lab(t):
     else:
         return (t / (3 * delta2)) + (4.0 / 29.0)
 
-def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
+def spectrum_to_lab_refle(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
+    
+    ### CONVERT PERCENT 0 <= REFLECTANCE <= 1 ###
+    spec = vals_vis.copy().astype(float)
+    if assume_percent:
+       spec = spec / 100.0
+    
+    # INTERPOLATE CIE FUNCTIONS
+    fx_bar = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
+    fy_bar = interp1d(df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
+    fz_bar = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
+    fs = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
+
+    # --> CIE FUNCTIONS
+    xbar = fx_bar(wl_vis)
+    ybar = fy_bar(wl_vis)
+    zbar = fz_bar(wl_vis)
+    s = fs(wl_vis)
+
+    ### GRID SETTING ###
+    deltas = compute_deltas(wl_vis)
+
+    ### NORMALIZATION CONSTANT ###
+    denom = np.sum(s * ybar * deltas)
+    if denom <= 1e-12:
+       st.error("ZKANICS ERROR CIELAB.py (ZERO DENOM)")
+       st.stop()
+    k = 100.0 / denom
+
+    ### --> X, Y, Z
+    X = k * np.sum(spec * s * xbar * deltas)
+    Y = k * np.sum(spec * s * ybar * deltas)
+    Z = k * np.sum(spec * s * zbar * deltas)
+
+    ### WHITEPOINT (R=1, perfect reflecting diffuser) ###
+    Xn = k * np.sum(1.0 * s * xbar * deltas)
+    Yn = k * np.sum(1.0 * s * ybar * deltas)
+    Zn = k * np.sum(1.0 * s * zbar * deltas)
+
+    ### --> L*, a*, b*
+    fx = f_lab (X / Xn)
+    fy = f_lab (Y / Yn)
+    fz = f_lab (Z / Zn)
+    L = (116.0 * fy) - 16.0
+    a = 500.0 * (fx - fy)
+    b = 200.0 * (fy - fz)
+
+    return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
+
+def spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     
     ### CONVERT PERCENT 0 <= TRANSMITTANCE <= 1 ###
     spec = vals_vis.copy().astype(float)
@@ -86,10 +135,10 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     Y = k * np.sum(spec * s * ybar * deltas)
     Z = k * np.sum(spec * s * zbar * deltas)
 
-    ### whitepoint (T=1, no sample) ###
-    Xn = k * np.sum(1.0 * s * xbar * deltas)
-    Yn = k * np.sum(1.0 * s * ybar * deltas)
-    Zn = k * np.sum(1.0 * s * zbar * deltas)
+    ### WHITEPOINT (T=1, no sample) ###
+    Xn = k * np.sum(s * xbar * deltas)
+    Yn = k * np.sum(s * ybar * deltas)
+    Zn = k * np.sum(s * zbar * deltas)
 
     ### --> L*, a*, b*
     fx = f_lab (X / Xn)
@@ -100,7 +149,7 @@ def spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     b = 200.0 * (fy - fz)
 
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
-
+    
 def cielab_core (df):
 
     base_dir = os.path.dirname(__file__)
@@ -120,7 +169,7 @@ def cielab_core (df):
        st.stop()
 
     ### XYZ --> LAB (MAIN) ###
-    res = spectrum_to_lab(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
+    res = spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
 
     ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
