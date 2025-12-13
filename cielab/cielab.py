@@ -182,7 +182,6 @@ def cielab_core (mode, df):
     srgb = linear_to_srgb(linear_rgb)
 
     ### RESULTS ###
-    st.write("k =", res["k"])
     st.write("XYZ = {:.6f}, {:.6f}, {:.6f}".format(res["X"], res["Y"], res["Z"]))
     st.write("Lab L*, a*, b* = {:.4f}, {:.4f}, {:.4f}".format(res["L"], res["a"], res["b"]))
     r, g, b_ = (srgb * 255).astype(int)
