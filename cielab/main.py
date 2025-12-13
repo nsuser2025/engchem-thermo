@@ -36,7 +36,7 @@ def cielab_gui():
                     type=["xlsx", "xls", "xlsm", "csv"])
     
     st.markdown("---")
-    mode = st.radio("スペクトル種別", ["透過率", "反射率"])
+    mode = st.radio("スペクトル種別", ["透過率", "反射率"], horizontal=True)
     st.markdown("---")
 
     if uploaded_file:
