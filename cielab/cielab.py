@@ -180,7 +180,7 @@ def cielab_core (mode_spec, mode_intp, df):
     srgb = linear_to_srgb(linear_rgb)
 
     ### YELLOW INDEX ###
-    if mode_spec == "反射率" and Y > 1e-6::
+    if mode_spec == "反射率" and Y > 1e-6:
        YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
     else:
        YI = None
