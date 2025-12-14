@@ -5,6 +5,7 @@ from typing import List
 from PIL import Image
 from .mkcsv import mkcsv_gui
 from .cielab import cielab_core
+from .document import cielab_overview
 
 def cielab_gui():
 
@@ -22,6 +23,7 @@ def cielab_gui():
     #st.markdown(r"""$$\eta_{0}$$: 基材粘度（粉体を一切含まない基材の粘度）""")
     #st.markdown(r"$\left[ \eta \right]$: 固有粘度（粉体が球体であれば2.5のままでOK）")
     #st.markdown(r"""$$\phi_{\mathrm{max}}$$: 最大充填体積分率（粘度を決める最も重要なパラメータ。離散要素法や実験から決める。）""")
+    cielab_overview()
     st.markdown("---")
     
     # INITIALIZE SESSIONS
