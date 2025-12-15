@@ -163,14 +163,16 @@ def cielab_core (mode_spec, mode_intp, df):
     wl, vals = load_measurements (df)
 
     ### RESTRICT TO 380-780 NM ###
-    mask = (wl >= 380.0) & (wl <= 780.0)
+    #mask = (wl >= 380.0) & (wl <= 780.0)
+    mask = (wl >= 300.0) & (wl <= 900.0)
     wl_vis = wl[mask]
     vals_vis = vals[mask]
     if wl_vis.size == 0:
        st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
        st.stop()
     if mode_intp == "3次スプライン":
-       wl_grid = np.arange(380.0, 781.0, 1.0)  
+       #wl_grid = np.arange(380.0, 781.0, 1.0) 
+       wl_grid = np.arange(300.0, 901.0, 1.0)  
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
     elif mode_intp == "線形":
