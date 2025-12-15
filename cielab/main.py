@@ -38,7 +38,6 @@ def cielab_gui():
     
     st.markdown("---")
     mode_spec = st.radio("スペクトル種別", ["透過率", "反射率"], horizontal=True)
-    mode_intp = st.radio("補間方法", ["なし", "線形", "3次スプライン"], horizontal=True)
     st.markdown("---")
 
     if uploaded_file:
@@ -65,7 +64,7 @@ def cielab_gui():
            wl = df.iloc[:, i]
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
-           Li, ai, bi, = cielab_core (mode_spec, mode_intp, df_pair)
+           Li, ai, bi, = cielab_core (mode_spec, df_pair)
            name_vals += [name]
            L_vals += [Li]
            a_vals += [ai]
