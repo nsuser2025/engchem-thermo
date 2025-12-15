@@ -5,6 +5,7 @@ import numpy as np
 from scipy.interpolate import interp1d, CubicSpline, UnivariateSpline
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
+from .nakamura import remove_background
 
 def load_measurements (df):
     wl = df.iloc[:,0].to_numpy(dtype=float)
@@ -20,10 +21,11 @@ def max_min_finder (wl, vals):
     return peaks_pos, peaks_neg
 
 ### POINTS OF MAX SLOPE ###
-def max_slope_finder (wl, vals):
+def remove_background (wl, vals):
     peaks_pos, peaks_neg = max_min_finder (wl, vals)
     peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
-    return peaks_all, dydx
+    for i in peaks_pos:
+    return peaks_all
 
 ### XYZ --> linear RGB ###
 def xyz_to_linear_rgb(X, Y, Z):
