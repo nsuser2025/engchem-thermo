@@ -13,6 +13,10 @@ def load_measurements (df):
     order = np.argsort(wl)
     return wl[order], vals[order]
 
+### MAXIMUM AND MINIMUM FINDER ###
+def max_min_finder (wl, vals):
+    st.write('saru')
+
 ### POINTS OF MAX SLOPE ###
 def max_slope_finder (wl, vals):
     spl = UnivariateSpline(wl, vals, k=3, s=0)
