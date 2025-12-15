@@ -1,4 +1,5 @@
 
+
 ### MAXIMUM AND MINIMUM FINDER ###
 def max_min_finder (wl, vals):
     peaks_pos, _ = find_peaks(vals)
@@ -12,3 +13,6 @@ def remove_background (wl, vals):
     for i in peaks_pos:
     return peaks_all
 
+# MODULE ERROR MESSAGE
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
