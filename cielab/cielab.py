@@ -17,7 +17,6 @@ def load_measurements (df):
 def max_min_finder (wl, vals):
     peaks_pos, _ = find_peaks(vals)
     peaks_neg, _ = find_peaks(-vals)
-    #peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
     return peaks_pos, peaks_neg
 
 ### POINTS OF MAX SLOPE ###
@@ -190,7 +189,7 @@ def cielab_core (mode_spec, df):
     cs = UnivariateSpline(wl_vis, vals_vis, k=3, s=2) 
     vals_i = cs(wl_grid)
     peaks_pos, peaks_neg = max_min_finder(wl_grid, vals_i) 
-    vals_i = np.clip(vals_i, 0.0, 100.0)
+    #vals_i = np.clip(vals_i, 0.0, 100.0)
 
     ### XYZ --> LAB (MAIN) ###
     if mode_spec == "透過率":
