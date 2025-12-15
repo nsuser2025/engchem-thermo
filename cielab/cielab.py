@@ -195,7 +195,7 @@ def cielab_core (mode_spec, df):
     linear_rgb = xyz_to_linear_rgb (X, Y, Z)
     srgb = linear_to_srgb (linear_rgb)
 
-    ### YELLOW INDEX ###
+    ### YELLOW INDEX (D65) ###
     if Y > 1e-6:
        YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
     else:
