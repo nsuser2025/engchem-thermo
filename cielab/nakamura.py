@@ -6,9 +6,11 @@ from scipy.signal import find_peaks
 def max_min_finder (wl, vals):
     peaks_pos, _ = find_peaks(vals)
     peaks_neg, _ = find_peaks(-vals)
-    
-    for i in peaks_pos:
-        st.write(wl[i])
+
+    wl_peaks = wl[peaks_pos]
+    mask = wl_peaks >= 380
+    nearest_peak_idx = peaks_pos[mask][np.argmin(wl_peaks[mask] - 380)]
+    st.write(nearest_peak_idx)
     return peaks_pos, peaks_neg
 
 ### POINTS OF MAX SLOPE ###
