@@ -1,6 +1,7 @@
 import streamlit as st
 import io
 import pandas as pd
+import numpy as np
 from typing import List
 from PIL import Image
 from .mkcsv import mkcsv_gui
