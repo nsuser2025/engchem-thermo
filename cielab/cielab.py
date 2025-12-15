@@ -226,8 +226,6 @@ def cielab_core (mode_spec, df):
     ### RESULTS ###
     col_text, col_plot, col_color = st.columns([2, 1, 1])
     with col_text:
-         st.write(f"補間: {mode_intp}")
-         st.write("X, Y, Z = {:.3f}, {:.3f}, {:.3f}".format(res["X"], res["Y"], res["Z"]))
          if YI is not None:
             st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
             st.write("Yellow Index (ASTM E313, ref.) = {:.3f}".format(YI))
