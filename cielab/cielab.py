@@ -15,31 +15,67 @@ def load_measurements (df):
 
 ### MIDPOINT ENVELOPE ###
 def midpoint (wl, vals):
+    """
+    連続する極大値と極小値の間の中間点（半値）が、
+    スペクトル曲線と交差する波長を抽出する。
+    Parameters:
+    wl (np.array): 波長 (x軸データ)
+    vals (np.array): 測定値 (y軸データ)
+    Returns:
+    tuple: (mid_x: 中間点の波長, mid_y: 中間点の値)
+    """
+    
+    # 1. 極大値と極小値のインデックスを検出
+    # 極大値 (Prominence=1 は、微小なノイズによるピークをある程度無視する設定)
     idx_max, _ = find_peaks(vals, prominence=1)
+    # 極小値 (値を反転して極大値として検出)
     idx_min, _ = find_peaks(-vals, prominence=1)
+    
+    # 2. 極値のインデックスとタイプを結合し、出現順にソート
     extrema = []
     for i in idx_max:
         extrema.append((i, "max"))
     for i in idx_min:
         extrema.append((i, "min"))
+    # インデックス (i) をキーとしてソート
     extrema.sort(key=lambda x: x[0])
 
     mid_x = []
     mid_y = []
+    # 3. 連続する極値ペアを処理
     for i in range(len(extrema) - 1):
-        i1, t1 = extrema[i]
-        i2, t2 = extrema[i+1]
-        # 同種ペアは除外
+        i1, t1 = extrema[i]    # 最初の極値 (インデックス, タイプ)
+        i2, t2 = extrema[i+1]  # 次の極値 (インデックス, タイプ)
+        
+        # 同種の極値ペア (例: max -> max) は、求める中間点ではないため除外
         if t1 == t2:
-           continue
-        y1, y2 = y_s[i1], y_s[i2]
+            continue
+            
+        # 連続する極値のy値を取得
+        y1, y2 = vals[i1], vals[i2] # ★修正済み (y_s -> vals)★
+        
+        # 極値の中間値 (半値) を計算
         y_half = 0.5 * (y1 + y2)
+        
+        # 4. 極値間の区間で中間値 (y_half) を横切る点を探索
         for j in range(i1, i2):
-            if (y_s[j] - y_half) * (y_s[j+1] - y_half) <= 0:
-                wl_mid = wl[j] + (y_half - vals[j]) * (wl[j+1] - wl[j]) / (vals[j+1] - vals[j])
-            mid_x.append(wl_mid)
-            mid_y.append(y_half)
-            break
+            # j と j+1 の点で、(y_s[j] - y_half) の符号が反転するかどうかを確認 (ゼロクロッシング)
+            if (vals[j] - y_half) * (vals[j+1] - y_half) <= 0: # ★修正済み (y_s -> vals)★
+                
+                # 線形補間により、交差する正確な波長 (wl_mid) を計算
+                # wl_mid = wl[j] + (y_half - vals[j]) * (wl[j+1] - wl[j]) / (vals[j+1] - vals[j])
+                
+                # 分母がゼロになる（vals[j] == vals[j+1]）ことを避けるためにチェック
+                dy = vals[j+1] - vals[j]
+                if abs(dy) > 1e-9:
+                     wl_mid = wl[j] + (y_half - vals[j]) * (wl[j+1] - wl[j]) / dy
+                else:
+                     # ほぼ水平な場合、中間として扱う
+                     wl_mid = 0.5 * (wl[j] + wl[j+1]) 
+                
+                mid_x.append(wl_mid)
+                mid_y.append(y_half)
+                break # 1つの極値ペアにつき、交点は1つなので、見つけたら次のペアへ
             
     mid_x = np.array(mid_x)
     mid_y = np.array(mid_y)
