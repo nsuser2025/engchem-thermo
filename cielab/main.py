@@ -4,6 +4,7 @@ import pandas as pd
 from typing import List
 from PIL import Image
 from .mkcsv import mkcsv_gui
+from .mkcsv import sanitize_for_csv_injection
 from .cielab import cielab_core
 from .document import cielab_overview
 
@@ -66,7 +67,8 @@ def cielab_gui():
            a_vals += [ai]
            b_vals += [bi]
        df_lab = pd.DataFrame({"L*": L_vals, "a*": a_vals, "b*": b_vals})
-       st.dataframe(df_lab)   
+       df_lab_safe = sanitize_for_csv_injection(df_lab) 
+       st.dataframe(df_lab_safe)   
        st.markdown("---") 
     
     df = st.session_state.data_df
