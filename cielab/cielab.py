@@ -163,8 +163,10 @@ def cielab_core (mode_spec, mode_intp, df):
     wl, vals = load_measurements (df)
 
     ### RESTRICT TO 380-780 NM ###
+    # REPLACEMENT START 2025/12/15
     #mask = (wl >= 380.0) & (wl <= 780.0)
-    mask = (wl >= 300.0) & (wl <= 900.0)
+    mask = (wl >= 300.0) & (wl <= 1000.0)
+    # REPLACEMENT END 2025/12/15
     wl_vis = wl[mask]
     vals_vis = vals[mask]
     if wl_vis.size == 0:
@@ -214,7 +216,7 @@ def cielab_core (mode_spec, mode_intp, df):
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
     #ax.set_xlim(380, 780)
-    ax.set_xlim(300, 900)
+    ax.set_xlim(300, 1000)
     ax.set_ylim(0, 100)
     ax.grid(True)
 
