@@ -193,12 +193,13 @@ def cielab_core (mode_spec, mode_intp, df):
        # REPLACEMENT START 2025/12/15 
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
-       peaks, dvals_dwl = max_slope_finder (wl_grid, vals_i) 
+       max_min_finder(wl_grid, vals_i) 
+       #peaks, dvals_dwl = max_slope_finder (wl_grid, vals_i) 
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
        vals_i = f_linear(wl_grid)
-       mid_x, mid_y = midpoint(wl_grid, vals_i) 
+       #mid_x, mid_y = midpoint(wl_grid, vals_i) 
     else:
        wl_grid = wl_vis
        vals_i = vals_vis
@@ -229,7 +230,7 @@ def cielab_core (mode_spec, mode_intp, df):
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
        #ax.plot(wl_grid, dvals_dw, lw=1, marker="o", ms=2, label="deriv")
-       ax.plot(wl_grid[peaks], vals_i[peaks], "ro", label="peaks")
+       #ax.plot(wl_grid[peaks], vals_i[peaks], "ro", label="peaks")
        ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
