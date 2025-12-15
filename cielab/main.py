@@ -66,7 +66,6 @@ def cielab_gui():
            a_vals += [ai]
            b_vals += [bi]
        df_lab = pd.DataFrame({"L*": L_vals, "a*": a_vals, "b*": b_vals})
-       st.title("LAB データ")
        st.dataframe(df_lab)   
        st.markdown("---") 
     
