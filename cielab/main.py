@@ -51,6 +51,9 @@ def cielab_gui():
        ### CIELAB ### 
        st.session_state.data_df = df
        st.markdown("---")
+       L_vals = []
+       a_vals = []
+       b_vals = [] 
        for i in range(0, df.shape[1], 2):
            name = df.columns[i+1]
            st.markdown(f"<div style='font-size:1.0rem; font-weight:600; margin-bottom:0.3rem;'>"
@@ -59,7 +62,10 @@ def cielab_gui():
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
            Li, ai, bi, = cielab_core (mode_spec, mode_intp, df_pair)
-           st.write(Li)
+           L_vals += [Li]
+           a_vals += [ai]
+           b_vals += [bi]
+       st.write(L_vals)
        st.markdown("---") 
     
     df = st.session_state.data_df
