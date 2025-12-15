@@ -70,6 +70,7 @@ def cielab_gui():
            L_vals += [Li]
            a_vals += [ai]
            b_vals += [bi]
+       st.markdown("---")
        name_vals = np.array(name_vals)    
        L_vals = np.array(L_vals)
        a_vals = np.array(a_vals)
@@ -80,7 +81,6 @@ def cielab_gui():
        df_sorted = df_lab.sort_values("Distance_to_ideal_white").reset_index(drop=True) 
        df_lab_safe = sanitize_for_csv_injection(df_sorted)
        st.dataframe(df_lab_safe) 
-       st.markdown("---") 
     
     df = st.session_state.data_df
     if df is None:
