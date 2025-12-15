@@ -8,7 +8,7 @@ def cielab_overview():
          st.markdown(r"""L$^{*}$（明度）: 0–100  
                          a$^{*}$：赤（＋）$\leftrightarrow$ 緑（−）  
                          b$^{*}$：黄（＋）$\leftrightarrow$ 青（−）""")
-         st.markdown(r"""${\rm L}^{*}=100 \cdots$ 完全な黒  
+         st.markdown(r"""L$^{*}$=100 $\cdots$ 完全な黒  
                          ${\rm L}^{*}=0 \cdots$ 理論上の最大明度 ${\rm a}^{*}={\rm b}^{*}=0$ のとき理想的な白""")
          st.markdown(r"""本アプリでは透過率/反射率スペクトルの波長領域を380–780 nmに限定しています.  
                          これは, 380 nm未満, 780 nmを超える波長は人間が色として知覚できないためです.""")
