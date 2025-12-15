@@ -20,7 +20,7 @@ def max_slope_finder (wl, vals):
     peaks_pos, _ = find_peaks(dydx)
     peaks_neg, _ = find_peaks(-dydx)
     peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
-    threshold = 0.3
+    threshold = 0.2
     peaks_all = [i for i in peaks_all if abs(dydx[i]) > threshold]
     return peaks_all, dydx
 
