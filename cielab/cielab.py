@@ -178,10 +178,6 @@ def cielab_core (mode_spec, df):
     cs = UnivariateSpline (wl_vis, vals_vis, k=3, s=2) 
     vals_i = cs(wl_grid)
     peaks_pos, peaks_neg = max_min_finder (wl_grid, vals_i)
-    for i in peaks_pos:
-        st.write(wl_grid[i])
-    for i in peaks_neg:
-        st.write(wl_grid[i])    
     #vals_i = np.clip(vals_i, 0.0, 100.0)
 
     ### XYZ --> LAB (MAIN) ###
