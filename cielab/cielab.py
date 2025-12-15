@@ -179,34 +179,17 @@ def cielab_core (mode_spec, mode_intp, df):
     
     wl, vals = load_measurements (df)
 
-    ### RESTRICT TO 380-780 NM ###
-    # REPLACEMENT START 2025/12/15
-    #mask = (wl >= 380.0) & (wl <= 780.0)
+    ### RESTRICT TO 300-1000 NM ###
     mask = (wl >= 300.0) & (wl <= 1000.0)
-    # REPLACEMENT END 2025/12/15
     wl_vis = wl[mask]
     vals_vis = vals[mask]
     if wl_vis.size == 0:
        st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
        st.stop()
-    if mode_intp == "3次スプライン":
-       # REPLACEMENT START 2025/12/15 
-       #wl_grid = np.arange(380.0, 781.0, 1.0) 
-       wl_grid = np.arange(300.0, 1001.0, 1.0)
-       # REPLACEMENT START 2025/12/15 
-       #cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
-       cs = UnivariateSpline(wl_vis, vals_vis, k=3, s=2) 
-       vals_i = cs(wl_grid)
-       peaks_pos, peaks_neg = max_min_finder(wl_grid, vals_i) 
-       #peaks, dvals_dwl = max_slope_finder (wl_grid, vals_i) 
-    elif mode_intp == "線形":
-       wl_grid = np.arange(380.0, 781.0, 1.0)  
-       f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
-       vals_i = f_linear(wl_grid)
-       #mid_x, mid_y = midpoint(wl_grid, vals_i) 
-    else:
-       wl_grid = wl_vis
-       vals_i = vals_vis
+    wl_grid = np.arange(300.0, 1001.0, 1.0)
+    cs = UnivariateSpline(wl_vis, vals_vis, k=3, s=2) 
+    vals_i = cs(wl_grid)
+    peaks_pos, peaks_neg = max_min_finder(wl_grid, vals_i) 
     vals_i = np.clip(vals_i, 0.0, 100.0)
 
     ### XYZ --> LAB (MAIN) ###
@@ -221,7 +204,6 @@ def cielab_core (mode_spec, mode_intp, df):
     srgb = linear_to_srgb(linear_rgb)
 
     ### YELLOW INDEX ###
-    #if mode_spec == "反射率" and Y > 1e-6:
     if Y > 1e-6:
        YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
     else:
@@ -233,7 +215,6 @@ def cielab_core (mode_spec, mode_intp, df):
        ax.plot(wl_grid, vals_i, lw=2, label="Measured")
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-       #ax.plot(wl_grid, dvals_dw, lw=1, marker="o", ms=2, label="deriv")
        ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
        ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
        ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
@@ -253,11 +234,6 @@ def cielab_core (mode_spec, mode_intp, df):
          if YI is not None:
             st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
             st.write("Yellow Index (ASTM E313, ref.) = {:.3f}".format(YI))
-         # COMMENT OUT START 2025/12/15     
-         #else:
-         #   st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
-         #   st.caption("※ 透過率モードでは Yellow Index は参考値です")
-         # COMMENT OUT END 2025/12/15
     with col_plot:
          st.pyplot(fig)
     with col_color:
