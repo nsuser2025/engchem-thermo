@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d, UnivariateSpline
 import matplotlib.pyplot as plt
-from .nakamura import remove_background
+from .nakamura import remove_background, min_max_finder
 
 ### INPUT df --> wl, vals ###
 def load_measurements (df):
@@ -115,19 +115,19 @@ def spectrum_to_lab_trans (wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True
        spec = spec / 100.0
     
     # INTERPOLATE CIE FUNCTIONS
-    fx_bar = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
-    fy_bar = interp1d(df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
-    fz_bar = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
-    fs = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
+    fx_bar = interp1d (df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
+    fy_bar = interp1d (df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
+    fz_bar = interp1d (df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
+    fs = interp1d (df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
 
     # --> CIE FUNCTIONS
-    xbar = fx_bar(wl_vis)
-    ybar = fy_bar(wl_vis)
-    zbar = fz_bar(wl_vis)
-    s = fs(wl_vis)
+    xbar = fx_bar (wl_vis)
+    ybar = fy_bar (wl_vis)
+    zbar = fz_bar (wl_vis)
+    s = fs (wl_vis)
 
     ### GRID SETTING ###
-    deltas = compute_deltas(wl_vis)
+    deltas = compute_deltas (wl_vis)
 
     ### NORMALIZATION CONSTANT ###
     denom = np.sum(s * ybar * deltas)
@@ -175,7 +175,7 @@ def cielab_core (mode_spec, df):
        st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
        st.stop()
     wl_grid = np.arange(300.0, 1001.0, 1.0)
-    cs = UnivariateSpline(wl_vis, vals_vis, k=3, s=2) 
+    cs = UnivariateSpline (wl_vis, vals_vis, k=3, s=2) 
     vals_i = cs(wl_grid)
     peaks_pos, peaks_neg = max_min_finder (wl_grid, vals_i)
     for i in peaks_pos:
