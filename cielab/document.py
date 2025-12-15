@@ -8,6 +8,5 @@ def cielab_overview():
          st.markdown(r"""L$^{*}$（明度）: 0–100  
                          a$^{*}$：赤（＋）$\leftrightarrow$ 緑（−）  
                          b$^{*}$：黄（＋）$\leftrightarrow$ 青（−）""")
-        
          st.markdown(r"""本アプリでは透過/吸収スペクトルの波長領域を380–780 nmに限定しています.  
                          これは, 380 nm未満, 780 nmを超える波長は人間が色として知覚できないためです.""")
