@@ -189,7 +189,7 @@ def cielab_core (mode_spec, mode_intp, df):
        # REPLACEMENT START 2025/12/15 
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
-       peaks, dvals_dw = max_slope_finder (wl_grid, vals_i) 
+       peaks, dvals_dwl = max_slope_finder (wl_grid, vals_i) 
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
