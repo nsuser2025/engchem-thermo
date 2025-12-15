@@ -16,8 +16,8 @@ def load_measurements (df):
 ### POINTS OF MAX SLOPE ###
 def max_slope_finder (wl, vals):
     spl = UnivariateSpline(wl, vals, k=3, s=0)
-    dy_dwl = spl.derivative()(wl)
-    st.write(dy_dx)
+    dydx = spl.derivative()(wl)
+    st.write(dydx)
 
 ### XYZ --> linear RGB ###
 def xyz_to_linear_rgb(X, Y, Z):
