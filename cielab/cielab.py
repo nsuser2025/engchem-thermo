@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d, CubicSpline, UnivariateSpline
-from scipy.signal import savgol_filter
+from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
 
 def load_measurements (df):
@@ -17,6 +17,8 @@ def load_measurements (df):
 def max_slope_finder (wl, vals):
     spl = UnivariateSpline(wl, vals, k=3, s=0)
     dydx = spl.derivative()(wl)
+    peaks, _ = find_peaks(dydx)
+    st.write(peaks)
     return dydx
 
 ### XYZ --> linear RGB ###
