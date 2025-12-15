@@ -68,7 +68,7 @@ def cielab_gui():
            L_vals += [Li]
            a_vals += [ai]
            b_vals += [bi]
-       dist_w = np.sqrt((L_vals - Lw)**2 + (a_vals - aw)**2 + (b_vals - bw)**2)
+       dist_w = np.sqrt((L_vals - L_w)**2 + (a_vals - a_w)**2 + (b_vals - b_w)**2)
        df_lab = pd.DataFrame({"L*": L_vals, "a*": a_vals, "b*": b_vals, "Distance_to_ideal_white": dist_w})
        df_lab_safe = sanitize_for_csv_injection(df_lab) 
        st.dataframe(df_lab_safe)   
