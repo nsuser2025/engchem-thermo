@@ -54,6 +54,7 @@ def cielab_gui():
        st.session_state.data_df = df
        st.markdown("---")
        L_w, a_w, b_w = 100, 0, 0 
+       name_vals = [] 
        L_vals = []
        a_vals = []
        b_vals = [] 
@@ -65,16 +66,17 @@ def cielab_gui():
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
            Li, ai, bi, = cielab_core (mode_spec, mode_intp, df_pair)
+           name_vals += [name]
            L_vals += [Li]
            a_vals += [ai]
            b_vals += [bi]
+       name_vals = np.array(name_vals)    
        L_vals = np.array(L_vals)
        a_vals = np.array(a_vals)
        b_vals = np.array(b_vals) 
        dist_w = np.sqrt((L_vals - L_w)**2 + (a_vals - a_w)**2 + (b_vals - b_w)**2)
-       df_lab = pd.DataFrame({"L*": L_vals, "a*": a_vals, "b*": b_vals, "Distance_to_ideal_white": dist_w})
-       df_lab_safe = sanitize_for_csv_injection(df_lab) 
-       st.dataframe(df_lab_safe)   
+       df_lab = pd.DataFrame({"列": name_vals, "L*": L_vals, "a*": a_vals, "b*": b_vals, 
+                              "Distance_to_ideal_white": dist_w})_lab_safe)   
        st.markdown("---") 
     
     df = st.session_state.data_df
