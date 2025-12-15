@@ -169,7 +169,7 @@ def spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
 
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
     
-def cielab_core (mode_spec, mode_intp, df):
+def cielab_core (mode_spec, df):
    
     base_dir = os.path.dirname(__file__)
     xyz_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
@@ -211,13 +211,10 @@ def cielab_core (mode_spec, mode_intp, df):
     
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
-    if mode_intp == 'なし':
-       ax.plot(wl_grid, vals_i, lw=2, label="Measured")
-    else:
-       ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-       ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
-       ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
-       ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
+    ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
+    ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
+    ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
+    ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
