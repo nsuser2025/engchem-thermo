@@ -58,7 +58,8 @@ def cielab_gui():
            wl = df.iloc[:, i]
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
-           cielab_core (mode_spec, mode_intp, df_pair)
+           Li, ai, bi, = cielab_core (mode_spec, mode_intp, df_pair)
+           st.write(Li)
        st.markdown("---") 
     
     df = st.session_state.data_df
