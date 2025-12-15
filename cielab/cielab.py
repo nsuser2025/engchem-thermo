@@ -2,11 +2,11 @@ import streamlit as st
 import os
 import pandas as pd
 import numpy as np
-from scipy.interpolate import interp1d, CubicSpline, UnivariateSpline
-from scipy.signal import find_peaks
+from scipy.interpolate import interp1d, UnivariateSpline
 import matplotlib.pyplot as plt
 from .nakamura import remove_background
 
+### INPUT df --> wl, vals ###
 def load_measurements (df):
     wl = df.iloc[:,0].to_numpy(dtype=float)
     vals = df.iloc[:,1].to_numpy(dtype=float)
@@ -14,21 +14,8 @@ def load_measurements (df):
     order = np.argsort(wl)
     return wl[order], vals[order]
 
-### MAXIMUM AND MINIMUM FINDER ###
-def max_min_finder (wl, vals):
-    peaks_pos, _ = find_peaks(vals)
-    peaks_neg, _ = find_peaks(-vals)
-    return peaks_pos, peaks_neg
-
-### POINTS OF MAX SLOPE ###
-def remove_background (wl, vals):
-    peaks_pos, peaks_neg = max_min_finder (wl, vals)
-    peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
-    for i in peaks_pos:
-    return peaks_all
-
 ### XYZ --> linear RGB ###
-def xyz_to_linear_rgb(X, Y, Z):
+def xyz_to_linear_rgb (X, Y, Z):
     ### sRGB D65 ###
     M = np.array([[ 3.2406, -1.5372, -0.4986],
                   [-0.9689,  1.8758,  0.0415],
@@ -37,8 +24,8 @@ def xyz_to_linear_rgb(X, Y, Z):
     RGB = M.dot(XYZ) 
     return RGB
 
-### linear RGB --> sRGB ###
-def linear_to_srgb(RGB):
+### LINEAR RGB --> sRGB ###
+def linear_to_srgb (RGB):
     def compand(c):
         c = np.clip(c, 0, 1)
         return np.where(c <= 0.0031308,
@@ -46,7 +33,8 @@ def linear_to_srgb(RGB):
                         1.055 * c**(1/2.4) - 0.055)
     return compand(RGB)
 
-def compute_deltas(wl):
+### DELTA FOR NUMERICAL INTEGRAL ###
+def compute_deltas (wl):
     dw = np.diff(wl)
     if dw.size == 0:
         return np.array([1.0])
@@ -57,8 +45,9 @@ def compute_deltas(wl):
     deltas[-1] = wl[-1] - wl[-2]
     deltas[1:-1] = 0.5 * (wl[2:] - wl[:-2])
     return deltas
-    
-def f_lab(t):
+
+### CIE F FUNCTION ###
+def f_lab (t):
     delta = 6.0 / 29.0
     delta2 = delta * delta
     delta3 = delta2 * delta
@@ -67,7 +56,8 @@ def f_lab(t):
     else:
         return (t / (3 * delta2)) + (4.0 / 29.0)
 
-def spectrum_to_lab_refle(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
+### CIE LAB FOR REFLECTANCE ###
+def spectrum_to_lab_refle (wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     
     ### CONVERT PERCENT 0 <= REFLECTANCE <= 1 ###
     spec = vals_vis.copy().astype(float)
@@ -75,19 +65,19 @@ def spectrum_to_lab_refle(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
        spec = spec / 100.0
     
     # INTERPOLATE CIE FUNCTIONS
-    fx_bar = interp1d(df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
-    fy_bar = interp1d(df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
-    fz_bar = interp1d(df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
-    fs = interp1d(df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
+    fx_bar = interp1d (df_xyz['wl'], df_xyz['xbar'], bounds_error=False, fill_value=0.0)
+    fy_bar = interp1d (df_xyz['wl'], df_xyz['ybar'], bounds_error=False, fill_value=0.0)
+    fz_bar = interp1d (df_xyz['wl'], df_xyz['zbar'], bounds_error=False, fill_value=0.0)
+    fs = interp1d (df_ill['wl'], df_ill['S'], bounds_error=False, fill_value=0.0)
 
     # --> CIE FUNCTIONS
-    xbar = fx_bar(wl_vis)
-    ybar = fy_bar(wl_vis)
-    zbar = fz_bar(wl_vis)
-    s = fs(wl_vis)
+    xbar = fx_bar (wl_vis)
+    ybar = fy_bar (wl_vis) 
+    zbar = fz_bar (wl_vis)
+    s = fs (wl_vis)
 
     ### GRID SETTING ###
-    deltas = compute_deltas(wl_vis)
+    deltas = compute_deltas (wl_vis)
 
     ### NORMALIZATION CONSTANT ###
     denom = np.sum(s * ybar * deltas)
@@ -116,7 +106,8 @@ def spectrum_to_lab_refle(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
 
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
 
-def spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
+### CIE LAB FOR TRANSMITTANCE ###
+def spectrum_to_lab_trans (wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True):
     
     ### CONVERT PERCENT 0 <= TRANSMITTANCE <= 1 ###
     spec = vals_vis.copy().astype(float)
@@ -164,7 +155,8 @@ def spectrum_to_lab_trans(wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True)
     b = 200.0 * (fy - fz)
 
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
-    
+
+### CIE MAIN PART ###
 def cielab_core (mode_spec, df):
    
     base_dir = os.path.dirname(__file__)
@@ -185,7 +177,7 @@ def cielab_core (mode_spec, df):
     wl_grid = np.arange(300.0, 1001.0, 1.0)
     cs = UnivariateSpline(wl_vis, vals_vis, k=3, s=2) 
     vals_i = cs(wl_grid)
-    peaks_pos, peaks_neg = max_min_finder(wl_grid, vals_i)
+    peaks_pos, peaks_neg = max_min_finder (wl_grid, vals_i)
     for i in peaks_pos:
         st.write(wl_grid[i])
     for i in peaks_neg:
@@ -194,14 +186,14 @@ def cielab_core (mode_spec, df):
 
     ### XYZ --> LAB (MAIN) ###
     if mode_spec == "透過率":
-       res = spectrum_to_lab_trans(wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
+       res = spectrum_to_lab_trans (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
     elif mode_spec == "反射率":
-       res = spectrum_to_lab_refle(wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
+       res = spectrum_to_lab_refle (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
 
     ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
-    linear_rgb = xyz_to_linear_rgb(X, Y, Z)
-    srgb = linear_to_srgb(linear_rgb)
+    linear_rgb = xyz_to_linear_rgb (X, Y, Z)
+    srgb = linear_to_srgb (linear_rgb)
 
     ### YELLOW INDEX ###
     if Y > 1e-6:
@@ -242,4 +234,4 @@ def cielab_core (mode_spec, df):
     
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
-   raise RuntimeError("Do not run this file directly; use it as a module.")
+   raise RuntimeError ("Do not run this file directly; use it as a module.")
