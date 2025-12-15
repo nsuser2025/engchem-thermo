@@ -22,7 +22,6 @@ def max_slope_finder (wl, vals):
     peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
     threshold = 0.1 
     peaks_all = [i for i in peaks_all if abs(dydx[i]) > threshold]
-    st.write(peaks_all)
     return peaks_all, dydx
 
 ### XYZ --> linear RGB ###
@@ -225,7 +224,8 @@ def cielab_core (mode_spec, mode_intp, df):
        ax.plot(wl_grid, vals_i, lw=2, label="Measured")
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-       ax.plot(wl_grid, dvals_dw, lw=1, marker="o", ms=2, label="deriv") 
+       #ax.plot(wl_grid, dvals_dw, lw=1, marker="o", ms=2, label="deriv")
+       ax.plot(wl_grid[peaks], dvals_dwl[peaks], "ro", label="peaks")
        ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
