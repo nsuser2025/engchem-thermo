@@ -21,13 +21,8 @@ def max_min_finder (wl, vals):
 
 ### POINTS OF MAX SLOPE ###
 def max_slope_finder (wl, vals):
-    spl = UnivariateSpline(wl, vals, k=3, s=0)
-    dydx = spl.derivative()(wl)
-    peaks_pos, _ = find_peaks(dydx)
-    peaks_neg, _ = find_peaks(-dydx)
+    peaks_pos, peaks_neg = max_min_finder (wl, vals)
     peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
-    threshold = 0.2
-    peaks_all = [i for i in peaks_all if abs(dydx[i]) > threshold]
     return peaks_all, dydx
 
 ### XYZ --> linear RGB ###
