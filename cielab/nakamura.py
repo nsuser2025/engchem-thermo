@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.signal import find_peaks
 
-
 ### MAXIMUM AND MINIMUM FINDER ###
 def max_min_finder (wl, vals):
     peaks_pos, _ = find_peaks(vals)
