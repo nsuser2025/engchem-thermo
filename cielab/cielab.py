@@ -197,7 +197,8 @@ def cielab_core (mode_spec, mode_intp, df):
     srgb = linear_to_srgb(linear_rgb)
 
     ### YELLOW INDEX ###
-    if mode_spec == "反射率" and Y > 1e-6:
+    #if mode_spec == "反射率" and Y > 1e-6:
+    if Y > 1e-6:
        YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
     else:
        YI = None
@@ -225,9 +226,11 @@ def cielab_core (mode_spec, mode_intp, df):
          if YI is not None:
             st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
             st.write("Yellow Index (ASTM E313, ref.) = {:.3f}".format(YI))
-         else:
-            st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
-            st.caption("※ 透過率モードでは Yellow Index は参考値です")
+         # COMMENT OUT START 2025/12/15     
+         #else:
+         #   st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
+         #   st.caption("※ 透過率モードでは Yellow Index は参考値です")
+         # COMMENT OUT END 2025/12/15
     with col_plot:
          st.pyplot(fig)
     with col_color:
