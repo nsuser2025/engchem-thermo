@@ -17,9 +17,11 @@ def load_measurements (df):
 def max_slope_finder (wl, vals):
     spl = UnivariateSpline(wl, vals, k=3, s=0)
     dydx = spl.derivative()(wl)
-    peaks, _ = find_peaks(dydx)
-    st.write(peaks)
-    return dydx
+    peaks_pos, _ = find_peaks(dydx)
+    peaks_neg, _ = find_peaks(-dydx)
+    peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
+    st.write(peaks_all)
+    return peaks_all, dydx
 
 ### XYZ --> linear RGB ###
 def xyz_to_linear_rgb(X, Y, Z):
@@ -186,7 +188,7 @@ def cielab_core (mode_spec, mode_intp, df):
        # REPLACEMENT START 2025/12/15 
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
-       dvals_dw = max_slope_finder (wl_grid, vals_i) 
+       peaks, dvals_dw = max_slope_finder (wl_grid, vals_i) 
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
