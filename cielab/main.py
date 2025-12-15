@@ -65,7 +65,7 @@ def cielab_gui():
            L_vals += [Li]
            a_vals += [ai]
            b_vals += [bi]
-       st.write(L_vals)
+       df_lab = pd.DataFrame({"L*": L_vals, "a*": a_vals, "b*": b_vals})
        st.markdown("---") 
     
     df = st.session_state.data_df
