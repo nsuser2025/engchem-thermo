@@ -218,7 +218,7 @@ def cielab_core (mode_spec, df):
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
-    ax.set_xlim(370, 780)
+    ax.set_xlim(380, 780)
     #ax.set_xlim(300, 1000)
     ax.set_ylim(0, 100)
     ax.grid(True)
