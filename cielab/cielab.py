@@ -173,8 +173,10 @@ def cielab_core (mode_spec, mode_intp, df):
        st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
        st.stop()
     if mode_intp == "3次スプライン":
+       # REPLACEMENT START 2025/12/15 
        #wl_grid = np.arange(380.0, 781.0, 1.0) 
-       wl_grid = np.arange(300.0, 901.0, 1.0)  
+       wl_grid = np.arange(300.0, 1001.0, 1.0)
+       # REPLACEMENT START 2025/12/15 
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
     elif mode_intp == "線形":
