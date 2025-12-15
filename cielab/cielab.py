@@ -175,7 +175,6 @@ def cielab_core (mode_spec, mode_intp, df):
        dy = np.gradient(vals_i, wl_grid)
        d2y = np.gradient(dy, wl_grid)
        inflection_points = np.where(np.diff(np.sign(d2y)))[0]
-       st.write(inflection_points) 
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
@@ -208,7 +207,9 @@ def cielab_core (mode_spec, mode_intp, df):
        ax.plot(wl_grid, vals_i, lw=2, label="Measured")
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-       ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
+       ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured")
+       ax.scatter(wl_grid[inflection_points], vals_i[inflection_points], 
+                  s=40, marker="o", label="Inflection points", zorder=5) 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
