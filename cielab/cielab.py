@@ -194,6 +194,7 @@ def cielab_core (mode_spec, mode_intp, df):
        #d2y = np.gradient(dy, wl_grid)
        #inflection_points = np.where(np.diff(np.sign(d2y)))[0]
        mid_x, mid_y = midpoint(wl_grid, vals_i)
+       st.write(mid_x) 
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
