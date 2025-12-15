@@ -173,7 +173,7 @@ def cielab_core (mode_spec, mode_intp, df):
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
        dy = np.gradient(vals_i, wl_grid)
-       d2y = np.gradient(dy, x)
+       d2y = np.gradient(dy, wl_grid)
        inflection_points = np.where(np.diff(np.sign(d2y)))[0]
        st.write(inflection_points) 
     elif mode_intp == "線形":
