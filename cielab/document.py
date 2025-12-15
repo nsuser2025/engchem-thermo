@@ -15,3 +15,7 @@ def cielab_overview():
                          これは, 380 nm未満, 780 nmを超える波長は人間が色として知覚できないためです.""")
          st.markdown(r"""参考として刺激値色空間の座標X, Y, Zも出力しますが, CIE L$^{*}$a$^{*}$b$^{*}$空間とは対照的に  
                         「座標間距離 $\approx$ 人間が感じる色差」は成り立ちません.""")
+        
+# MODULE ERROR MESSAGE
+if __name__ == "__main__":
+   raise RuntimeError("Do not run this file directly; use it as a module.")
