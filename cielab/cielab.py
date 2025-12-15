@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d, CubicSpline
+from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
 
 def load_measurements (df):
@@ -11,6 +12,23 @@ def load_measurements (df):
     ### sort ascending by wavelength ###
     order = np.argsort(wl)
     return wl[order], vals[order]
+
+### MIDPOINT ENVELOPE ###
+def midpoint (wl, vals):
+    idx_max, _ = find_peaks(vals, prominence=1)
+    idx_min, _ = find_peaks(-vals, prominence=1)
+    mid_x = []
+    mid_y = []
+    for i in range(min(len(idx_max), len(idx_min))):
+        if idx_min[i] < idx_max[i]:
+           i_min, i_max = idx_min[i], idx_max[i]
+        else:
+           i_min, i_max = idx_max[i], idx_min[i]
+    mid_x.append(wl[i_min:i_max].mean())
+    mid_y.append(0.5 * (vals[i_min] + vals[i_max]))
+    mid_x = np.array(mid_x)
+    mid_y = np.array(mid_y)
+    return mid_x, mid_y
 
 ### XYZ --> linear RGB ###
 def xyz_to_linear_rgb(X, Y, Z):
@@ -172,13 +190,15 @@ def cielab_core (mode_spec, mode_intp, df):
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
-       dy = np.gradient(vals_i, wl_grid)
-       d2y = np.gradient(dy, wl_grid)
-       inflection_points = np.where(np.diff(np.sign(d2y)))[0]
+       #dy = np.gradient(vals_i, wl_grid)
+       #d2y = np.gradient(dy, wl_grid)
+       #inflection_points = np.where(np.diff(np.sign(d2y)))[0]
+       mid_x, mid_y = midpoint(wl_grid, vals_i)
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
        vals_i = f_linear(wl_grid)
+       mid_x, mid_y = midpoint(wl_grid, vals_i) 
     else:
        wl_grid = wl_vis
        vals_i = vals_vis
@@ -208,8 +228,9 @@ def cielab_core (mode_spec, mode_intp, df):
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
        ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured")
-       ax.scatter(wl_grid[inflection_points], vals_i[inflection_points], 
-                  s=40, marker="o", label="Inflection points", zorder=5) 
+       #ax.scatter(wl_grid[inflection_points], vals_i[inflection_points], 
+       #           s=40, marker="o", label="Inflection points", zorder=5) 
+       ax.plot(mid_x, mid_y, linestyle="--", linewidth=2, label="Midpoint envelope") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
