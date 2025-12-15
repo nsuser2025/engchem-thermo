@@ -77,7 +77,8 @@ def cielab_gui():
        dist_w = np.sqrt((L_vals - L_w)**2 + (a_vals - a_w)**2 + (b_vals - b_w)**2)
        df_lab = pd.DataFrame({"name": name_vals, "L*": L_vals, "a*": a_vals, "b*": b_vals, 
                               "Distance_to_ideal_white": dist_w})
-       df_lab_safe = sanitize_for_csv_injection(df_lab)
+       df_sorted = df_lab.sort_values("Distance_to_Ideal_White").reset_index(drop=True) 
+       df_lab_safe = sanitize_for_csv_injection(df_sorted)
        st.dataframe(df_lab_safe) 
        st.markdown("---") 
     
