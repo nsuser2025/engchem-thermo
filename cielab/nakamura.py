@@ -7,12 +7,15 @@ def max_min_finder (wl, vals):
     peaks_pos, _ = find_peaks(vals)
     peaks_neg, _ = find_peaks(-vals)
 
-    wl_peaks = wl[peaks_pos]
-    mask = wl_peaks >= 380
-    nearest_peak_idx = peaks_pos[mask][np.argmin(wl_peaks[mask] - 380)]
-    st.write(nearest_peak_idx)
+    wl_pos = wl[peaks_pos]
+    mask = wl_pos >= 380
+    min_pos = peaks_pos[mask][np.argmin(wl_pos[mask] - 380)]
+    max_pos = peaks_pos[mask][np.argmin(wl_pos[mask] - 780)]
+    st.write(min_pos)
+    st.write(max_pos)
     st.write(wl_peaks)
-    st.write(wl[nearest_peak_idx])
+    st.write(wl[min_pos])
+    st.write(wl[max_pos])
     return peaks_pos, peaks_neg
 
 ### POINTS OF MAX SLOPE ###
