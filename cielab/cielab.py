@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 import numpy as np
-from scipy.interpolate import interp1d, CubicSpline
+from scipy.interpolate import interp1d, CubicSpline, UnivariateSpline
 from scipy.signal import savgol_filter
 import matplotlib.pyplot as plt
 
@@ -15,8 +15,8 @@ def load_measurements (df):
 
 ### POINTS OF MAX SLOPE ###
 def max_slope_finder (wl, vals):
-    dy_dx = savgol_filter(vals, window_length=11, polyorder=3, 
-                          deriv=1, delta=np.mean(np.diff(wl)))
+    spl = UnivariateSpline(wl, vals, k=3, s=0)
+    dy_dwl = spl.derivative()(wl)
     st.write(dy_dx)
 
 ### XYZ --> linear RGB ###
