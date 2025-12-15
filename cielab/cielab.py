@@ -234,7 +234,7 @@ def cielab_core (mode_spec, mode_intp, df):
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
        #ax.plot(wl_grid, dvals_dw, lw=1, marker="o", ms=2, label="deriv")
        ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
-       ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "ro", label="peaks_neg") 
+       ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
        ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
