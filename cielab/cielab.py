@@ -15,7 +15,10 @@ def load_measurements (df):
 
 ### MAXIMUM AND MINIMUM FINDER ###
 def max_min_finder (wl, vals):
-    st.write('saru')
+    peaks_pos, _ = find_peaks(vals)
+    peaks_neg, _ = find_peaks(-vals)
+    peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
+    return peaks_all
 
 ### POINTS OF MAX SLOPE ###
 def max_slope_finder (wl, vals):
@@ -193,7 +196,7 @@ def cielab_core (mode_spec, mode_intp, df):
        # REPLACEMENT START 2025/12/15 
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
-       max_min_finder(wl_grid, vals_i) 
+       peaks = max_min_finder(wl_grid, vals_i) 
        #peaks, dvals_dwl = max_slope_finder (wl_grid, vals_i) 
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
@@ -230,7 +233,7 @@ def cielab_core (mode_spec, mode_intp, df):
     else:
        ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
        #ax.plot(wl_grid, dvals_dw, lw=1, marker="o", ms=2, label="deriv")
-       #ax.plot(wl_grid[peaks], vals_i[peaks], "ro", label="peaks")
+       ax.plot(wl_grid[peaks], vals_i[peaks], "ro", label="peaks")
        ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
