@@ -227,13 +227,13 @@ def cielab_core (mode_spec, mode_intp, df):
          st.pyplot(fig)
     with col_color:
          r, g, b_ = (srgb * 255).astype(int)
-         #st.markdown(f"""<div style="width:100%;height:150px;background-color: rgb({r},{g},{b_});
-         #            border: 3px solid gray;border-radius: 20px;box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-         #            "></div>""",unsafe_allow_html=True)
          st.markdown(f"""<div style="width:100%;height:150px;background-color: rgb({r},{g},{b_});
                      border: 3px solid gray;border-radius: 20px;
                      "></div>""",unsafe_allow_html=True)
-
+    
+    ### FINAL ACTION ###
+    return res["L"], res["a"], res["b"]
+    
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
    raise RuntimeError("Do not run this file directly; use it as a module.")
