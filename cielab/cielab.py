@@ -195,7 +195,7 @@ def cielab_core (mode_spec, mode_intp, df):
        wl_grid = np.arange(300.0, 1001.0, 1.0)
        # REPLACEMENT START 2025/12/15 
        #cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
-       cs = UnivariateSpline(wl_vis, vals_vis, s=2.0) 
+       cs = UnivariateSpline(wl_vis, vals_vis, s=1.5) 
        vals_i = cs(wl_grid)
        peaks_pos, peaks_neg = max_min_finder(wl_grid, vals_i) 
        #peaks, dvals_dwl = max_slope_finder (wl_grid, vals_i) 
