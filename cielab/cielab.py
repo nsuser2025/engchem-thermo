@@ -191,6 +191,8 @@ def cielab_core (mode_spec, df):
     peaks_pos, peaks_neg = max_min_finder(wl_grid, vals_i)
     for i in peaks_pos:
         st.write(wl_grid[i])
+    for i in peaks_neg:
+        st.write(wl_grid[i])    
     #vals_i = np.clip(vals_i, 0.0, 100.0)
 
     ### XYZ --> LAB (MAIN) ###
