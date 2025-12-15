@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d, CubicSpline
-from scipy.signal import find_peaks
+from scipy.signal import savgol_filter
 import matplotlib.pyplot as plt
 
 def load_measurements (df):
@@ -12,6 +12,12 @@ def load_measurements (df):
     ### sort ascending by wavelength ###
     order = np.argsort(wl)
     return wl[order], vals[order]
+
+### POINTS OF MAX SLOPE ###
+def max_slope_finder (wl, vals):
+    dy_dx = savgol_filter(vals, window_length=11, polyorder=3, 
+                          deriv=1, delta=np.mean(np.diff(wl)))
+    st.write(dy_dx)
 
 ### XYZ --> linear RGB ###
 def xyz_to_linear_rgb(X, Y, Z):
@@ -31,7 +37,6 @@ def linear_to_srgb(RGB):
                         12.92 * c,
                         1.055 * c**(1/2.4) - 0.055)
     return compand(RGB)
-
 
 def compute_deltas(wl):
     dw = np.diff(wl)
@@ -179,6 +184,7 @@ def cielab_core (mode_spec, mode_intp, df):
        # REPLACEMENT START 2025/12/15 
        cs = CubicSpline(wl_vis, vals_vis, bc_type='natural')
        vals_i = cs(wl_grid)
+       max_slope_finder (wl_grid, vals_i) 
     elif mode_intp == "線形":
        wl_grid = np.arange(380.0, 781.0, 1.0)  
        f_linear = interp1d(wl_vis, vals_vis, bounds_error=False, fill_value=0.0)
