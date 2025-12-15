@@ -17,15 +17,30 @@ def load_measurements (df):
 def midpoint (wl, vals):
     idx_max, _ = find_peaks(vals, prominence=1)
     idx_min, _ = find_peaks(-vals, prominence=1)
+    extrema = []
+    for i in idx_max:
+        extrema.append((i, "max"))
+    for i in idx_min:
+        extrema.append((i, "min"))
+    extrema.sort(key=lambda x: x[0])
+
     mid_x = []
     mid_y = []
-    for i in range(min(len(idx_max), len(idx_min))):
-        if idx_min[i] < idx_max[i]:
-           i_min, i_max = idx_min[i], idx_max[i]
-        else:
-           i_min, i_max = idx_max[i], idx_min[i]
-    mid_x.append(wl[i_min:i_max].mean())
-    mid_y.append(0.5 * (vals[i_min] + vals[i_max]))
+    for i in range(len(extrema) - 1):
+        i1, t1 = extrema[i]
+        i2, t2 = extrema[i+1]
+        # 同種ペアは除外
+        if t1 == t2:
+           continue
+        y1, y2 = y_s[i1], y_s[i2]
+        y_half = 0.5 * (y1 + y2)
+        for j in range(i1, i2):
+            if (y_s[j] - y_half) * (y_s[j+1] - y_half) <= 0:
+                wl_mid = wl[j] + (y_half - vals[j]) * (wl[j+1] - wl[j]) / (vals[j+1] - vals[j])
+            mid_x.append(wl_mid)
+            mid_y.append(y_half)
+            break
+            
     mid_x = np.array(mid_x)
     mid_y = np.array(mid_y)
     return mid_x, mid_y
