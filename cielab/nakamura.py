@@ -48,6 +48,8 @@ def max_min_finder (wl, vals):
     peaks_pos_range = peaks_pos[mask]
     
     st.write('neko')
+    st.write(peaks_pos)
+    st.write(wl_pos)
     st.write(wl_pos_range)
     st.write(vals_pos_range)
     st.write(peaks_pos_range)
