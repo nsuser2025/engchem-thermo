@@ -29,23 +29,23 @@ def max_min_finder (wl, vals):
        max_pos = None
 
     wl_neg = wl[peaks_neg]
-    st.write(wl_neg)
+    #st.write(wl_neg)
     mask = wl_neg < 380
     if np.any(mask):
        min_neg_pre = peaks_neg[mask][np.argmax(wl_neg[mask])]
-       st.write(wl[min_neg_pre])
+       #st.write(wl[min_neg_pre])
     else:
        min_neg_pre = None
     mask = wl_neg >= 380
     if np.any(mask):
        min_neg = peaks_neg[mask][np.argmin(wl_neg[mask] - 380)]
-       st.write(wl[min_neg])
+       #st.write(wl[min_neg])
     else:
        min_neg = None 
     mask = wl_neg <= 780
     if np.any(mask):
        max_neg = peaks_neg[mask][np.argmax(wl_neg[mask])]
-       st.write(wl[max_neg])
+       #st.write(wl[max_neg])
     else:
        max_neg = None
 
