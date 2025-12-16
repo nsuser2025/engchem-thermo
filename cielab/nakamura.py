@@ -62,7 +62,7 @@ def max_min_finder (wl, vals):
 ### LINEAR SPECTRUM GENERATOR ###
 def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     for i in range(len(wl_maxmin)-1):
-        st.write(wl_maxmin(i))
+        st.write(wl_maxmin[i])
     vals_cast = vals_maxmin
     return vals_cast
     
