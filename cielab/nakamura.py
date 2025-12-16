@@ -64,6 +64,7 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     x_mid = []
     for i in range(len(wl_maxmin)-1):
         x_mid += [0.50 * (wl_maxmin[i] + wl_maxmin[i+1])]
+    x_mid = np.array(x_mid)    
     st.write(x_mid)
     vals_cast = vals_maxmin
     return vals_cast
