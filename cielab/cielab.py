@@ -182,7 +182,7 @@ def cielab_core (bool_maxmin, df):
     wl_i_clean, vals_i_clean = linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin)
     
     ### XYZ --> LAB (MAIN) ###
-    res = spectrum_to_lab_trans (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
+    res = spectrum_to_lab_trans (wl_i_clean, vals_i_clean, df_xyz, df_ill, assume_percent=True)
     
     ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
