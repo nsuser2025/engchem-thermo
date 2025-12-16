@@ -7,6 +7,7 @@ def max_min_finder (wl, vals):
     peaks_pos, _ = find_peaks(vals)
     peaks_neg, _ = find_peaks(-vals)
 
+    st.write('saru')
     wl_pos = wl[peaks_pos]
     mask = wl_pos < 380
     if np.any(mask):
