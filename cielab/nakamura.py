@@ -8,6 +8,8 @@ def max_min_finder (wl, vals):
     peaks_neg, _ = find_peaks(-vals)
 
     wl_pos = wl[peaks_pos]
+    mask = wl_pos < 380
+    min_pos_pre = peaks_pos[mask][np.argmax(wl_pos[mask])]
     mask = wl_pos >= 380
     min_pos = peaks_pos[mask][np.argmin(wl_pos[mask] - 380)]
     mask = wl_pos <= 780
@@ -19,12 +21,11 @@ def max_min_finder (wl, vals):
     mask = wl_neg <= 780
     max_neg = peaks_neg[mask][np.argmax(wl_neg[mask])]
     
-    if wl[min_pos] > wl[min_neg]:
-       wl_ini = wl_pos[min_pos-1]
-    elif wl[min_neg] > wl[min_pos]:
-       wl_ini = wl_neg[min_neg-1]
-    st.write('Saru')    
-    st.write(wl_ini)    
+    #if wl[min_pos] > wl[min_neg]:
+    #   wl_ini = wl_pos[min_pos-1]
+    #elif wl[min_neg] > wl[min_pos]:
+    #   wl_ini = wl_neg[min_neg-1]
+    #st.write(wl_ini)    
     
     return peaks_pos, peaks_neg
 
