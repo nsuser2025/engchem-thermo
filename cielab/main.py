@@ -37,7 +37,7 @@ def cielab_gui():
                     type=["xlsx", "xls", "xlsm", "csv"])
     
     st.markdown("---")
-    mode_spec = st.radio("スペクトル種別", ["透過率", "反射率"], horizontal=True)
+    bool_maxmin = st.radio("最大値・最小値を表示しますか？", ["on", "off"], horizontal=True)
     st.markdown("---")
 
     if uploaded_file:
@@ -64,7 +64,7 @@ def cielab_gui():
            wl = df.iloc[:, i]
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
-           Li, ai, bi, = cielab_core (mode_spec, df_pair)
+           Li, ai, bi, = cielab_core (bool_maxmin, df_pair)
            name_vals += [name]
            L_vals += [Li]
            a_vals += [ai]
