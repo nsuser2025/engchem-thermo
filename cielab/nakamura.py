@@ -73,7 +73,7 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
 
     wl_calc = []
     vals_calc = []
-    for ir in range(len(wl_mid)):
+    for ir in range(len(wl_mid)-1):
         a = (vals_mid[ir+1] - vals_mid[ir]) / (wl_mid[ir+1] - wl_mid[ir])
         b = vals_mid[ir] - (a * wl_mid[ir])    
         for i in wl_grid:
