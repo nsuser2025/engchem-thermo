@@ -23,6 +23,7 @@ def max_min_finder (wl, vals):
        wl_ini = wl_pos[min_pos-1]
     elif wl[min_neg] > wl[min_pos]:
        wl_ini = wl_neg[min_neg-1]
+    st.write('Saru')    
     st.write(wl_ini)    
     
     return peaks_pos, peaks_neg
