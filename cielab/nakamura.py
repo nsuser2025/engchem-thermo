@@ -8,7 +8,6 @@ def max_min_finder (wl, vals):
     peaks_neg, _ = find_peaks(-vals)
 
     wl_pos = wl[peaks_pos]
-    #st.write(wl_pos)
     mask = wl_pos < 380
     if np.any(mask):
        min_pos_pre = peaks_pos[mask][np.argmax(wl_pos[mask])]
@@ -58,7 +57,12 @@ def max_min_finder (wl, vals):
        idx_ini = min_neg_pre
        wl_ini = wl[min_neg_pre]
        vl_ini = vals[min_neg_pre] 
-    wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos, wl_neg])) 
+    
+    mask = (wl_pos >= 380) & (wl_pos <= 780)
+    wl_pos_range = wl_pos[mask]
+    mask = (wl_neg >= 380) & (wl_neg <= 780)
+    wl_neg_range = wl_neg[mask]
+    wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])) 
     idx_sum = np.concatenate([[idx_ini], peaks_pos, peaks_neg])
 
     #order = np.argsort(wl_sum)
