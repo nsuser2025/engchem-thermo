@@ -198,6 +198,7 @@ def cielab_core (mode_spec, df):
        YI = None
     
     ### FIGURE PLOT ###
+    st.write('sarunekoinu')
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
     ax.plot(wl_maxmin, vals_maxmin, "ro", label="peaks_cleaned")
