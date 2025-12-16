@@ -64,7 +64,7 @@ def cielab_gui():
            wl = df.iloc[:, i]
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
-           Li, ai, bi, = cielab_core (bool_maxmin, df_pair)
+           Li, ai, bi, YI, = cielab_core (bool_maxmin, df_pair)
            name_vals += [name]
            L_vals += [Li]
            a_vals += [ai]
