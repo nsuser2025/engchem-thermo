@@ -202,7 +202,7 @@ def cielab_core (bool_maxmin, df):
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
     ax.plot(wl_i_clean, vals_i_clean, lw=2, c="blue", label="Corrected")
     if bool_maxmin == 'on':
-       ax.plot(wl_maxmin, vals_maxmin, "ro", label="Max and Minimum points for Correction")
+       ax.plot(wl_maxmin, vals_maxmin, "go", label="Max and Minimum points for Correction")
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
