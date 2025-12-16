@@ -157,7 +157,7 @@ def spectrum_to_lab_trans (wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
 
 ### CIE MAIN PART ###
-def cielab_core (bool_maxmin, df):
+def cielab_core (bool_maxmin, YI_option, df):
    
     base_dir = os.path.dirname(__file__)
     xyz_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
@@ -190,10 +190,10 @@ def cielab_core (bool_maxmin, df):
     srgb = linear_to_srgb (linear_rgb)
 
     ### YELLOW INDEX (D65) ###
-    if Y > 1e-6:
-       #YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
-       ### ILLUMINANT C ### 
-       st.write('saru') 
+    if YI_option == "D65" and Y > 1e-6:
+       YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y 
+    ### ILLUMINANT C ###     
+    elif YI_option == "C" and Y > 1e-6:
        YI = 100 * ((1.2985 * X) - (1.1335 * Z)) / Y 
     else:
        YI = None
