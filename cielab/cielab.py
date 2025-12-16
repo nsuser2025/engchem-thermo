@@ -178,7 +178,7 @@ def cielab_core (mode_spec, df):
     cs = UnivariateSpline (wl_vis, vals_vis, k=3, s=2) 
     vals_i = cs(wl_grid)
     vals_i = np.clip(vals_i, 0.0, 100.0)
-    wl_nakamura, vals_nakamura = max_min_finder (wl_grid, vals_i)
+    wl_maxmin, vals_maxmin = max_min_finder (wl_grid, vals_i)
     
     ### XYZ --> LAB (MAIN) ###
     if mode_spec == "透過率":
@@ -200,7 +200,7 @@ def cielab_core (mode_spec, df):
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-    ax.plot(wl_nakamura, vals_nakamura, "ro", label="peaks_cleaned")
+    ax.plot(wl_maxmin, vals_maxmin, "ro", label="peaks_cleaned")
     #ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
     #ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
