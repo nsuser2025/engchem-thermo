@@ -38,7 +38,7 @@ def cielab_gui():
     
     st.markdown("---")
     bool_maxmin = st.radio("最大値・最小値を表示しますか？", ["on", "off"], horizontal=True)
-    YI_option = st.radio("黄色度式", ["D65", "C"], horizontal=True)
+    YI_option = st.radio("黄色度式", ["D65光源", "C光源"], horizontal=True)
     st.markdown("---")
 
     if uploaded_file:
