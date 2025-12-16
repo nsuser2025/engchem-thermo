@@ -21,17 +21,18 @@ def max_min_finder (wl, vals):
     wl_neg_range = wl_neg[mask]
     vals_neg_range = vals_neg[mask]
     peaks_neg_range = peaks_neg[mask]
-    
-    wl_all = np.concatenate([[300], wl_pos_range, wl_neg_range])
-    vals_all = np.concatenate([[99.0], vals_pos_range, vals_neg_range])
-    peaks_all = np.concatenate([[2], peaks_pos_range, peaks_neg_range])
 
+    wl_ini = 300
+    vals_ini = 20.0
+    
+    wl_all = np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])
+    vals_all = np.concatenate([[vals_ini], vals_pos_range, vals_neg_range])
+    
     order = np.argsort(wl_all)
     wl_cast = wl_all[order]
     vals_cast = vals_all[order]
-    peaks_cast = peaks_all[order]
-
-    return wl_cast, vals_cast, peaks_cast
+    
+    return wl_cast, vals_cast
 
 ### POINTS OF MAX SLOPE ###
 def remove_background (wl, vals):
