@@ -82,8 +82,6 @@ def cielab_gui():
        df_lab = pd.DataFrame({"name": name_vals, "L*": L_vals, "a*": a_vals, "b*": b_vals,
                               "YI": YI_vals, "Delta YI": DYI_vals, 
                               "Distance_to_ideal_white": dist_w})
-       #df_sorted = df_lab.sort_values("Distance_to_ideal_white").reset_index(drop=True) 
-       #df_lab_safe = sanitize_for_csv_injection(df_sorted)
        df_lab_safe = sanitize_for_csv_injection(df_lab) 
        st.dataframe(df_lab_safe) 
     
