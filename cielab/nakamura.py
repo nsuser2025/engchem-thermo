@@ -72,14 +72,19 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     vals_mid = np.array(vals_mid)
 
     for irange in range(len(wl_mid)-1): 
+        
         a = (vals_mid[irange+1] - vals_mid[irange]) / (wl_mid[irange+1] - wl_mid[irange])
         b = vals_mid[irange] - (a * wl_mid[irange])
-        st.write('saruinu')
-        st.write(a)
-        st.write(b)
-    
-    wl_cast = wl_mid
-    vals_cast = vals_mid
+        
+        idxs = np.where(wl_grid < wl_mid[irange+1])[0]
+        wl_calc = []
+        vals_calc = []
+        for i in idxs:
+            wl_calc += [wl_grid[i]]
+            vals_calc += [(a * wl_grid[i]) + b]
+         
+    wl_cast = wl_calc
+    vals_cast = vals_calc
     return wl_cast, vals_cast
     
 # MODULE ERROR MESSAGE
