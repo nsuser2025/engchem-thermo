@@ -22,13 +22,14 @@ def max_min_finder (wl, vals):
     vals_neg_range = vals_neg[mask]
     peaks_neg_range = peaks_neg[mask]
     
-    wl_cast = np.concatenate([wl_pos_range, wl_neg_range])
-    vals_cast = np.concatenate([vals_pos_range, vals_neg_range])
-    peaks_cast = np.concatenate([peaks_pos_range, peaks_neg_range])
-    
-    #wl_cast = wl_pos[mask]
-    #vals_cast = vals_pos[mask]
-    #peaks_cast = peaks_pos[mask]
+    wl_all = np.concatenate([wl_pos_range, wl_neg_range])
+    vals_all = np.concatenate([vals_pos_range, vals_neg_range])
+    peaks_all = np.concatenate([peaks_pos_range, peaks_neg_range])
+
+    order = np.argsort(wl_all)
+    wl_cast = wl_all[order]
+    vals_cast = vals_all[order]
+    peaks_cast = peaks_all[order]
 
     return wl_cast, vals_cast, peaks_cast
 
