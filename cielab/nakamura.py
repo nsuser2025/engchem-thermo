@@ -36,11 +36,11 @@ def max_min_finder (wl, vals):
     if wl[min_pos] > wl[min_neg] and min_pos_pre != None:
        idx_ini = min_pos_pre 
        wl_ini = wl[min_pos_pre]
-       vl_ini = vals[min_pos_pre]
+       vals_ini = vals[min_pos_pre]
     elif wl[min_neg] > wl[min_pos] and min_neg_pre != None:
        idx_ini = min_neg_pre
        wl_ini = wl[min_neg_pre]
-       vl_ini = vals[min_neg_pre] 
+       vals_ini = vals[min_neg_pre] 
 
     mask = (wl_pos >= 380) & (wl_pos <= 780)
     wl_pos_range = wl_pos[mask]
@@ -52,22 +52,16 @@ def max_min_finder (wl, vals):
     vals_neg_range = vals_neg[mask]
     peaks_neg_range = peaks_neg[mask]
     
-    st.write('inu')
-    st.write(peaks_neg)
-    st.write(wl_neg)
-    st.write(vals_neg)
-    st.write(wl_neg_range)
-    st.write(vals_neg_range)
-    st.write(peaks_neg_range)
-    
-    
-    #wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])) 
-    #idx_sum = np.concatenate([[idx_ini], peaks_pos, peaks_neg])
+    wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos_range, wl_neg_range]))
+    vals_sum = np.sort(np.concatenate([[vals_ini], vals_pos_range, vals_neg_range])) 
+    peaks_sum = np.concatenate([[idx_ini], peaks_pos_range, peaks_neg_range])
 
-    #order = np.argsort(wl_sum)
-    #wl_sum = wl_sum[order]
-    #idx_sum = idx_sum[order]
-    #st.write(wl_sum)
+    order = np.argsort(wl_sum)
+    wl_nakamura = wl_sum[order]
+    vals_nakamura = vals_sum[order]
+    peaks_nakamura = peaks_sum[order]
+    st.write('nakamura')
+    st.write(wl_nakamura)
     #st.write(idx_sum)
     
     return peaks_pos, peaks_neg
