@@ -56,8 +56,10 @@ def max_min_finder (wl, vals):
     elif wl[min_neg] > wl[min_pos] and min_neg_pre != None:
        wl_ini = wl[min_neg_pre]
        vl_ini = vals[min_neg_pre] 
-    st.write(wl_ini)
-    st.write(vl_ini)
+    #st.write(wl_ini)
+    #st.write(vl_ini)
+    wl_sum = wl_ini + wl_pos + wl_neg 
+    st.write(wl_sum)
     
     return peaks_pos, peaks_neg
 
