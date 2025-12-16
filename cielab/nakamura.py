@@ -62,7 +62,7 @@ def max_min_finder (wl, vals):
 ### LINEAR SPECTRUM GENERATOR ###
 def linear_spectrum (wl_grid, vals_i, wl_cast, vals_cast):
     aho = 1
-    return aho
+    return vals_cast
     
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
