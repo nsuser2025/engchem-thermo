@@ -63,7 +63,10 @@ def max_min_finder (wl, vals):
 def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     x_mid = []
     for i in range(len(wl_maxmin)-1):
-        x_mid += [0.50 * (wl_maxmin[i] + wl_maxmin[i+1])]
+        x_mid_value = 0.50 * (wl_maxmin[i] + wl_maxmin[i+1])
+        mask = wl_grid <= x_mid_value
+        idx_in_mask = np.argmax(wl_pos[mask])
+        x_mid += [wl_grid[idx_in_mask]]
     x_mid = np.array(x_mid)    
     st.write(x_mid)
     vals_cast = vals_maxmin
