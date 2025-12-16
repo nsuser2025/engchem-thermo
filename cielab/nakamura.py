@@ -6,7 +6,9 @@ from scipy.signal import find_peaks
 def ini_finder (wl_pos_range, wl_neg_range):
     if wl_pos_range[0] > wl_neg_range[0]:
        st.write('inu')
-
+    else:
+       st.write('unko')
+        
     wl_ini = 300
     vals_ini = 20.0
     return wl_ini, vals_ini    
