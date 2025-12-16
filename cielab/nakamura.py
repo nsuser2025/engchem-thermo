@@ -5,13 +5,30 @@ from scipy.signal import find_peaks
 ### INITIAL POINT ###
 def ini_finder (wl, vals, peaks_pos_range, peaks_neg_range, 
                 wl_pos_range, wl_neg_range, vals_pos_range, vals_neg_range):
+
     if wl_pos_range[0] > wl_neg_range[0]:
-       st.write('inu')
-    else:
-       st.write('unkounko')
-        
-    wl_ini = 300
-    vals_ini = 20.0
+       mask = wl_pos < 380
+       if np.any(mask):
+          nearest_idx_in_mask = np.argmax(wl_pos[mask])
+          nearest_idx = np.where(mask)[0][nearest_idx_in_mask]
+          wl_ini  = wl_pos[nearest_idx]
+          vals_ini = vals_pos[nearest_idx]
+       else:
+          wl_ini = None
+          vals_ini = None
+    elif wl_neg_range[0] > wl_pos_range[0]:
+       mask = wl_neg < 380
+       if np.any(mask):
+          nearest_idx_in_mask = np.argmax(wl_neg[mask])
+          nearest_idx = np.where(mask)[0][nearest_idx_in_mask]
+          wl_ini  = wl_neg[nearest_idx]
+          vals_ini = vals_neg[nearest_idx]
+       else:
+          wl_ini = None
+          vals_ini = None
+         
+    #wl_ini = 300
+    #vals_ini = 20.0
     return wl_ini, vals_ini    
         
 ### MAXIMUM AND MINIMUM FINDER ###
