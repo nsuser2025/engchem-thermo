@@ -17,10 +17,10 @@ def max_min_finder (wl, vals):
     st.write(wl_neg)
     mask = wl_neg >= 380
     min_neg = peaks_neg[mask][np.argmin(wl_neg[mask] - 380)]
-    st.write(wl_neg[min_neg])
+    st.write(wl[min_neg])
     mask = wl_neg <= 780
     max_neg = peaks_neg[mask][np.argmax(wl_neg[mask])]
-    st.write(wl_neg[max_neg])
+    st.write(wl[max_neg])
     return peaks_pos, peaks_neg
 
 ### POINTS OF MAX SLOPE ###
