@@ -200,15 +200,15 @@ def cielab_core (mode_spec, df):
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-    ax.plot(wl_nakamura[peaks_nakamura], vals_nakamura[peaks_nakamura], "ro", label="peaks_cleaned")
+    ax.plot(wl_nakamura, vals_nakamura, "ro", label="peaks_cleaned")
     #ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
     #ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
-    ax.set_xlim(380, 780)
-    #ax.set_xlim(300, 1000)
+    #ax.set_xlim(380, 780)
+    ax.set_xlim(300, 1000)
     ax.set_ylim(0, 100)
     ax.grid(True)
 
