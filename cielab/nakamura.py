@@ -57,8 +57,10 @@ def max_min_finder (wl, vals):
     peaks_sum = np.concatenate([[idx_ini], peaks_pos_range, peaks_neg_range])
 
     st.write('sarusaru')
+    st.write(wl_pos_range)
+    st.write(wl_neg_range)
     st.write(wl_sum)
-    st.write(vals_sum)
+    #st.write(vals_sum)
     
     order = np.argsort(wl_sum)
     wl_nakamura = wl_sum[order]
