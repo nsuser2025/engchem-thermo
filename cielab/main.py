@@ -38,6 +38,7 @@ def cielab_gui():
     
     st.markdown("---")
     bool_maxmin = st.radio("最大値・最小値を表示しますか？", ["on", "off"], horizontal=True)
+    YI_option = st.radio("黄色度式", ["D65", "C"], horizontal=True)
     st.markdown("---")
 
     if uploaded_file:
@@ -65,7 +66,7 @@ def cielab_gui():
            wl = df.iloc[:, i]
            spec = df.iloc[:, i+1]
            df_pair = pd.DataFrame({"wl": wl,"spec": spec})
-           Li, ai, bi, YI, = cielab_core (bool_maxmin, df_pair)
+           Li, ai, bi, YI, = cielab_core (bool_maxmin, YI_option, df_pair)
            name_vals += [name]
            L_vals += [Li]
            a_vals += [ai]
