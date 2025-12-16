@@ -7,7 +7,7 @@ def ini_finder (wl_pos_range, wl_neg_range):
     if wl_pos_range[0] > wl_neg_range[0]:
        st.write('inu')
     else:
-       st.write('unko')
+       st.write('unkounko')
         
     wl_ini = 300
     vals_ini = 20.0
