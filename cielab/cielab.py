@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d, UnivariateSpline
 import matplotlib.pyplot as plt
-from .nakamura import max_min_finder
+from .nakamura import max_min_finder, linear_spectrum
 
 ### INPUT df --> wl, vals ###
 def load_measurements (df):
