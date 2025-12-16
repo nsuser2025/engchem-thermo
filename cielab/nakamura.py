@@ -62,7 +62,7 @@ def max_min_finder (wl, vals):
     peaks_nakamura = peaks_sum[order]
     st.write('nakamura')
     st.write(wl_nakamura)
-    #st.write(idx_sum)
+    st.write(vals_nakamura)
     
     return peaks_pos, peaks_neg
 
