@@ -177,9 +177,9 @@ def cielab_core (mode_spec, df):
     wl_grid = np.arange(300.0, 1001.0, 1.0)
     cs = UnivariateSpline (wl_vis, vals_vis, k=3, s=2) 
     vals_i = cs(wl_grid)
-    wl_nakamura, vals_nakamura, peaks_nakamura = max_min_finder (wl_grid, vals_i)
-    #vals_i = np.clip(vals_i, 0.0, 100.0)
-
+    vals_i = np.clip(vals_i, 0.0, 100.0)
+    wl_nakamura, vals_nakamura = max_min_finder (wl_grid, vals_i)
+    
     ### XYZ --> LAB (MAIN) ###
     if mode_spec == "透過率":
        res = spectrum_to_lab_trans (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
