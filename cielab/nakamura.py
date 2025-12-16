@@ -57,10 +57,6 @@ def max_min_finder (wl, vals):
     wl_cast = wl_all[order]
     vals_cast = vals_all[order]
 
-    st.write ('saru22')
-    wl_tmp = 0.5 * (wl_cast[0] + wl_cast[1])
-    st.write (wl_tmp)
-    
     return wl_cast, vals_cast
 
 # MODULE ERROR MESSAGE
