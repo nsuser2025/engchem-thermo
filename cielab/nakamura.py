@@ -45,7 +45,7 @@ def max_min_finder (wl, vals):
     mask = (wl_neg >= 380) & (wl_neg <= 780)
     wl_neg_range = wl_neg[mask]
     wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])) 
-    idx_sum = np.concatenate([[idx_ini], peaks_pos, peaks_neg])
+    idx_sum = np.concatenate([[idx_ini], peaks_pos_range, peaks_neg_range])
 
     #order = np.argsort(wl_sum)
     #wl_sum = wl_sum[order]
