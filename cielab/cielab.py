@@ -197,8 +197,8 @@ def cielab_core (bool_maxmin, df):
     
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
-    ax.axvline(380, linestyle="--", color="green", lw=1)
-    ax.axvline(780, linestyle="--", color="green", lw=1)
+    ax.axvline(380, linestyle="--", color="violet", lw=1)
+    ax.axvline(780, linestyle="--", color="red", lw=1)
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
     ax.plot(wl_i_clean, vals_i_clean, lw=2, c="blue", label="Corrected")
     if bool_maxmin == 'on':
