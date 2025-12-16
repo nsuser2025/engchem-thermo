@@ -4,8 +4,8 @@ from scipy.signal import find_peaks
 
 ### MAXIMUM AND MINIMUM FINDER ###
 def max_min_finder (wl, vals):
-    peaks_pos, _ = find_peaks(vals)
-    peaks_neg, _ = find_peaks(-vals)
+    peaks_pos, value_pos = find_peaks(vals)
+    peaks_neg, value_neg = find_peaks(-vals)
 
     wl_pos = wl[peaks_pos]
     mask = wl_pos < 380
@@ -41,7 +41,7 @@ def max_min_finder (wl, vals):
        vl_ini = vals[min_neg_pre] 
 
     st.write('neko')
-    st.write(peaks_neg)
+    st.write(value_pos)
     mask = (wl_pos >= 380) & (wl_pos <= 780)
     wl_pos_range = wl_pos[mask]
     mask = (wl_neg >= 380) & (wl_neg <= 780)
