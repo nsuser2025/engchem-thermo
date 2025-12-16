@@ -193,6 +193,7 @@ def cielab_core (bool_maxmin, df):
     if Y > 1e-6:
        #YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y
        ### ILLUMINANT C ### 
+       st.write('saru') 
        YI = 100 * ((1.2985 * X) - (1.1335 * Z)) / Y 
     else:
        YI = None
