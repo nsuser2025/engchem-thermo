@@ -61,9 +61,9 @@ def max_min_finder (wl, vals):
     wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos, wl_neg])) 
     idx_sum = np.concatenate([[idx_ini], peaks_pos, peaks_neg])
 
-    order = np.argsort(wl_sum)
-    wl_sum = wl_sum[order]
-    idx_sum = idx_sum[order]
+    #order = np.argsort(wl_sum)
+    #wl_sum = wl_sum[order]
+    #idx_sum = idx_sum[order]
     st.write(wl_sum)
     st.write(idx_sum)
     
