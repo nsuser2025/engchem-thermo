@@ -3,8 +3,7 @@ import numpy as np
 from scipy.signal import find_peaks
 
 ### INITIAL POINT ###
-def ini_finder (wl, vals, peaks_pos_range, peaks_neg_range, 
-                wl_pos_range, wl_neg_range, vals_pos_range, vals_neg_range):
+def ini_finder (wl_pos, wl_neg, vals_pos, vals_neg, wl_pos_range, wl_neg_range):
 
     if wl_pos_range[0] > wl_neg_range[0]:
        mask = wl_pos < 380
@@ -51,9 +50,7 @@ def max_min_finder (wl, vals):
     vals_neg_range = vals_neg[mask]
     peaks_neg_range = peaks_neg[mask]
 
-    wl_ini, vals_ini = ini_finder (wl, vals, peaks_pos_range, peaks_neg_range,
-                                   wl_pos_range, wl_neg_range,
-                                   vals_pos_range, vals_neg_range)
+    wl_ini, vals_ini = ini_finder (wl_pos, wl_neg, vals_pos, vals_neg, wl_pos_range, wl_neg_range)
     
     wl_all = np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])
     vals_all = np.concatenate([[vals_ini], vals_pos_range, vals_neg_range])
