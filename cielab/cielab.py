@@ -197,6 +197,8 @@ def cielab_core (bool_maxmin, df):
     
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
+    ax.axvline(380, linestyle="--", color="gray", lw=1)
+    ax.axvline(780, linestyle="--", color="gray", lw=1)
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
     ax.plot(wl_i_clean, vals_i_clean, lw=2, c="blue", label="Corrected")
     if bool_maxmin == 'on':
@@ -205,7 +207,6 @@ def cielab_core (bool_maxmin, df):
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
-    #ax.set_xlim(380, 780)
     ax.set_xlim(300, 1000)
     ax.set_ylim(0, 100)
     ax.grid(True)
