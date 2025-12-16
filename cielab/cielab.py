@@ -179,6 +179,7 @@ def cielab_core (bool_maxmin, df):
     vals_i = cs(wl_grid)
     vals_i = np.clip(vals_i, 0.0, 100.0)
     wl_maxmin, vals_maxmin = max_min_finder (wl_grid, vals_i)
+    linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin)
     
     ### XYZ --> LAB (MAIN) ###
     res = spectrum_to_lab_trans (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
