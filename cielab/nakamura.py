@@ -48,7 +48,7 @@ def max_min_finder (wl, vals):
     peaks_pos_range = peaks_pos[mask]
     
     st.write('neko')
-    st.write(vals_pos_range)
+    st.write(wl_pos_range)
     
     
     #wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])) 
