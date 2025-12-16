@@ -177,7 +177,7 @@ def cielab_core (mode_spec, df):
     wl_grid = np.arange(300.0, 1001.0, 1.0)
     cs = UnivariateSpline (wl_vis, vals_vis, k=3, s=2) 
     vals_i = cs(wl_grid)
-    peaks_pos, peaks_neg = max_min_finder (wl_grid, vals_i)
+    wl_nakamura, vals_nakamura, peaks_nakamura = max_min_finder (wl_grid, vals_i)
     #vals_i = np.clip(vals_i, 0.0, 100.0)
 
     ### XYZ --> LAB (MAIN) ###
@@ -200,8 +200,9 @@ def cielab_core (mode_spec, df):
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-    ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
-    ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
+    ax.plot(wl_nakamura[peaks_nakamura], vals_nakamura[peaks_nakamura], "ro", label="peaks_cleaned")
+    #ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
+    #ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
