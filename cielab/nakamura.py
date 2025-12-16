@@ -49,6 +49,7 @@ def max_min_finder (wl, vals):
     
     st.write('neko')
     st.write(wl_pos_range)
+    st.write(vals_pos_range)
     
     
     #wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])) 
