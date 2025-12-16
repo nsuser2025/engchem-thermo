@@ -190,10 +190,10 @@ def cielab_core (bool_maxmin, YI_option, df):
     srgb = linear_to_srgb (linear_rgb)
 
     ### YELLOW INDEX (D65) ###
-    if YI_option == "D65" and Y > 1e-6:
+    if YI_option == "D65光源" and Y > 1e-6:
        YI = 100 * ((1.3013 * X) - (1.1498 * Z)) / Y 
     ### ILLUMINANT C ###     
-    elif YI_option == "C" and Y > 1e-6:
+    elif YI_option == "C光源" and Y > 1e-6:
        YI = 100 * ((1.2985 * X) - (1.1335 * Z)) / Y 
     else:
        YI = None
