@@ -64,13 +64,13 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     wl_mid = []
     vals_mid = []
     for i in range(len(wl_maxmin)-1):
+        # wlの中間値から求める場合
         #wl_mid_value = 0.50 * (wl_maxmin[i] + wl_maxmin[i+1])
         #idx = np.argmin(np.abs(wl_grid - wl_mid_value))
+        # valsの中間値から求める場合
         maxv = max(vals_maxmin[i], vals_maxmin[i+1])
         minv = min(vals_maxmin[i], vals_maxmin[i+1])
         vals_mid_value = minv + (0.50 * (maxv - minv))
-        st.write('saru')
-        #idx = np.argmin(np.abs(vals_i - vals_mid_value)) # vals_iから探すのはダメ！
         mask = (wl_grid >= wl_maxmin[i]) & (wl_grid <= wl_maxmin[i+1])
         idx = np.argmin(np.abs(vals_i[mask] - vals_mid_value))
         idx = np.where(mask)[0][idx]
