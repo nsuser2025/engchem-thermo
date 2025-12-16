@@ -56,7 +56,8 @@ def cielab_gui():
        name_vals = [] 
        L_vals = []
        a_vals = []
-       b_vals = [] 
+       b_vals = []
+       YI_vals = []
        for i in range(0, df.shape[1], 2):
            name = df.columns[i+1]
            st.markdown(f"<div style='font-size:1.0rem; font-weight:600; margin-bottom:0.3rem;'>"
@@ -69,16 +70,21 @@ def cielab_gui():
            L_vals += [Li]
            a_vals += [ai]
            b_vals += [bi]
+           YI_vals += [YI]
        st.markdown("---")
        name_vals = np.array(name_vals)    
        L_vals = np.array(L_vals)
        a_vals = np.array(a_vals)
        b_vals = np.array(b_vals) 
+       YI_vals = np.array(YI_vals) 
+       DYI_vals = YI_vals-YI_vals[0] 
        dist_w = np.sqrt((L_vals - L_w)**2 + (a_vals - a_w)**2 + (b_vals - b_w)**2)
-       df_lab = pd.DataFrame({"name": name_vals, "L*": L_vals, "a*": a_vals, "b*": b_vals, 
+       df_lab = pd.DataFrame({"name": name_vals, "L*": L_vals, "a*": a_vals, "b*": b_vals,
+                              "YI": YI_vals, "Delta YI": DYI_vals, 
                               "Distance_to_ideal_white": dist_w})
-       df_sorted = df_lab.sort_values("Distance_to_ideal_white").reset_index(drop=True) 
-       df_lab_safe = sanitize_for_csv_injection(df_sorted)
+       #df_sorted = df_lab.sort_values("Distance_to_ideal_white").reset_index(drop=True) 
+       #df_lab_safe = sanitize_for_csv_injection(df_sorted)
+       df_lab_safe = sanitize_for_csv_injection(df) 
        st.dataframe(df_lab_safe) 
     
     df = st.session_state.data_df
