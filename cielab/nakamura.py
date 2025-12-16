@@ -71,7 +71,7 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     wl_mid = np.array(wl_mid)
     vals_mid = np.array(vals_mid)
 
-    for irange in range(len(wl_mid)-1): 
+    for irange in range(1, len(wl_mid)-1): 
         
         a = (vals_mid[irange+1] - vals_mid[irange]) / (wl_mid[irange+1] - wl_mid[irange])
         b = vals_mid[irange] - (a * wl_mid[irange])
