@@ -60,8 +60,8 @@ def max_min_finder (wl, vals):
     return wl_cast, vals_cast
 
 ### LINEAR SPECTRUM GENERATOR ###
-def linear_spectrum (wl_grid, vals_i, wl_cast, vals_cast):
-    aho = 1
+def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
+    vals_cast = vals_maxmin
     return vals_cast
     
 # MODULE ERROR MESSAGE
