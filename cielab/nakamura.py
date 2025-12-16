@@ -56,21 +56,21 @@ def max_min_finder (wl, vals):
     vals_sum = np.sort(np.concatenate([[vals_ini], vals_pos_range, vals_neg_range])) 
     peaks_sum = np.concatenate([[idx_ini], peaks_pos_range, peaks_neg_range])
 
-    st.write('sarusaru')
-    st.write(wl_pos_range)
-    st.write(wl_neg_range)
-    st.write(wl_sum)
+    #st.write('sarusaru')
+    #st.write(wl_pos_range)
+    #st.write(wl_neg_range)
+    #st.write(wl_sum)
     #st.write(vals_sum)
     
     order = np.argsort(wl_sum)
     wl_nakamura = wl_sum[order]
     vals_nakamura = vals_sum[order]
     peaks_nakamura = peaks_sum[order]
-    st.write('nakamura')
-    st.write(wl_nakamura)
-    st.write(vals_nakamura)
+    #st.write('nakamura')
+    #st.write(wl_nakamura)
+    #st.write(vals_nakamura)
     
-    return peaks_pos, peaks_neg
+    return wl_nakamura, vals_nakamura, peaks_nakamura
 
 ### POINTS OF MAX SLOPE ###
 def remove_background (wl, vals):
