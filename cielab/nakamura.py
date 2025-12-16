@@ -71,13 +71,15 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     wl_mid = np.array(wl_mid)
     vals_mid = np.array(vals_mid)
 
+    ### CORRECTED SPECTRUM ###
     wl_calc = [] 
     vals_calc = []
     for ir in range(len(wl_mid)-1): 
-        ###
+        ### SLOPE AND INTERCEPT ###
         a = (vals_mid[ir+1] - vals_mid[ir]) / (wl_mid[ir+1] - wl_mid[ir])
         b = vals_mid[ir] - (a * wl_mid[ir])
-        ###
+        
+        ### LINEAR SPECTRUM RANGE ###
         if ir == 0:
            wl_min = 380
            wl_max = wl_mid[1]
@@ -87,17 +89,17 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
         else:
            wl_min = wl_mid[ir]
            wl_max = wl_mid[ir+1]
-        ###     
+            
+        ### CORRECTED SPECTRUM IN RANGE ###
         for i in range(380, 781, 1):
             if i >= wl_min and i < wl_max:
                wl_calc += [i] 
                vals_calc += [(a*i) + b] 
-                
+
+        ### --> wl_cast, vals_cast ###
         wl_cast = np.array(wl_calc)
         vals_cast = np.array(vals_calc)
 
-    st.write('saruinuoo')
-    st.write(wl_cast)
     return wl_cast, vals_cast
     
 # MODULE ERROR MESSAGE
