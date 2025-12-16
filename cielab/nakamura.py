@@ -67,8 +67,9 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
         wl_mid_value = 0.50 * (wl_maxmin[i] + wl_maxmin[i+1])
         mask = wl_grid <= wl_mid_value
         idx_in_mask = np.argmax(wl_grid[mask])
-        wl_mid += [wl_grid[idx_in_mask]]
-        vals_mid += [vals_i[idx_in_mask]]
+        idx = np.where(mask)[0][idx_in_mask]
+        wl_mid += [wl_grid[idx]]
+        vals_mid += [vals_i[idx]]
     wl_mid = np.array(wl_mid)
     vals_mid = np.array(vals_mid)
     st.write(wl_mid)
