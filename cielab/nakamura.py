@@ -66,7 +66,9 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     for i in range(len(wl_maxmin)-1):
         #wl_mid_value = 0.50 * (wl_maxmin[i] + wl_maxmin[i+1])
         #idx = np.argmin(np.abs(wl_grid - wl_mid_value))
-        vals_mid_value = 0.50 * (vals_maxmin[i] + vals_maxmin[i+1])
+        maxv = max(vals_maxmin[i], vals_maxmin[i+1])
+        minv = min(vals_maxmin[i], vals_maxmin[i+1])
+        vals_mid_value = 0.50 * (maxv - minv)
         idx = np.argmin(np.abs(vals_i - vals_mid_value))
         wl_mid += [wl_grid[idx]]
         vals_mid += [vals_i[idx]]
