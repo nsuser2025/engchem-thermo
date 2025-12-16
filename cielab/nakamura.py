@@ -18,12 +18,13 @@ def max_min_finder (wl, vals):
     peaks_pos_range = peaks_pos[mask]
 
     mask = (wl_neg >= 380) & (wl_neg <= 780)
-    #wl_neg_range = wl_neg[mask]
-    #vals_neg_range = vals_neg[mask]
-    #peaks_neg_range = peaks_neg[mask]
-    wl_cast = wl_neg[mask]
-    vals_cast = vals_neg[mask]
-    peaks_cast = peaks_neg[mask]
+    wl_neg_range = wl_neg[mask]
+    vals_neg_range = vals_neg[mask]
+    peaks_neg_range = peaks_neg[mask]
+    
+    wl_cast = np.concatenate([wl_pos_range, wl_neg_range])
+    vals_cast = np.concatenate([vals_pos_range, vals_neg_range])
+    peaks_cast = np.concatenate([peaks_pos_range, peaks_neg_range])
     
     #wl_cast = wl_pos[mask]
     #vals_cast = vals_pos[mask]
