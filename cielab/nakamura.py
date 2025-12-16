@@ -72,7 +72,7 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     vals_mid = np.array(vals_mid)
     st.write(wl_mid)
     st.write(vals_mid)
-    vals_cast = vals_mid
+    vals_cast = vals_maxmin
     return vals_cast
     
 # MODULE ERROR MESSAGE
