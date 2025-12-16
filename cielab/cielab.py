@@ -219,7 +219,7 @@ def cielab_core (bool_maxmin, YI_option, df):
     with col_text:
          if YI is not None:
             st.write("L*, a*, b* = {:.2f}, {:.2f}, {:.2f}".format(res["L"], res["a"], res["b"]))
-            st.write("Yellow Index (ASTM E313, ref.) = {:.3f}".format(YI))
+            st.write("Yellow Index = {:.3f}".format(YI))
     with col_plot:
          st.pyplot(fig)
     with col_color:
