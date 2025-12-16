@@ -98,6 +98,7 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
         vals_cast = np.array(vals_calc)
 
     st.write('saruinuoo')
+    st.write(wl_cast)
     return wl_cast, vals_cast
     
 # MODULE ERROR MESSAGE
