@@ -59,6 +59,10 @@ def max_min_finder (wl, vals):
 
     return wl_cast, vals_cast
 
+### LINEAR SPECTRUM GENERATOR ###
+def linear_spectrum ():
+    
+
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
    raise RuntimeError("Do not run this file directly; use it as a module.")
