@@ -19,11 +19,11 @@ def max_min_finder (wl, vals):
     st.write(wl[min_pos])
     st.write(wl[max_pos])
 
-    wl_neg = wl[peaks_neg]
-    mask = wl_neg >= 380
-    min_neg = peaks_neg[mask][np.argmin(wl_neg[mask] - 380)]
-    mask = wl_neg <= 780
-    max_neg = peaks_neg[mask][np.argmax(wl_neg[mask])]
+    #wl_neg = wl[peaks_neg]
+    #mask = wl_neg >= 380
+    #min_neg = peaks_neg[mask][np.argmin(wl_neg[mask] - 380)]
+    #mask = wl_neg <= 780
+    #max_neg = peaks_neg[mask][np.argmax(wl_neg[mask])]
     
     #if wl[min_pos] > wl[min_neg]:
     #   wl_ini = wl_pos[min_pos-1]
