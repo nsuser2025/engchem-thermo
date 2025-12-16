@@ -157,7 +157,7 @@ def spectrum_to_lab_trans (wl_vis, vals_vis, df_xyz, df_ill, assume_percent=True
     return {"X":X, "Y":Y, "Z":Z, "L":L, "a":a, "b":b, "k":k, "white":{"Xn":Xn,"Yn":Yn,"Zn":Zn}}
 
 ### CIE MAIN PART ###
-def cielab_core (mode_spec, df):
+def cielab_core (bool_maxmin, df):
    
     base_dir = os.path.dirname(__file__)
     xyz_path = os.path.join(base_dir, "CIE_xyz_1931_2deg.csv")
@@ -181,11 +181,8 @@ def cielab_core (mode_spec, df):
     wl_maxmin, vals_maxmin = max_min_finder (wl_grid, vals_i)
     
     ### XYZ --> LAB (MAIN) ###
-    if mode_spec == "透過率":
-       res = spectrum_to_lab_trans (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
-    elif mode_spec == "反射率":
-       res = spectrum_to_lab_refle (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
-
+    res = spectrum_to_lab_trans (wl_grid, vals_i, df_xyz, df_ill, assume_percent=True)
+    
     ### XYZ --> RGB ###
     X, Y, Z = res["X"], res["Y"], res["Z"]
     linear_rgb = xyz_to_linear_rgb (X, Y, Z)
@@ -200,9 +197,8 @@ def cielab_core (mode_spec, df):
     ### FIGURE PLOT ###
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.plot(wl_grid, vals_i, lw=2, label="Interpolated")
-    ax.plot(wl_maxmin, vals_maxmin, "ro", label="peaks_cleaned")
-    #ax.plot(wl_grid[peaks_pos], vals_i[peaks_pos], "ro", label="peaks_pos")
-    #ax.plot(wl_grid[peaks_neg], vals_i[peaks_neg], "bo", label="peaks_neg") 
+    if bool_maxmin == 'on':
+       ax.plot(wl_maxmin, vals_maxmin, "ro", label="peaks_cleaned")
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
