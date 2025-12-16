@@ -2,6 +2,15 @@ import streamlit as st
 import numpy as np
 from scipy.signal import find_peaks
 
+### INITIAL POINT ###
+def ini_finder (wl_pos_range, wl_neg_range):
+    if wl_pos_range[0] > wl_neg_range[0]:
+       st.write('inu')
+
+    wl_ini = 300
+    vals_ini = 20.0
+    return wl_ini, vals_ini    
+        
 ### MAXIMUM AND MINIMUM FINDER ###
 def max_min_finder (wl, vals):
     peaks_pos, _ = find_peaks(vals)
@@ -22,8 +31,7 @@ def max_min_finder (wl, vals):
     vals_neg_range = vals_neg[mask]
     peaks_neg_range = peaks_neg[mask]
 
-    wl_ini = 300
-    vals_ini = 20.0
+    wl_ini, vals_ini = ini_finder (wl_pos_range, wl_neg_range)
     
     wl_all = np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])
     vals_all = np.concatenate([[vals_ini], vals_pos_range, vals_neg_range])
@@ -33,13 +41,6 @@ def max_min_finder (wl, vals):
     vals_cast = vals_all[order]
     
     return wl_cast, vals_cast
-
-### POINTS OF MAX SLOPE ###
-def remove_background (wl, vals):
-    peaks_pos, peaks_neg = max_min_finder (wl, vals)
-    peaks_all = np.sort(np.concatenate([peaks_pos, peaks_neg]))
-    #for i in peaks_pos:
-    return peaks_all
 
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
