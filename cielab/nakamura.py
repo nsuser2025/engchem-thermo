@@ -53,11 +53,13 @@ def max_min_finder (wl, vals):
     wl_all = np.concatenate([[wl_ini], wl_pos_range, wl_neg_range])
     vals_all = np.concatenate([[vals_ini], vals_pos_range, vals_neg_range])
 
-    st.write ('saru')
-    st.write (wl_all[0])
     order = np.argsort(wl_all)
     wl_cast = wl_all[order]
     vals_cast = vals_all[order]
+
+    st.write ('saru22')
+    wl_tmp = 0.5 * (wl_cast[0] + wl_cast[1])
+    st.write (wl_tmp)
     
     return wl_cast, vals_cast
 
