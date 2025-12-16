@@ -26,8 +26,6 @@ def ini_finder (wl_pos, wl_neg, vals_pos, vals_neg, wl_pos_range, wl_neg_range):
           wl_ini = None
           vals_ini = None
          
-    #wl_ini = 300
-    #vals_ini = 20.0
     return wl_ini, vals_ini    
         
 ### MAXIMUM AND MINIMUM FINDER ###
