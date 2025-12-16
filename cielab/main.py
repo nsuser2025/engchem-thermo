@@ -84,7 +84,7 @@ def cielab_gui():
                               "Distance_to_ideal_white": dist_w})
        #df_sorted = df_lab.sort_values("Distance_to_ideal_white").reset_index(drop=True) 
        #df_lab_safe = sanitize_for_csv_injection(df_sorted)
-       df_lab_safe = sanitize_for_csv_injection(df) 
+       df_lab_safe = sanitize_for_csv_injection(df_lab) 
        st.dataframe(df_lab_safe) 
     
     df = st.session_state.data_df
