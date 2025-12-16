@@ -57,7 +57,7 @@ def max_min_finder (wl, vals):
        wl_ini = wl[min_neg_pre]
        vl_ini = vals[min_neg_pre] 
     st.write('saru')
-    wl_sum = np.sort(np.concatenate([wl_ini, wl_pos, wl_neg])) 
+    wl_sum = np.sort(np.concatenate([[wl_ini], wl_pos, wl_neg])) 
     st.write(wl_sum)
     
     return peaks_pos, peaks_neg
