@@ -226,7 +226,7 @@ def cielab_core (bool_maxmin, df):
                      "></div>""",unsafe_allow_html=True)
     
     ### FINAL ACTION ###
-    return res["L"], res["a"], res["b"]
+    return res["L"], res["a"], res["b"], YI
     
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
