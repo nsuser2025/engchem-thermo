@@ -11,43 +11,25 @@ def max_min_finder (wl, vals):
     mask = wl_pos < 380
     if np.any(mask):
        min_pos_pre = peaks_pos[mask][np.argmax(wl_pos[mask])]
-       #st.write(wl[min_pos_pre])
     else:
        min_pos_pre = None
     mask = wl_pos >= 380
     if np.any(mask):
        min_pos = peaks_pos[mask][np.argmin(wl_pos[mask] - 380)]
-       #st.write(wl[min_pos])
     else:
        min_pos = None 
-    mask = wl_pos <= 780
-    if np.any(mask):
-       max_pos = peaks_pos[mask][np.argmax(wl_pos[mask])]
-       #st.write(wl[max_pos])
-    else:
-       max_pos = None
 
     wl_neg = wl[peaks_neg]
-    #st.write(wl_neg)
     mask = wl_neg < 380
     if np.any(mask):
        min_neg_pre = peaks_neg[mask][np.argmax(wl_neg[mask])]
-       #st.write(wl[min_neg_pre])
     else:
        min_neg_pre = None
     mask = wl_neg >= 380
     if np.any(mask):
        min_neg = peaks_neg[mask][np.argmin(wl_neg[mask] - 380)]
-       #st.write(wl[min_neg])
     else:
        min_neg = None 
-    mask = wl_neg <= 780
-    if np.any(mask):
-       max_neg = peaks_neg[mask][np.argmax(wl_neg[mask])]
-       #st.write(wl[max_neg])
-    else:
-       max_neg = None
-
     
     if wl[min_pos] > wl[min_neg] and min_pos_pre != None:
        idx_ini = min_pos_pre 
