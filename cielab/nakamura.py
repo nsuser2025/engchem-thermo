@@ -40,6 +40,7 @@ def max_min_finder (wl, vals):
        wl_ini = wl[min_neg_pre]
        vl_ini = vals[min_neg_pre] 
 
+    st.write('saru')
     st.write(peaks_neg)
     mask = (wl_pos >= 380) & (wl_pos <= 780)
     wl_pos_range = wl_pos[mask]
