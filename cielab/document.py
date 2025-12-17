@@ -26,6 +26,7 @@ def cielab_overview():
                          t^{1/3}, & t > (6/29)^{3} \\
                          \frac{1}{3}\biggl( \frac{29}{6} \biggr)^{2}t + \frac{4}{29}, & \text{otherwise}
                   \end{cases}""")
+         st.markdown(r"""$\delta \equiv (6/29)$""")
     
     with st.expander("黄色度（Yellow Index, YI）の計算式"):
          st.markdown(r"""D65光源""")
