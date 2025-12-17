@@ -18,14 +18,14 @@ def cielab_overview():
                         「座標間距離 $\approx$ 人間が感じる色差」は成り立ちません.""")
     
     with st.expander("CIE L$^{*}$a$^{*}$b$^{*}$変換の計算式"):
-         #st.latex(r"L^{\ast} = 116 F(Y) - 16")
-         #st.latex(r"a^{\ast} = 500 ( F(X) - F(Y))")
-         #st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
-         st.markdown(r"""<div style="text-align: left; font-size: 20px;">
-                     $L^{\ast} = $<br>
-                     $a^{\ast} = $<br>
-                     $b^{\ast} = $</div>""",
-                     unsafe_allow_html=True)
+         st.latex(r"L^{\ast} = 116 F(Y) - 16")
+         st.latex(r"a^{\ast} = 500 ( F(X) - F(Y))")
+         st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
+         st.latex(r"""YI =
+                  \begin{cases}
+                         100\,\dfrac{1.3013\,X - 1.1498\,Z}{Y}, & \text{D65 光源} \\
+                         100\,\dfrac{1.2985\,X - 1.1335\,Z}{Y}, & \text{C 光源}
+                  \end{cases}""")
     
     with st.expander("黄色度（Yellow Index, YI）の計算式"):
          st.markdown(r"""D65光源""")
