@@ -17,7 +17,8 @@ def cielab_overview():
                         「座標間距離 $\approx$ 人間が感じる色差」は成り立ちません.""")
     with st.expander("CIE L$^{*}$a$^{*}$b$^{*}$変換の計算式"):
          st.latex(r"L^{\ast} = 116 F(Y/Y_{n}) - 16")
-         st.latex(r"a^{\ast} = 500 ( F(X/X_{n}) - F(Y/Yn))")
+         st.latex(r"a^{\ast} = 500 ( F(X/X_{n}) - F(Y/Y_{n}))")
+         st.latex(r"b^{\ast} = 200 ( F(Y/Y_{n}) - F(Z/Z_{n}))")
         
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
