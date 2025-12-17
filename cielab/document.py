@@ -17,7 +17,7 @@ def cielab_overview():
          st.markdown(r"""参考として刺激値色空間の座標X, Y, Zも出力しますが, CIE L$^{*}$a$^{*}$b$^{*}$空間とは対照的に  
                         「座標間距離 $\approx$ 人間が感じる色差」は成り立ちません.""")
 
-    with st.expander("CIE XYZ$変換の計算式"):
+    with st.expander("CIE XYZ変換の計算式"):
          st.latex(r"L^{\ast} = 116 F(Y/Y_{\rm n}) - 16")
          st.latex(r"a^{\ast} = 500 ( F(X/X_{\rm n}) - F(Y/Y_{\rm n}))")
          st.latex(r"b^{\ast} = 200 ( F(Y/Y_{\rm n}) - F(Z/Z_{\rm n}))")
