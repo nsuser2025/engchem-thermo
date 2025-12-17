@@ -22,9 +22,9 @@ def cielab_overview():
          #st.latex(r"a^{\ast} = 500 ( F(X) - F(Y))")
          #st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
          st.markdown(r"""<div style="text-align: left; font-size: 20px;">
-                     $L^{\ast} = 116\,F(Y) - 16$<br>
-                     $a^{\ast} = 500\,(F(X) - F(Y))$<br>
-                     $b^{\ast} = 200\,(F(Y) - F(Z))$</div>""",
+                     $L^{\ast} = $<br>
+                     $a^{\ast} = $<br>
+                     $b^{\ast} = $</div>""",
                      unsafe_allow_html=True)
     
     with st.expander("黄色度（Yellow Index, YI）の計算式"):
