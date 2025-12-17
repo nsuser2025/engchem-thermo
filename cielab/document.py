@@ -16,8 +16,7 @@ def cielab_overview():
          st.markdown(r"""参考として刺激値色空間の座標X, Y, Zも出力しますが, CIE L$^{*}$a$^{*}$b$^{*}$空間とは対照的に  
                         「座標間距離 $\approx$ 人間が感じる色差」は成り立ちません.""")
     with st.expander("CIE L$^{*}$a$^{*}$b$^{*}$変換の計算式"):
-         st.markdown(r"""参考として刺激値色空間の座標X, Y, Zも出力しますが, CIE L$^{*}$a$^{*}$b$^{*}$空間とは対照的に  
-                        「座標間距離 $\approx$ 人間が感じる色差」は成り立ちません.""")    
+         st.latex(r"L^{\ast} = 116 F(Y/Y_{n}) - 16")    
         
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
