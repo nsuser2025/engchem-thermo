@@ -18,15 +18,15 @@ def cielab_overview():
                         「座標間距離 $\approx$ 人間が感じる色差」は成り立ちません.""")
     
     with st.expander("CIE L$^{*}$a$^{*}$b$^{*}$変換の計算式"):
-         st.latex(r"L^{\ast} = 116 F(Y/Y_{n}) - 16")
-         st.latex(r"a^{\ast} = 500 ( F(X/X_{n}) - F(Y/Y_{n}))")
-         st.latex(r"b^{\ast} = 200 ( F(Y/Y_{n}) - F(Z/Z_{n}))")
+         st.latex(r"L^{\ast} = 116 F(Y) - 16")
+         st.latex(r"a^{\ast} = 500 ( F(X) - F(Y))")
+         st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
     
     with st.expander("黄色度（Yellow Index, YI）の計算式"):
          st.markdown(r"""D65光源""")
-         st.latex(r"YI = 100 ()/")
+         st.latex(r"YI = 100 (1.3013X - 1.1498Z) / Y")
          st.markdown(r"""C光源""") 
-         st.latex(r"YI = 100 (1.2985X-1.1335Z) / Y")
+         st.latex(r"YI = 100 (1.2985X - 1.1335Z) / Y")
               
         
 # MODULE ERROR MESSAGE
