@@ -21,7 +21,7 @@ def cielab_overview():
          st.latex(r"L^{\ast} = 116 F(Y) - 16")
          st.latex(r"a^{\ast} = 500 ( F(X) - F(Y))")
          st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
-         st.latex(r"""YI =
+         st.latex(r"""F(t) =
                   \begin{cases}
                          100\,\dfrac{1.3013\,X - 1.1498\,Z}{Y}, & \text{D65 光源} \\
                          100\,\dfrac{1.2985\,X - 1.1335\,Z}{Y}, & \text{C 光源}
