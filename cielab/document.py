@@ -21,12 +21,12 @@ def cielab_overview():
          st.latex(r"L^{\ast} = 116 F(Y) - 16")
          st.latex(r"a^{\ast} = 500 ( F(X) - F(Y))")
          st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
-         st.latex(r"""F(t) =
+         st.latex(r"F(t) =
                   \begin{cases}
                          t^{1/3}, & t > (6/29)^{3} \\
                          \frac{1}{3}\biggl( \frac{29}{6} \biggr)^{2}t + \frac{4}{29}, & \text{otherwise}
-                  \end{cases}""")
-         st.markdown(r"""$\delta \equiv (6/29)$""")
+                  \end{cases}")
+         st.latex(r"$\delta \equiv (6/29)$")
     
     with st.expander("黄色度（Yellow Index, YI）の計算式"):
          st.markdown(r"""D65光源""")
