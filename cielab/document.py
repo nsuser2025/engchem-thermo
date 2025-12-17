@@ -23,8 +23,8 @@ def cielab_overview():
          st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
          st.latex(r"""F(t) =
                   \begin{cases}
-                         100\,\dfrac{1.3013\,X - 1.1498\,Z}{Y}, & \text{D65 光源} \\
-                         100\,\dfrac{1.2985\,X - 1.1335\,Z}{Y}, & \text{C 光源}
+                         t^{1/3}, & t > (6/29)^{3} \\
+                         \frac{1}{3}\biggl( \frac{29}{6} \biggr)^{2}t + \frac{4}{29}, & \text{otherwise}
                   \end{cases}""")
     
     with st.expander("黄色度（Yellow Index, YI）の計算式"):
