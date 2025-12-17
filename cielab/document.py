@@ -23,8 +23,8 @@ def cielab_overview():
          st.latex(r"b^{\ast} = 200 ( F(Y) - F(Z))")
          st.latex(r"""F(t) =
                   \begin{cases}
-                         t^{1/3}, & t > (6/29)^{3} \\
-                         \frac{1}{3}\biggl( \frac{29}{6} \biggr)^{2}t + \frac{4}{29}, & \text{otherwise}
+                         t^{1/3}, & t > (\delta)^{3} \\
+                         \frac{1}{3} (\delta)^{-2}t + \frac{4}{29}, & \text{otherwise}
                   \end{cases}""")
          st.latex(r"\delta \equiv (6/29)")
     
