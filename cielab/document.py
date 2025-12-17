@@ -24,7 +24,7 @@ def cielab_overview():
          st.latex(r"""F(t) =
                   \begin{cases}
                          t^{1/3}, & t > (\delta)^{3} \\
-                         \frac{1}{3} (\delta)^{-2}t + \frac{4}{29}, & \text{otherwise}
+                         \frac{1}{3} (\delta)^{-2}t + \frac{4}{29}, & t \leq (\delta)^{3}
                   \end{cases}""")
          st.latex(r"\delta \equiv (6/29)")
     
