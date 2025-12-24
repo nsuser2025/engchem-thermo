@@ -5,19 +5,20 @@ import pandas as pd
 import io
 from mkslide.main import mkslide_gui
 from cielab.main import cielab_gui
-from odesolver.main import ode_gui
+from viscosity.main import ode_gui
 from pic2xlsx.main import pic2xlsx_gui
 
 st.image("zkanics_cute_logo.png", caption="Supported by Zkanics F. P. S. since 2024", width=250)
 st.markdown("---")
 
-select = ["MKSLIDE", "CIELAB", "PIC2XLSX"]
+select = ["MKSLIDE", "CIELAB", "KDVISCO", "PIC2XLSX"]
 page = st.selectbox("計算を選択してください", select)
 if page == "MKSLIDE":
    mkslide_gui ()
 elif page == "CIELAB":
-   #ode_gui ()
    cielab_gui ()
+elif page == "KDVISCO":
+   kdvisco_gui ()   
 elif page == "PIC2XLSX":
    pic2xlsx_gui ()
 else:
