@@ -5,7 +5,7 @@ import pandas as pd
 import io
 from mkslide.main import mkslide_gui
 from cielab.main import cielab_gui
-from viscosity.main import ode_gui
+from visco.kdviscosity import ode_gui
 from pic2xlsx.main import pic2xlsx_gui
 
 st.image("zkanics_cute_logo.png", caption="Supported by Zkanics F. P. S. since 2024", width=250)
