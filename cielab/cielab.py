@@ -175,7 +175,13 @@ def cielab_core (bool_maxmin, YI_option, df):
        st.error("ZKANICS ERROR CIELAB.py (NO DATA IN VISIBLE RANGE)")
        st.stop()
     wl_grid = np.arange(300.0, 1001.0, 1.0)
-    cs = UnivariateSpline (wl_vis, vals_vis, k=3, s=2) 
+    cs = UnivariateSpline (wl_vis, vals_vis, k=3, s=2)
+    
+    # ADD START 2026/03/13 START
+    cs2 = cs.derivative(n=2)
+    inflection_points = cs2.roots()
+    # ADD END 2026/03/13 END
+    
     vals_i = cs(wl_grid)
     vals_i = np.clip(vals_i, 0.0, 100.0)
     wl_maxmin, vals_maxmin = max_min_finder (wl_grid, vals_i)
