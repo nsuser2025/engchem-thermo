@@ -179,7 +179,9 @@ def cielab_core (bool_maxmin, YI_option, df):
     
     # ADD START 2026/03/13 START
     cs2 = cs.derivative(n=2)
-    inflection_points = cs2.roots()
+    y2 = cs2(wl_grid)
+    idx = np.where(np.diff(np.sign(y2)))[0]
+    inflection_points = wl_grid[idx]
     # ADD END 2026/03/13 END
     
     vals_i = cs(wl_grid)
