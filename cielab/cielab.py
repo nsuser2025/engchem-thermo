@@ -213,6 +213,10 @@ def cielab_core (bool_maxmin, YI_option, df):
     if bool_maxmin == 'on':
        ax.plot(wl_maxmin, vals_maxmin, "go", label="Max and Minimum points for Correction")
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
+    # ADD START 2026/03/13
+    vals_inflection = cs(inflection_points)
+    ax.plot(inflection_points, vals_inflection, "ro", ms=6, label="Inflection points")
+    # ADD END 2026/03/13
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
     ax.set_ylabel("Transmittance / Reflectance [%]")
