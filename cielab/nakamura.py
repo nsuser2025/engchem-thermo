@@ -109,7 +109,58 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
         vals_cast = np.array(vals_calc)
 
     return wl_cast, vals_cast
-    
+
+### LINEAR SPECTRUM GENERATOR VER.2 2026/03/17 ###
+def linear_spectrum_ver2 (wl_grid, vals_i, wl_maxmin, vals_maxmin):
+    wl_mid = []
+    vals_mid = []
+    for i in range(len(wl_maxmin)-1):
+        # wlの中間値から求める場合
+        #wl_mid_value = 0.50 * (wl_maxmin[i] + wl_maxmin[i+1])
+        #idx = np.argmin(np.abs(wl_grid - wl_mid_value))
+        # valsの中間値から求める場合
+        maxv = max(vals_maxmin[i], vals_maxmin[i+1])
+        minv = min(vals_maxmin[i], vals_maxmin[i+1])
+        vals_mid_value = minv + (0.50 * (maxv - minv))
+        mask = (wl_grid >= wl_maxmin[i]) & (wl_grid <= wl_maxmin[i+1])
+        idx = np.argmin(np.abs(vals_i[mask] - vals_mid_value))
+        idx = np.where(mask)[0][idx]
+        wl_mid += [wl_grid[idx]]
+        vals_mid += [vals_i[idx]]
+    wl_mid = np.array(wl_mid)
+    vals_mid = np.array(vals_mid)
+
+    ### CORRECTED SPECTRUM ###
+    wl_calc = [] 
+    vals_calc = []
+    for ir in range(len(wl_mid)-1): 
+        ### SLOPE AND INTERCEPT ###
+        a = (vals_mid[ir+1] - vals_mid[ir]) / (wl_mid[ir+1] - wl_mid[ir])
+        b = vals_mid[ir] - (a * wl_mid[ir])
+        
+        ### LINEAR SPECTRUM RANGE ###
+        if ir == 0:
+           wl_min = 380
+           wl_max = wl_mid[1]
+        elif ir == len(wl_mid) - 2:
+           wl_min = wl_mid[ir]
+           wl_max = 781
+        else:
+           wl_min = wl_mid[ir]
+           wl_max = wl_mid[ir+1]
+            
+        ### CORRECTED SPECTRUM IN RANGE ###
+        for i in range(380, 781, 1):
+            if i >= wl_min and i < wl_max:
+               wl_calc += [i] 
+               vals_calc += [(a*i) + b] 
+
+        ### --> wl_cast, vals_cast ###
+        wl_cast = np.array(wl_calc)
+        vals_cast = np.array(vals_calc)
+
+    return wl_cast, vals_cast
+
 # MODULE ERROR MESSAGE
 if __name__ == "__main__":
    raise RuntimeError("Do not run this file directly; use it as a module.")
