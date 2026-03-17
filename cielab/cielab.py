@@ -190,7 +190,7 @@ def cielab_core (bool_maxmin, YI_option, df):
     wl_maxmin, vals_maxmin = max_min_finder (wl_grid, vals_i)
     # CHANGE 2026/03/17 START
     # wl_i_clean, vals_i_clean = linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin)
-    wl_i_clean, vals_i_clean = linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect)
+    wl_i_clean, vals_i_clean = linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect, wl_maxmin, vals_maxmin)
     # CHANGE 2026/03/17 END
     
     ### XYZ --> LAB (MAIN) ###
