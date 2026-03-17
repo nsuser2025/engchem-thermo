@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d, UnivariateSpline
 import matplotlib.pyplot as plt
-from .nakamura import max_min_finder, linear_spectrum
+from .nakamura import max_min_finder, linear_spectrum_ver2
 
 ### INPUT df --> wl, vals ###
 def load_measurements (df):
@@ -181,13 +181,14 @@ def cielab_core (bool_maxmin, YI_option, df):
     cs2 = cs.derivative(n=2)
     y2 = cs2(wl_grid)
     idx = np.where(np.diff(np.sign(y2)))[0]
-    inflection_points = wl_grid[idx]
+    wl_inflect = wl_grid[idx]
+    vals_inflect = cs(wl_inflect)
     # ADD END 2026/03/13 END
     
     vals_i = cs(wl_grid)
     vals_i = np.clip(vals_i, 0.0, 100.0)
     wl_maxmin, vals_maxmin = max_min_finder (wl_grid, vals_i)
-    wl_i_clean, vals_i_clean = linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin)
+    wl_i_clean, vals_i_clean = linear_spectrum_ver2 (wl_grid, vals_i, wl_maxmin, vals_maxmin)
     
     ### XYZ --> LAB (MAIN) ###
     res = spectrum_to_lab_trans (wl_i_clean, vals_i_clean, df_xyz, df_ill, assume_percent=True)
@@ -216,8 +217,7 @@ def cielab_core (bool_maxmin, YI_option, df):
        ax.plot(wl_maxmin, vals_maxmin, "go", label="Max and Minimum points for Correction")
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     # ADD START 2026/03/13
-    vals_inflection = cs(inflection_points)
-    ax.plot(inflection_points, vals_inflection, "ro", ms=6, label="Inflection points")
+    ax.plot(wl_inflect, vals_inflect, "ro", ms=6, label="Inflection points")
     # ADD END 2026/03/13
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
