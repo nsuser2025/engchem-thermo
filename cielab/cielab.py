@@ -220,7 +220,8 @@ def cielab_core (bool_maxmin, YI_option, df):
        ax.plot(wl_maxmin, vals_maxmin, "go", label="Max and Minimum points for Correction")
     ax.plot(wl_vis, vals_vis, lw=1, marker="o", ms=2, label="Measured") 
     # ADD START 2026/03/13
-    ax.plot(wl_inflect, vals_inflect, "ro", ms=6, label="Inflection points")
+    mask = wl_inflect <= 780
+    ax.plot(wl_inflect[mask], vals_inflect[mask], "ro", ms=6, label="Inflection points")
     # ADD END 2026/03/13
     ax.legend()
     ax.set_xlabel("Wavelength [nm]")
