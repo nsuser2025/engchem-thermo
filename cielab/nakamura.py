@@ -136,9 +136,6 @@ def linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect, wl_maxmin, 
     wl_target = wl_inflect.loc[idx]
     vals_target = vals_inflect.loc[idx]
 
-    wl_mid[0] = wl_target
-    vals_mid[0] = vals_target
-
     ### CORRECTED SPECTRUM ###
     wl_calc = [] 
     vals_calc = []
