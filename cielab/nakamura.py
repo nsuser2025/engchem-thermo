@@ -111,9 +111,24 @@ def linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin):
     return wl_cast, vals_cast
 
 ### LINEAR SPECTRUM GENERATOR VER.2 2026/03/17 ###
-def linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect):
-    wl_mid = np.array(wl_inflect)
-    vals_mid = np.array(vals_inflect)
+def linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect, wl_maxmin, vals_maxmin):
+    wl_mid = []
+    vals_mid = []
+    for i in range(len(wl_maxmin)-1):
+        # wlの中間値から求める場合
+        #wl_mid_value = 0.50 * (wl_maxmin[i] + wl_maxmin[i+1])
+        #idx = np.argmin(np.abs(wl_grid - wl_mid_value))
+        # valsの中間値から求める場合
+        maxv = max(vals_maxmin[i], vals_maxmin[i+1])
+        minv = min(vals_maxmin[i], vals_maxmin[i+1])
+        vals_mid_value = minv + (0.50 * (maxv - minv))
+        mask = (wl_grid >= wl_maxmin[i]) & (wl_grid <= wl_maxmin[i+1])
+        idx = np.argmin(np.abs(vals_i[mask] - vals_mid_value))
+        idx = np.where(mask)[0][idx]
+        wl_mid += [wl_grid[idx]]
+        vals_mid += [vals_i[idx]]
+    wl_mid = np.array(wl_mid)
+    vals_mid = np.array(vals_mid)
 
     ### CORRECTED SPECTRUM ###
     wl_calc = [] 
