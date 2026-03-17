@@ -130,6 +130,8 @@ def linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect, wl_maxmin, 
     wl_mid = np.array(wl_mid)
     vals_mid = np.array(vals_mid)
 
+    wl_inflect = np.array(wl_inflect)
+    vals_inflect = np.array(vals_inflect)
     idx = wl_inflect[wl_inflect < 380].idxmax()
     wl_target = wl_inflect.loc[idx]
     vals_target = vals_inflect.loc[idx]
