@@ -133,9 +133,20 @@ def linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect, wl_maxmin, 
     wl_inflect = np.array(wl_inflect)
     vals_inflect = np.array(vals_inflect)
 
+    
     filtered = wl_inflect[wl_inflect < 380]
-    st.write("filtered:", filtered)
-    st.write("is empty:", len(filtered) == 0)
+    if len(filtered) > 0:
+       wl_target = filtered.max()
+       idx = np.where(wl_inflect == wl_target)[0][0]
+    else:
+       # fallback（380に一番近い値）
+       idx = np.abs(wl_inflect - 380).argmin()
+       wl_target = wl_inflect[idx]
+    vals_target = vals_inflect[idx]
+    wl_mid[0] = wl_target
+    vals_mid[0] = vals_target
+    #st.write("filtered:", filtered)
+    #st.write("is empty:", len(filtered) == 0)
     
     ### CORRECTED SPECTRUM ###
     wl_calc = [] 
