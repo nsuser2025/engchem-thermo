@@ -188,7 +188,10 @@ def cielab_core (bool_maxmin, YI_option, df):
     vals_i = cs(wl_grid)
     vals_i = np.clip(vals_i, 0.0, 100.0)
     wl_maxmin, vals_maxmin = max_min_finder (wl_grid, vals_i)
-    wl_i_clean, vals_i_clean = linear_spectrum_ver2 (wl_grid, vals_i, wl_maxmin, vals_maxmin)
+    # CHANGE 2026/03/17 START
+    # wl_i_clean, vals_i_clean = linear_spectrum (wl_grid, vals_i, wl_maxmin, vals_maxmin)
+    wl_i_clean, vals_i_clean = linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect)
+    # CHANGE 2026/03/17 END
     
     ### XYZ --> LAB (MAIN) ###
     res = spectrum_to_lab_trans (wl_i_clean, vals_i_clean, df_xyz, df_ill, assume_percent=True)
