@@ -132,7 +132,6 @@ def linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect, wl_maxmin, 
 
     wl_inflect = np.array(wl_inflect)
     vals_inflect = np.array(vals_inflect)
-
     
     filtered = wl_inflect[wl_inflect < 380]
     if len(filtered) > 0:
