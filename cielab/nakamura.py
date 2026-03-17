@@ -132,14 +132,11 @@ def linear_spectrum_ver2 (wl_grid, vals_i, wl_inflect, vals_inflect, wl_maxmin, 
 
     wl_inflect = np.array(wl_inflect)
     vals_inflect = np.array(vals_inflect)
-    #idx = wl_inflect[wl_inflect < 380].idxmax()
-    #wl_target = wl_inflect.loc[idx]
-    #vals_target = vals_inflect.loc[idx]
 
     filtered = wl_inflect[wl_inflect < 380]
     st.write("filtered:", filtered)
-    st.write("is empty:", filtered.empty)
-
+    st.write("is empty:", len(filtered) == 0)
+    
     ### CORRECTED SPECTRUM ###
     wl_calc = [] 
     vals_calc = []
